@@ -1,0 +1,23 @@
+{
+  "platforms": ["local"],
+  "type": "number",
+  "title": {
+    "en": "Longitude",
+    "nl": "Lengtegraad",
+    "de": "Längengrad",
+    "fr": "Longitude",
+    "it": "Longitudine",
+    "sv": "Longitud",
+    "no": "Lengdegrad",
+    "es": "Longitud",
+    "da": "Længdegrad",
+    "ru": "Долгота",
+    "pl": "Długość geograficzna",
+    "ko": "경도"
+  },
+  "insights": false,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/geo-alt.svg"
+}

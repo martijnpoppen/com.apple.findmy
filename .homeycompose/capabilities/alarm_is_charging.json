@@ -1,0 +1,21 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Device is charging",
+    "nl": "Apparaat wordt opgeladen",
+    "de": "Gerät wird geladen",
+    "fr": "L'appareil se charge",
+    "it": "Il dispositivo è in carica",
+    "sv": "Enhet laddas",
+    "no": "Enheten lades",
+    "es": "El dispositivo se está cargando",
+    "da": "Enhed oplades",
+    "ru": "Устройство заряжается",
+    "pl": "Urządzenie ładuje się",
+    "ko": "장치가 충전 중입니다"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/battery-charging.svg"
+}

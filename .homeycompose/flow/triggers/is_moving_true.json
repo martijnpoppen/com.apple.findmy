@@ -1,0 +1,38 @@
+{
+  "id": "is_moving_true",
+  "title": {
+    "en": "Device started moving",
+    "nl": "Apparaat is aan het bewegen",
+    "de": "Gerät hat angefangen zu bewegen",
+    "fr": "L'appareil a commencé à bouger",
+    "it": "Il dispositivo ha iniziato a muoversi",
+    "sv": "Enheten började röra sig",
+    "no": "Enheten begynte å bevege seg",
+    "es": "El dispositivo comenzó a moverse",
+    "da": "Enhed begyndte at bevæge sig",
+    "ru": "Устройство начало двигаться",
+    "pl": "Urządzenie zaczęło się poruszać",
+    "ko": "장치가 움직이기 시작했습니다"
+  },
+  "titleFormatted": {
+    "en": "Device started moving",
+    "nl": "Apparaat is aan het bewegen",
+    "de": "Gerät hat angefangen zu bewegen",
+    "fr": "L'appareil a commencé à bouger",
+    "it": "Il dispositivo ha iniziato a muoversi",
+    "sv": "Enheten började röra sig",
+    "no": "Enheten begynte å bevege seg",
+    "es": "El dispositivo comenzó a moverse",
+    "da": "Enhed begyndte at bevæge sig",
+    "ru": "Устройство начало двигаться",
+    "pl": "Urządzenie zaczęło się poruszać",
+    "ko": "장치가 움직이기 시작했습니다"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=apple-device&capabilities=alarm_is_moving"
+    }
+  ]
+}

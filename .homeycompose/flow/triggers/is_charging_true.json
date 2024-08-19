@@ -1,0 +1,38 @@
+{
+  "id": "is_charging_true",
+  "title": {
+    "en": "Device started charging",
+    "nl": "Apparaat is aan het opladen",
+    "de": "Gerät wird geladen",
+    "fr": "L'appareil a commencé à se charger",
+    "it": "Il dispositivo è in carica",
+    "sv": "Enhet började ladda",
+    "no": "Enheten begynte å lade",
+    "es": "El dispositivo comenzó a cargarse",
+    "da": "Enhed begyndte at oplade",
+    "ru": "Устройство начало заряжаться",
+    "pl": "Urządzenie zaczęło się ładować",
+    "ko": "장치가 충전을 시작했습니다"
+  },
+  "titleFormatted": {
+    "en": "Device started charging",
+    "nl": "Apparaat is aan het opladen",
+    "de": "Gerät wird geladen",
+    "fr": "L'appareil a commencé à se charger",
+    "it": "Il dispositivo è in carica",
+    "sv": "Enhet började ladda",
+    "no": "Enheten begynte å lade",
+    "es": "El dispositivo comenzó a cargarse",
+    "da": "Enhed begyndte at oplade",
+    "ru": "Устройство начало заряжаться",
+    "pl": "Urządzenie zaczęło się ładować",
+    "ko": "장치가 충전을 시작했습니다"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=apple-device&capabilities=alarm_is_charging"
+    }
+  ]
+}

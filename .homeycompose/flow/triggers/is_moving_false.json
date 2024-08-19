@@ -1,0 +1,39 @@
+{
+    "id": "is_moving_false",
+    "title": {
+      "en": "Device stopped moving",
+        "nl": "Apparaat is gestopt met bewegen",
+        "de": "Gerät hat aufgehört zu bewegen",
+        "fr": "L'appareil a arrêté de bouger",
+        "it": "Il dispositivo ha smesso di muoversi",
+        "sv": "Enheten slutade röra sig",
+        "no": "Enheten sluttet å bevege seg",
+        "es": "El dispositivo dejó de moverse",
+        "da": "Enhed stoppede med at bevæge sig",
+        "ru": "Устройство перестало двигаться",
+        "pl": "Urządzenie przestało się poruszać",
+        "ko": "장치가 움직임을 중지했습니다"
+    },
+    "titleFormatted": {
+        "en": "Device stopped moving",
+        "nl": "Apparaat is gestopt met bewegen",
+        "de": "Gerät hat aufgehört zu bewegen",
+        "fr": "L'appareil a arrêté de bouger",
+        "it": "Il dispositivo ha smesso di muoversi",
+        "sv": "Enheten slutade röra sig",
+        "no": "Enheten sluttet å bevege seg",
+        "es": "El dispositivo dejó de moverse",
+        "da": "Enhed stoppede med at bevæge sig",
+        "ru": "Устройство перестало двигаться",
+        "pl": "Urządzenie przestało się poruszać",
+        "ko": "장치가 움직임을 중지했습니다"
+    },
+    "args": [
+      {
+        "type": "device",
+        "name": "device",
+        "filter": "driver_id=apple-device&capabilities=alarm_is_moving"
+      }
+    ]
+  }
+  

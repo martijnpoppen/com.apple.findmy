@@ -1,0 +1,24 @@
+{
+  "name": {
+    "en": "Apple Find My"
+  },
+  "capabilities": [
+    "alarm_battery",
+    "alarm_is_home",
+    "alarm_is_moving",
+    "alarm_is_charging",
+    "measure_battery",
+    "measure_distance",
+    "measure_distance_meters",
+    "measure_distance_miles",
+    "measure_interval",
+    "measure_latitude",
+    "measure_longitude",
+    "send_message",
+    "send_sound"
+  ],
+  "energy": {
+    "batteries": ["INTERNAL"]
+  },
+  "$extends": ["device", "pair", "repair", "settings"]
+}

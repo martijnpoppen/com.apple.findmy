@@ -1,0 +1,95 @@
+{
+  "id": "is_in_range",
+  "title": {
+    "en": "Device is in range of Latitude and Longitude",
+    "nl": "Apparaat is binnen bereik van Latitude en Longitude",
+    "de": "Gerät ist im Bereich von Breite und Länge",
+    "fr": "L'appareil est dans la plage de latitude et de longitude",
+    "it": "Il dispositivo è nell'intervallo di latitudine e longitudine",
+    "sv": "Enheten är inom räckvidd för latitud och longitud",
+    "no": "Enheten er innenfor rekkevidde for breddegrad og lengdegrad",
+    "es": "El dispositivo está en el rango de latitud y longitud",
+    "da": "Enheden er inden for rækkevidde af breddegrad og længdegrad",
+    "ru": "Устройство находится в диапазоне широты и долготы",
+    "pl": "Urządzenie znajduje się w zasięgu szerokości i długości geograficznej",
+    "ko": "장치가 위도와 경도 범위 내에 있습니다"
+  },
+  "titleFormatted": {
+    "en": "Device is in [[radius]] meters of Latitude [[latitude]] and Longitude [[longitude]]",
+    "nl": "Apparaat is binnen [[radius]] meter van Latitude [[latitude]] en Longitude [[longitude]]",
+    "de": "Gerät ist im Bereich von [[radius]] Metern Breite [[latitude]] und Länge [[longitude]]",
+    "fr": "L'appareil est dans un rayon de [[radius]] mètres de latitude [[latitude]] et de longitude [[longitude]]",
+    "it": "Il dispositivo è in [[radius]] metri di latitudine [[latitude]] e longitudine [[longitude]]",
+    "sv": "Enheten är inom [[radius]] meter av latitud [[latitude]] och longitud [[longitude]]",
+    "no": "Enheten er innenfor [[radius]] meter av breddegrad [[latitude]] og lengdegrad [[longitude]]",
+    "es": "El dispositivo está en [[radius]] metros de latitud [[latitude]] y longitud [[longitude]]",
+    "da": "Enheden er inden for [[radius]] meter af breddegrad [[latitude]] og længdegrad [[longitude]]",
+    "ru": "Устройство находится в [[radius]] метрах от широты [[latitude]] и долготы [[longitude]]",
+    "pl": "Urządzenie znajduje się w [[radius]] metrów od szerokości [[latitude]] i długości geograficznej [[longitude]]",
+    "ko": "장치가 위도 [[latitude]] 및 경도 [[longitude]]의 [[radius]] 미터 범위 내에 있습니다"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=apple-device&capabilities=alarm_is_home"
+    },
+    {
+      "type": "text",
+      "name": "latitude",
+      "required": true,
+      "title": {
+        "en": "Latitude",
+        "nl": "Breedtegraad",
+        "de": "Breitengrad",
+        "fr": "Latitude",
+        "it": "Latitudine",
+        "sv": "Latitud",
+        "no": "Breddegrad",
+        "es": "Latitud",
+        "da": "Breddegrad",
+        "ru": "Широта",
+        "pl": "Szerokość geograficzna",
+        "ko": "위도"
+      }
+    },
+    {
+      "type": "text",
+      "name": "longitude",
+      "required": true,
+      "title": {
+        "en": "Longitude",
+        "nl": "Lengtegraad",
+        "de": "Längengrad",
+        "fr": "Longitude",
+        "it": "Longitudine",
+        "sv": "Longitud",
+        "no": "Lengdegrad",
+        "es": "Longitud",
+        "da": "Længdegrad",
+        "ru": "Долгота",
+        "pl": "Długość geograficzna",
+        "ko": "경도"
+      }
+    },
+    {
+      "type": "number",
+      "name": "radius",
+      "required": true,
+      "title": {
+        "en": "Radius (meters)",
+        "nl": "Straal (meters)",
+        "de": "Radius (Meter)",
+        "fr": "Rayon (mètres)",
+        "it": "Raggio (metri)",
+        "sv": "Radie (meter)",
+        "no": "Radius (meter)",
+        "es": "Radio (metros)",
+        "da": "Radius (meter)",
+        "ru": "Радиус (метры)",
+        "pl": "Promień (metry)",
+        "ko": "반경 (미터)"
+      }
+    }
+  ]
+}

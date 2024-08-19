@@ -1,0 +1,42 @@
+{
+  "platforms": ["local"],
+  "type": "number",
+  "title": {
+    "en": "Server request interval",
+    "nl": "Serververzoekinterval",
+    "de": "Serveranforderungsintervall",
+    "fr": "Intervalle de demande de serveur",
+    "it": "Intervallo di richiesta del server",
+    "sv": "Serverförfrågningsintervall",
+    "no": "Serverforespørselsintervall",
+    "es": "Intervalo de solicitud del servidor",
+    "da": "Serverforespørgselsinterval",
+    "ru": "Интервал запроса сервера",
+    "pl": "Interwał żądania serwera",
+    "ko": "서버 요청 간격"
+  },
+  "units": {
+    "en": "seconds"
+  },
+  "insights": true,
+  "desc": {
+    "en": "Server request interval",
+    "nl": "Serververzoekinterval",
+    "de": "Serveranforderungsintervall",
+    "fr": "Intervalle de demande de serveur",
+    "it": "Intervallo di richiesta del server",
+    "sv": "Serverförfrågningsintervall",
+    "no": "Serverforespørselsintervall",
+    "es": "Intervalo de solicitud del servidor",
+    "da": "Serverforespørgselsinterval",
+    "ru": "Интервал запроса сервера",
+    "pl": "Interwał żądania serwera",
+    "ko": "서버 요청 간격"
+  },
+  "chartType": "spline",
+  "decimals": 2,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/speedometer.svg"
+}

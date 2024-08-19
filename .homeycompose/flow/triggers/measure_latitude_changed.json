@@ -1,0 +1,17 @@
+{
+  "id": "measure_latitude_changed",
+  "title": {
+    "en": "Latitude has changed",
+    "nl": "Breedtegraad is veranderd",
+    "de": "Breitengrad hat sich geändert",
+    "fr": "La latitude a changé",
+    "it": "La latitudine è cambiata",
+    "sv": "Latituden har ändrats",
+    "no": "Breddegraden har endret seg",
+    "es": "La latitud ha cambiado",
+    "da": "Breddegraden er ændret",
+    "ru": "Широта изменилась",
+    "pl": "Szerokość geograficzna została zmieniona",
+    "ko": "위도가 변경되었습니다"
+  }
+}

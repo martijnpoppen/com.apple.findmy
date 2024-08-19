@@ -1,0 +1,42 @@
+{
+  "title": {
+    "en": "Play sound on device",
+    "nl": "Geluid afspelen op apparaat",
+    "de": "Ton auf Gerät abspielen",
+    "fr": "Jouer un son sur l'appareil",
+    "it": "Riproduci suono sul dispositivo",
+    "sv": "Spela ljud på enheten",
+    "no": "Spill lyd på enheten",
+    "es": "Reproducir sonido en el dispositivo",
+    "da": "Afspil lyd på enheden",
+    "ru": "Воспроизвести звук на устройстве",
+    "pl": "Odtwórz dźwięk na urządzeniu",
+    "ko": "장치에서 소리 재생"
+  },
+  "titleFormatted": {
+    "en": "Play sound on device",
+    "nl": "Geluid afspelen op apparaat",
+    "de": "Ton auf Gerät abspielen",
+    "fr": "Jouer un son sur l'appareil",
+    "it": "Riproduci suono sul dispositivo",
+    "sv": "Spela ljud på enheten",
+    "no": "Spill lyd på enheten",
+    "es": "Reproducir sonido en el dispositivo",
+    "da": "Afspil lyd på enheden",
+    "ru": "Воспроизвести звук на устройстве",
+    "pl": "Odtwórz dźwięk na urządzeniu",
+    "ko": "장치에서 소리 재생"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "placeholder": {
+        "en": "Select device",
+        "nl": "Selecteer apparaat"
+      },
+      "filter": "driver_id=apple-device|Whatsapp_cloud&capabilities=send_message"
+    }
+  ],
+  "platforms": ["local"]
+}

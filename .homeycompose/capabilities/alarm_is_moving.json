@@ -1,0 +1,21 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Is moving",
+    "nl": "Is aan het bewegen",
+    "de": "Bewegt sich",
+    "fr": "Est en mouvement",
+    "it": "Si sta muovendo",
+    "sv": "Rör sig",
+    "no": "Beveger seg",
+    "es": "Está en movimiento",
+    "da": "Bevæger sig",
+    "ru": "Движется",
+    "pl": "Porusza się",
+    "ko": "움직이고 있습니다"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/motion.svg"
+}

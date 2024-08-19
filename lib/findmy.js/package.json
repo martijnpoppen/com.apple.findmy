@@ -1,0 +1,36 @@
+{
+  "name": "findmy.js",
+  "version": "1.0.1",
+  "description": "A simple Typescript library for Apple's Find My network without requiring 2FA login",
+  "homepage": "https://github.com/CaramelFur/findmy.js",
+  "keywords": [
+    "Apple",
+    "Find My",
+    "Tracking",
+    "iCloud"
+  ],
+  "author": "Caramel <findmy@caramelfur.dev>",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/CaramelFur/findmy.js/issues",
+    "email": "findmy@caramelfur.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CaramelFur/findmy.js.git"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/tough-cookie": "^4.0.5",
+    "@types/node": "^20.14.9",
+    "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "@foxt/js-srp": "0.0.3-patch2",
+    "tough-cookie": "^4.1.4"
+  }
+}

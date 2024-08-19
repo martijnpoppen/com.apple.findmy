@@ -1,0 +1,17 @@
+{
+  "id": "measure_battery_changed",
+  "title": {
+    "en": "Battery percentage has changed",
+    "nl": "Batterijpercentage is veranderd",
+    "de": "Batterieprozentsatz hat sich geändert",
+    "fr": "Le pourcentage de la batterie a changé",
+    "it": "La percentuale della batteria è cambiata",
+    "sv": "Batteriprocenten har ändrats",
+    "no": "Batteriprosenten har endret seg",
+    "es": "El porcentaje de la batería ha cambiado",
+    "da": "Batteriprocenten er ændret",
+    "ru": "Процент заряда батареи изменился",
+    "pl": "Procent naładowania baterii został zmieniony",
+    "ko": "배터리 백분율이 변경되었습니다"
+  }
+}

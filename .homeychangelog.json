@@ -1,0 +1,29 @@
+{
+  "0.0.2": {
+    "en": "NEW: First release"
+  },
+  "0.0.3": {
+    "en": "ADD new flowcards"
+  },
+  "0.1.0": {
+    "en": "Beta Release"
+  },
+  "1.0.0": {
+    "en": "NEW: Official Release"
+  },
+  "1.0.1": {
+    "en": "FIX: location check"
+  },
+  "1.0.2": {
+    "en": "NEW: Official Release"
+  },
+  "1.0.3": {
+    "en": "Changed App Title"
+  },
+  "1.0.4": {
+    "en": "FIX: typo"
+  },
+  "1.0.5": {
+    "en": "FIX: Device not found error"
+  }
+}

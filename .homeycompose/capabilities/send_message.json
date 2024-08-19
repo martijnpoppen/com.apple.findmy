@@ -1,0 +1,11 @@
+{
+    "platforms": ["local"],
+    "type": "boolean",
+    "title": {
+      "en": "Send Message"
+    },
+    "getable": false,
+    "setable": false,
+    "uiComponent": null
+  }
+  

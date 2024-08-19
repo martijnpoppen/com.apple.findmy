@@ -1,0 +1,38 @@
+{
+  "id": "is_home_false",
+  "title": {
+    "en": "Device left home",
+    "nl": "Apparaat heeft thuis verlaten",
+    "de": "Gerät hat das Zuhause verlassen",
+    "fr": "L'appareil a quitté la maison",
+    "it": "Il dispositivo ha lasciato casa",
+    "sv": "Enhet lämnade hemmet",
+    "no": "Enheten forlot hjemmet",
+    "es": "El dispositivo salió de casa",
+    "da": "Enhed forlod hjemmet",
+    "ru": "Устройство покинуло дом",
+    "pl": "Urządzenie opuściło dom",
+    "ko": "장치가 집을 떠났습니다"
+  },
+  "titleFormatted": {
+    "en": "Device left home",
+    "nl": "Apparaat heeft thuis verlaten",
+    "de": "Gerät hat das Zuhause verlassen",
+    "fr": "L'appareil a quitté la maison",
+    "it": "Il dispositivo ha lasciato casa",
+    "sv": "Enhet lämnade hemmet",
+    "no": "Enheten forlot hjemmet",
+    "es": "El dispositivo salió de casa",
+    "da": "Enhed forlod hjemmet",
+    "ru": "Устройство покинуло дом",
+    "pl": "Urządzenie opuściło dom",
+    "ko": "장치가 집을 떠났습니다"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=apple-device&capabilities=alarm_is_home"
+    }
+  ]
+}

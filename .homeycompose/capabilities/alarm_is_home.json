@@ -1,0 +1,21 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Is device at home",
+    "nl": "Is apparaat thuis",
+    "de": "Ist das Gerät zu Hause",
+    "fr": "L'appareil est-il à la maison",
+    "it": "Il dispositivo è a casa",
+    "sv": "Är enheten hemma",
+    "no": "Er enheten hjemme",
+    "es": "¿Está el dispositivo en casa",
+    "da": "Er enheden hjemme",
+    "ru": "Находится ли устройство дома",
+    "pl": "Czy urządzenie jest w domu",
+    "ko": "장치가 집에 있습니까"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/house-door.svg"
+}

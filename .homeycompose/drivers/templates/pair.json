@@ -1,0 +1,78 @@
+{
+  "pair": [
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "usernameLabel": {
+          "en": "Username",
+          "nl": "Gebruikersnaam",
+            "de": "Benutzername",
+            "fr": "Nom d'utilisateur",
+            "it": "Nome utente",
+            "sv": "Användarnamn",
+            "no": "Brukernavn",
+            "es": "Nombre de usuario",
+            "da": "Brugernavn",
+            "ru": "Имя пользователя",
+            "pl": "Nazwa użytkownika",
+            "ko": "사용자 이름"
+        },
+        "usernamePlaceholder": {
+          "en": "john@doe.com"
+        },
+        "usernameValue": {
+          "en": ""
+        },
+        "passwordLabel": {
+          "en": "Password",
+          "nl": "Wachtwoord",
+            "de": "Passwort",
+            "fr": "Mot de passe",
+            "it": "Password",
+            "sv": "Lösenord",
+            "no": "Passord",
+            "es": "Contraseña",
+            "da": "Adgangskode",
+            "ru": "Пароль",
+            "pl": "Hasło",
+            "ko": "비밀번호"
+        },
+        "passwordPlaceholder": {
+          "en": "Password",
+          "nl": "Wachtwoord",
+            "de": "Passwort",
+            "fr": "Mot de passe",
+            "it": "Password",
+            "sv": "Lösenord",
+            "no": "Passord",
+            "es": "Contraseña",
+            "da": "Adgangskode",
+            "ru": "Пароль",
+            "pl": "Hasło",
+            "ko": "비밀번호"
+        },
+        "logo": "../../../assets/icon.svg"
+      }
+    },
+    {
+      "id": "loading",
+      "template": "loading"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    },
+    {
+      "id": "done",
+      "template": "done"
+    }
+  ]
+}

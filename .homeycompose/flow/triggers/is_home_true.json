@@ -1,0 +1,38 @@
+{
+  "id": "is_home_true",
+  "title": {
+    "en": "Device came home",
+    "nl": "Apparaat is thuis gekomen",
+    "de": "Gerät ist nach Hause gekommen",
+    "fr": "L'appareil est rentré à la maison",
+    "it": "Il dispositivo è tornato a casa",
+    "sv": "Enhet kom hem",
+    "no": "Enheten kom hjem",
+    "es": "El dispositivo llegó a casa",
+    "da": "Enhed kom hjem",
+    "ru": "Устройство пришло домой",
+    "pl": "Urządzenie wróciło do domu",
+    "ko": "장치가 집에 왔습니다"
+  },
+  "titleFormatted": {
+    "en": "Device came home",
+    "nl": "Apparaat is thuis gekomen",
+    "de": "Gerät ist nach Hause gekommen",
+    "fr": "L'appareil est rentré à la maison",
+    "it": "Il dispositivo è tornato a casa",
+    "sv": "Enhet kom hem",
+    "no": "Enheten kom hjem",
+    "es": "El dispositivo llegó a casa",
+    "da": "Enhed kom hjem",
+    "ru": "Устройство пришло домой",
+    "pl": "Urządzenie wróciło do domu",
+    "ko": "장치가 집에 왔습니다"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=apple-device&capabilities=alarm_is_home"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+    "platforms": ["local"],
+    "type": "number",
+    "title": {
+      "en": "Latitude",
+      "nl": "Breedtegraad",
+      "de": "Breitengrad",
+      "fr": "Latitude",
+      "it": "Latitudine",
+      "sv": "Latitud",
+      "no": "Breddegrad",
+      "es": "Latitud",
+      "da": "Breddegrad",
+      "ru": "Широта",
+      "pl": "Szerokość geograficzna",
+      "ko": "위도"
+    },
+    "insights": false,
+    "getable": true,
+    "setable": false,
+    "uiComponent": "sensor",
+    "icon": "assets/icons/geo-alt-fill.svg"
+  }
+  

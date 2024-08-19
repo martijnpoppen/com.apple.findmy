@@ -1,0 +1,39 @@
+{
+    "id": "is_charging_false",
+    "title": {
+      "en": "Device stopped charging",
+        "nl": "Apparaat is gestopt met opladen",
+        "de": "Gerät hat aufgehört zu laden",
+        "fr": "L'appareil a arrêté de se charger",
+        "it": "Il dispositivo ha smesso di caricarsi",
+        "sv": "Enheten slutade ladda",
+        "no": "Enheten sluttet å lade",
+        "es": "El dispositivo dejó de cargarse",
+        "da": "Enhed stoppede med at oplade",
+        "ru": "Устройство перестало заряжаться",
+        "pl": "Urządzenie przestało się ładować",
+        "ko": "장치가 충전을 중지했습니다"
+    },
+    "titleFormatted": {
+      "en": "Device stopped charging",
+        "nl": "Apparaat is gestopt met opladen",
+        "de": "Gerät hat aufgehört zu laden",
+        "fr": "L'appareil a arrêté de se charger",
+        "it": "Il dispositivo ha smesso di caricarsi",
+        "sv": "Enheten slutade ladda",
+        "no": "Enheten sluttet å lade",
+        "es": "El dispositivo dejó de cargarse",
+        "da": "Enhed stoppede med at oplade",
+        "ru": "Устройство перестало заряжаться",
+        "pl": "Urządzenie przestało się ładować",
+        "ko": "장치가 충전을 중지했습니다"
+    },
+    "args": [
+      {
+        "type": "device",
+        "name": "device",
+        "filter": "driver_id=apple-device&capabilities=alarm_is_charging"
+      }
+    ]
+  }
+  

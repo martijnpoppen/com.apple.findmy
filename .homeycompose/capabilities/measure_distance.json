@@ -1,0 +1,42 @@
+{
+  "platforms": ["local"],
+  "type": "number",
+  "title": {
+    "en": "Distance from Home(y) in km",
+    "nl": "Afstand van Home(y) in km",
+    "de": "Entfernung von Home(y) in km",
+    "fr": "Distance de Home(y) en km",
+    "it": "Distanza da Home(y) in km",
+    "sv": "Avstånd från Home(y) i km",
+    "no": "Avstand fra Home(y) i km",
+    "es": "Distancia desde Home(y) en km",
+    "da": "Afstand fra Home(y) i km",
+    "ru": "Расстояние от Home(y) в км",
+    "pl": "Odległość od Home(y) w km",
+    "ko": "홈(y)로부터의 거리(km)"
+  },
+  "units": {
+    "en": "km"
+  },
+  "insights": true,
+  "desc": {
+    "en": "Distance from Home(y) in km",
+    "nl": "Afstand van Home(y) in km",
+    "de": "Entfernung von Home(y) in km",
+    "fr": "Distance de Home(y) en km",
+    "it": "Distanza da Home(y) in km",
+    "sv": "Avstånd från Home(y) i km",
+    "no": "Avstand fra Home(y) i km",
+    "es": "Distancia desde Home(y) en km",
+    "da": "Afstand fra Home(y) i km",
+    "ru": "Расстояние от Home(y) в км",
+    "pl": "Odległość od Home(y) w km",
+    "ko": "홈(y)로부터의 거리(km)"
+  },
+  "chartType": "spline",
+  "decimals": 2,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/mileage.svg"
+}

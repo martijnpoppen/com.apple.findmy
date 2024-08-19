@@ -1,0 +1,1911 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.apple.findmy",
+  "version": "1.0.5",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "brandColor": "#000000",
+  "name": {
+    "en": "Find My"
+  },
+  "description": {
+    "en": "One app to find it all.",
+    "nl": "Eén app om alles te vinden.",
+    "de": "Eine App, um alles zu finden.",
+    "fr": "Une application pour tout trouver.",
+    "it": "Un'app per trovare tutto.",
+    "sv": "En app för att hitta allt.",
+    "no": "Én app for å finne alt.",
+    "es": "Una aplicación para encontrarlo todo.",
+    "da": "En app til at finde det hele.",
+    "ru": "Одно приложение, чтобы найти все.",
+    "pl": "Jedna aplikacja do znalezienia wszystkiego.",
+    "ko": "모두 찾을 수있는 앱."
+  },
+  "category": [
+    "localization"
+  ],
+  "tags": {
+    "en": [
+      "Apple",
+      "Apple Find My",
+      "Find My iPhone",
+      "Locate iPhone",
+      "Home",
+      "Away",
+      "Location",
+      "Geolocation",
+      "Geofencing",
+      "GPS",
+      "Find",
+      "Apple",
+      "iOS",
+      "iPhone",
+      "iPad",
+      "Watch",
+      "AirPods",
+      "Mac",
+      "Lost",
+      "Phone",
+      "Tracking",
+      "Presence"
+    ],
+    "nl": [
+      "Apple",
+      "Apple Find My",
+      "Zoek mijn iPhone",
+      "Locatie iPhone",
+      "Thuis",
+      "Weg",
+      "Locatie",
+      "Geolocatie",
+      "Geofencing",
+      "GPS",
+      "Vind",
+      "Apple",
+      "iOS",
+      "iPhone",
+      "iPad",
+      "Watch",
+      "AirPods",
+      "Mac",
+      "Verloren",
+      "Telefoon",
+      "Tracking",
+      "Aanwezigheid"
+    ],
+    "de": [
+      "Apple",
+      "Apple Find My",
+      "Finde mein iPhone",
+      "iPhone finden",
+      "Zuhause",
+      "Weg",
+      "Standort",
+      "Geolokalisierung",
+      "Geofencing",
+      "GPS",
+      "Finden",
+      "Apple",
+      "iOS",
+      "iPhone",
+      "iPad",
+      "Watch",
+      "AirPods",
+      "Mac",
+      "Verloren",
+      "Telefon",
+      "Tracking",
+      "Anwesenheit"
+    ],
+    "fr": [
+      "Apple",
+      "Apple Find My",
+      "Trouver mon iPhone",
+      "Localiser iPhone",
+      "Maison",
+      "Loin",
+      "Emplacement",
+      "Géolocalisation",
+      "Géofencing",
+      "GPS",
+      "Trouver",
+      "Apple",
+      "iOS",
+      "iPhone",
+      "iPad",
+      "Watch",
+      "AirPods",
+      "Mac",
+      "Perdu",
+      "Téléphone",
+      "Suivi",
+      "Présence"
+    ],
+    "it": [
+      "Apple",
+      "Apple Find My",
+      "Trova il mio iPhone",
+      "Localizza iPhone",
+      "Casa",
+      "Via",
+      "Posizione",
+      "Geolocalizzazione",
+      "Geofencing",
+      "GPS",
+      "Trova",
+      "Apple",
+      "iOS",
+      "iPhone",
+      "iPad",
+      "Watch",
+      "AirPods",
+      "Mac",
+      "Perso",
+      "Telefono",
+      "Tracciamento",
+      "Presenza"
+    ],
+    "sv": [
+      "Apple",
+      "Apple Find My",
+      "Hitta min iPhone",
+      "Lokalisera iPhone",
+      "Hem",
+      "Borta",
+      "Plats",
+      "Geolokalisering",
+      "Geofencing",
+      "GPS",
+      "Hitta",
+      "Apple",
+      "iOS",
+      "iPhone",
+      "iPad",
+      "Watch",
+      "AirPods",
+      "Mac",
+      "Förlorad",
+      "Telefon",
+      "Spårning",
+      "Närvaro"
+    ],
+    "no": [
+      "Apple",
+      "Apple Find My",
+      "Finn min iPhone",
+      "Lokaliser iPhone",
+      "Hjem",
+      "Borte",
+      "Plassering",
+      "Geolokalisering",
+      "Geofencing",
+      "GPS",
+      "Finn",
+      "Apple",
+      "iOS",
+      "iPhone",
+      "iPad",
+      "Watch",
+      "AirPods",
+      "Mac",
+      "Tapt",
+      "Telefon",
+      "Sporing",
+      "Tilstedeværelse"
+    ],
+    "es": [
+      "Apple",
+      "Apple Find My",
+      "Encuentra mi iPhone",
+      "Localizar iPhone",
+      "Casa",
+      "Lejos",
+      "Ubicación",
+      "Geolocalización",
+      "Geofencing",
+      "GPS",
+      "Encontrar",
+      "Apple",
+      "iOS",
+      "iPhone",
+      "iPad",
+      "Watch",
+      "AirPods",
+      "Mac",
+      "Perdido",
+      "Teléfono",
+      "Rastreo",
+      "Presencia"
+    ],
+    "da": [
+      "Apple",
+      "Apple Find My",
+      "Find min iPhone",
+      "Lokaliser iPhone",
+      "Hjem",
+      "Væk",
+      "Placering",
+      "Geolokalisering",
+      "Geofencing",
+      "GPS",
+      "Find",
+      "Apple",
+      "iOS",
+      "iPhone",
+      "iPad",
+      "Watch",
+      "AirPods",
+      "Mac",
+      "Mistet",
+      "Telefon",
+      "Sporing",
+      "Tilstedeværelse"
+    ],
+    "ru": [
+      "Apple",
+      "Apple Find My",
+      "Найди мой iPhone",
+      "Найти iPhone",
+      "Дом",
+      "Далеко",
+      "Местоположение",
+      "Геолокация",
+      "Геозабор",
+      "GPS",
+      "Найти",
+      "Apple",
+      "iOS",
+      "iPhone",
+      "iPad",
+      "Watch",
+      "AirPods",
+      "Mac",
+      "Потерянный",
+      "Телефон",
+      "Отслеживание",
+      "Присутствие"
+    ],
+    "pl": [
+      "Apple",
+      "Apple Find My",
+      "Znajdź mój iPhone",
+      "Zlokalizuj iPhone",
+      "Dom",
+      "Daleko",
+      "Lokalizacja",
+      "Geolokalizacja",
+      "Geofencing",
+      "GPS",
+      "Znajdź",
+      "Apple",
+      "iOS",
+      "iPhone",
+      "iPad",
+      "Watch",
+      "AirPods",
+      "Mac",
+      "Zagubiony",
+      "Telefon",
+      "Śledzenie",
+      "Obecność"
+    ],
+    "ko": [
+      "Apple",
+      "Apple Find My",
+      "내 iPhone 찾기",
+      "iPhone 찾기",
+      "집",
+      "떨어져",
+      "위치",
+      "지리적 위치",
+      "지오펜싱",
+      "GPS",
+      "찾기",
+      "Apple",
+      "iOS",
+      "iPhone",
+      "iPad",
+      "Watch",
+      "AirPods",
+      "Mac",
+      "잃어버린",
+      "전화",
+      "추적",
+      "존재"
+    ]
+  },
+  "permissions": [
+    "homey:manager:geolocation"
+  ],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Martijn Poppen",
+    "email": "applefindmy@martijnpoppen.nl"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Martijn Poppen",
+        "email": "applefindmy@martijnpoppen.nl"
+      }
+    ],
+    "translators": [
+      {
+        "name": "🇬🇧 Martijn Poppen"
+      },
+      {
+        "name": "ChatGPT (translations)"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "martijnpoppen"
+      },
+      "bunq": {
+        "username": "martijnpoppen"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://community.homey.app/t/114491"
+  },
+  "source": "https://github.com/martijnpoppen/com.apple.findmy",
+  "homeyCommunityTopicId": 114491,
+  "support": "https://community.homey.app/t/114491",
+  "flow": {
+    "triggers": [
+      {
+        "id": "is_charging_false",
+        "title": {
+          "en": "Device stopped charging",
+          "nl": "Apparaat is gestopt met opladen",
+          "de": "Gerät hat aufgehört zu laden",
+          "fr": "L'appareil a arrêté de se charger",
+          "it": "Il dispositivo ha smesso di caricarsi",
+          "sv": "Enheten slutade ladda",
+          "no": "Enheten sluttet å lade",
+          "es": "El dispositivo dejó de cargarse",
+          "da": "Enhed stoppede med at oplade",
+          "ru": "Устройство перестало заряжаться",
+          "pl": "Urządzenie przestało się ładować",
+          "ko": "장치가 충전을 중지했습니다"
+        },
+        "titleFormatted": {
+          "en": "Device stopped charging",
+          "nl": "Apparaat is gestopt met opladen",
+          "de": "Gerät hat aufgehört zu laden",
+          "fr": "L'appareil a arrêté de se charger",
+          "it": "Il dispositivo ha smesso di caricarsi",
+          "sv": "Enheten slutade ladda",
+          "no": "Enheten sluttet å lade",
+          "es": "El dispositivo dejó de cargarse",
+          "da": "Enhed stoppede med at oplade",
+          "ru": "Устройство перестало заряжаться",
+          "pl": "Urządzenie przestało się ładować",
+          "ko": "장치가 충전을 중지했습니다"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=apple-device&capabilities=alarm_is_charging"
+          }
+        ]
+      },
+      {
+        "id": "is_charging_true",
+        "title": {
+          "en": "Device started charging",
+          "nl": "Apparaat is aan het opladen",
+          "de": "Gerät wird geladen",
+          "fr": "L'appareil a commencé à se charger",
+          "it": "Il dispositivo è in carica",
+          "sv": "Enhet började ladda",
+          "no": "Enheten begynte å lade",
+          "es": "El dispositivo comenzó a cargarse",
+          "da": "Enhed begyndte at oplade",
+          "ru": "Устройство начало заряжаться",
+          "pl": "Urządzenie zaczęło się ładować",
+          "ko": "장치가 충전을 시작했습니다"
+        },
+        "titleFormatted": {
+          "en": "Device started charging",
+          "nl": "Apparaat is aan het opladen",
+          "de": "Gerät wird geladen",
+          "fr": "L'appareil a commencé à se charger",
+          "it": "Il dispositivo è in carica",
+          "sv": "Enhet började ladda",
+          "no": "Enheten begynte å lade",
+          "es": "El dispositivo comenzó a cargarse",
+          "da": "Enhed begyndte at oplade",
+          "ru": "Устройство начало заряжаться",
+          "pl": "Urządzenie zaczęło się ładować",
+          "ko": "장치가 충전을 시작했습니다"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=apple-device&capabilities=alarm_is_charging"
+          }
+        ]
+      },
+      {
+        "id": "is_home_false",
+        "title": {
+          "en": "Device left home",
+          "nl": "Apparaat heeft thuis verlaten",
+          "de": "Gerät hat das Zuhause verlassen",
+          "fr": "L'appareil a quitté la maison",
+          "it": "Il dispositivo ha lasciato casa",
+          "sv": "Enhet lämnade hemmet",
+          "no": "Enheten forlot hjemmet",
+          "es": "El dispositivo salió de casa",
+          "da": "Enhed forlod hjemmet",
+          "ru": "Устройство покинуло дом",
+          "pl": "Urządzenie opuściło dom",
+          "ko": "장치가 집을 떠났습니다"
+        },
+        "titleFormatted": {
+          "en": "Device left home",
+          "nl": "Apparaat heeft thuis verlaten",
+          "de": "Gerät hat das Zuhause verlassen",
+          "fr": "L'appareil a quitté la maison",
+          "it": "Il dispositivo ha lasciato casa",
+          "sv": "Enhet lämnade hemmet",
+          "no": "Enheten forlot hjemmet",
+          "es": "El dispositivo salió de casa",
+          "da": "Enhed forlod hjemmet",
+          "ru": "Устройство покинуло дом",
+          "pl": "Urządzenie opuściło dom",
+          "ko": "장치가 집을 떠났습니다"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=apple-device&capabilities=alarm_is_home"
+          }
+        ]
+      },
+      {
+        "id": "is_home_true",
+        "title": {
+          "en": "Device came home",
+          "nl": "Apparaat is thuis gekomen",
+          "de": "Gerät ist nach Hause gekommen",
+          "fr": "L'appareil est rentré à la maison",
+          "it": "Il dispositivo è tornato a casa",
+          "sv": "Enhet kom hem",
+          "no": "Enheten kom hjem",
+          "es": "El dispositivo llegó a casa",
+          "da": "Enhed kom hjem",
+          "ru": "Устройство пришло домой",
+          "pl": "Urządzenie wróciło do domu",
+          "ko": "장치가 집에 왔습니다"
+        },
+        "titleFormatted": {
+          "en": "Device came home",
+          "nl": "Apparaat is thuis gekomen",
+          "de": "Gerät ist nach Hause gekommen",
+          "fr": "L'appareil est rentré à la maison",
+          "it": "Il dispositivo è tornato a casa",
+          "sv": "Enhet kom hem",
+          "no": "Enheten kom hjem",
+          "es": "El dispositivo llegó a casa",
+          "da": "Enhed kom hjem",
+          "ru": "Устройство пришло домой",
+          "pl": "Urządzenie wróciło do domu",
+          "ko": "장치가 집에 왔습니다"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=apple-device&capabilities=alarm_is_home"
+          }
+        ]
+      },
+      {
+        "id": "is_moving_false",
+        "title": {
+          "en": "Device stopped moving",
+          "nl": "Apparaat is gestopt met bewegen",
+          "de": "Gerät hat aufgehört zu bewegen",
+          "fr": "L'appareil a arrêté de bouger",
+          "it": "Il dispositivo ha smesso di muoversi",
+          "sv": "Enheten slutade röra sig",
+          "no": "Enheten sluttet å bevege seg",
+          "es": "El dispositivo dejó de moverse",
+          "da": "Enhed stoppede med at bevæge sig",
+          "ru": "Устройство перестало двигаться",
+          "pl": "Urządzenie przestało się poruszać",
+          "ko": "장치가 움직임을 중지했습니다"
+        },
+        "titleFormatted": {
+          "en": "Device stopped moving",
+          "nl": "Apparaat is gestopt met bewegen",
+          "de": "Gerät hat aufgehört zu bewegen",
+          "fr": "L'appareil a arrêté de bouger",
+          "it": "Il dispositivo ha smesso di muoversi",
+          "sv": "Enheten slutade röra sig",
+          "no": "Enheten sluttet å bevege seg",
+          "es": "El dispositivo dejó de moverse",
+          "da": "Enhed stoppede med at bevæge sig",
+          "ru": "Устройство перестало двигаться",
+          "pl": "Urządzenie przestało się poruszać",
+          "ko": "장치가 움직임을 중지했습니다"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=apple-device&capabilities=alarm_is_moving"
+          }
+        ]
+      },
+      {
+        "id": "is_moving_true",
+        "title": {
+          "en": "Device started moving",
+          "nl": "Apparaat is aan het bewegen",
+          "de": "Gerät hat angefangen zu bewegen",
+          "fr": "L'appareil a commencé à bouger",
+          "it": "Il dispositivo ha iniziato a muoversi",
+          "sv": "Enheten började röra sig",
+          "no": "Enheten begynte å bevege seg",
+          "es": "El dispositivo comenzó a moverse",
+          "da": "Enhed begyndte at bevæge sig",
+          "ru": "Устройство начало двигаться",
+          "pl": "Urządzenie zaczęło się poruszać",
+          "ko": "장치가 움직이기 시작했습니다"
+        },
+        "titleFormatted": {
+          "en": "Device started moving",
+          "nl": "Apparaat is aan het bewegen",
+          "de": "Gerät hat angefangen zu bewegen",
+          "fr": "L'appareil a commencé à bouger",
+          "it": "Il dispositivo ha iniziato a muoversi",
+          "sv": "Enheten började röra sig",
+          "no": "Enheten begynte å bevege seg",
+          "es": "El dispositivo comenzó a moverse",
+          "da": "Enhed begyndte at bevæge sig",
+          "ru": "Устройство начало двигаться",
+          "pl": "Urządzenie zaczęło się poruszać",
+          "ko": "장치가 움직이기 시작했습니다"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=apple-device&capabilities=alarm_is_moving"
+          }
+        ]
+      },
+      {
+        "id": "measure_battery_changed",
+        "title": {
+          "en": "Battery percentage has changed",
+          "nl": "Batterijpercentage is veranderd",
+          "de": "Batterieprozentsatz hat sich geändert",
+          "fr": "Le pourcentage de la batterie a changé",
+          "it": "La percentuale della batteria è cambiata",
+          "sv": "Batteriprocenten har ändrats",
+          "no": "Batteriprosenten har endret seg",
+          "es": "El porcentaje de la batería ha cambiado",
+          "da": "Batteriprocenten er ændret",
+          "ru": "Процент заряда батареи изменился",
+          "pl": "Procent naładowania baterii został zmieniony",
+          "ko": "배터리 백분율이 변경되었습니다"
+        }
+      },
+      {
+        "id": "measure_distance_meters_changed",
+        "title": {
+          "en": "Distance from Home(y) changed",
+          "nl": "Afstand van Home(y) veranderd",
+          "de": "Entfernung von Home(y) geändert",
+          "fr": "Distance de Home(y) modifiée",
+          "it": "Distanza da Home(y) cambiata",
+          "sv": "Avstånd från Home(y) ändrat",
+          "no": "Avstand fra Home(y) endret",
+          "es": "Distancia desde Home(y) cambiada",
+          "da": "Afstand fra Home(y) ændret",
+          "ru": "Расстояние от Home(y) изменилось",
+          "pl": "Odległość od Home(y) zmieniona",
+          "ko": "홈(y)로부터의 거리가 변경됨"
+        }
+      },
+      {
+        "id": "measure_latitude_changed",
+        "title": {
+          "en": "Latitude has changed",
+          "nl": "Breedtegraad is veranderd",
+          "de": "Breitengrad hat sich geändert",
+          "fr": "La latitude a changé",
+          "it": "La latitudine è cambiata",
+          "sv": "Latituden har ändrats",
+          "no": "Breddegraden har endret seg",
+          "es": "La latitud ha cambiado",
+          "da": "Breddegraden er ændret",
+          "ru": "Широта изменилась",
+          "pl": "Szerokość geograficzna została zmieniona",
+          "ko": "위도가 변경되었습니다"
+        }
+      },
+      {
+        "id": "measure_longitude_changed",
+        "title": {
+          "en": "Longitude has changed",
+          "nl": "Lengtegraad is veranderd",
+          "de": "Längengrad hat sich geändert",
+          "fr": "La longitude a changé",
+          "it": "La longitudine è cambiata",
+          "sv": "Longituden har ändrats",
+          "no": "Lengdegraden har endret seg",
+          "es": "La longitud ha cambiado",
+          "da": "Længdegraden er ændret",
+          "ru": "Долгота изменилась",
+          "pl": "Długość geograficzna została zmieniona",
+          "ko": "경도가 변경되었습니다"
+        }
+      }
+    ],
+    "conditions": [
+      {
+        "id": "is_charging",
+        "title": {
+          "en": "Device is charging",
+          "nl": "Apparaat is aan het opladen"
+        },
+        "titleFormatted": {
+          "en": "Device !{{is|isn't}} charging",
+          "nl": "Apparaat !{{is|is niet}} aan het opladen"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=apple-device&capabilities=alarm_is_charging"
+          }
+        ],
+        "platforms": [
+          "local"
+        ]
+      },
+      {
+        "id": "is_home",
+        "title": {
+          "en": "Device is home",
+          "nl": "Apparaat is thuis"
+        },
+        "titleFormatted": {
+          "en": "Device !{{is|isn't}} home",
+          "nl": "Apparaat !{{is|is niet}} thuis"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=apple-device&capabilities=alarm_is_home"
+          }
+        ],
+        "platforms": [
+          "local"
+        ]
+      },
+      {
+        "id": "is_in_range",
+        "title": {
+          "en": "Device is in range of Latitude and Longitude",
+          "nl": "Apparaat is binnen bereik van Latitude en Longitude",
+          "de": "Gerät ist im Bereich von Breite und Länge",
+          "fr": "L'appareil est dans la plage de latitude et de longitude",
+          "it": "Il dispositivo è nell'intervallo di latitudine e longitudine",
+          "sv": "Enheten är inom räckvidd för latitud och longitud",
+          "no": "Enheten er innenfor rekkevidde for breddegrad og lengdegrad",
+          "es": "El dispositivo está en el rango de latitud y longitud",
+          "da": "Enheden er inden for rækkevidde af breddegrad og længdegrad",
+          "ru": "Устройство находится в диапазоне широты и долготы",
+          "pl": "Urządzenie znajduje się w zasięgu szerokości i długości geograficznej",
+          "ko": "장치가 위도와 경도 범위 내에 있습니다"
+        },
+        "titleFormatted": {
+          "en": "Device is in [[radius]] meters of Latitude [[latitude]] and Longitude [[longitude]]",
+          "nl": "Apparaat is binnen [[radius]] meter van Latitude [[latitude]] en Longitude [[longitude]]",
+          "de": "Gerät ist im Bereich von [[radius]] Metern Breite [[latitude]] und Länge [[longitude]]",
+          "fr": "L'appareil est dans un rayon de [[radius]] mètres de latitude [[latitude]] et de longitude [[longitude]]",
+          "it": "Il dispositivo è in [[radius]] metri di latitudine [[latitude]] e longitudine [[longitude]]",
+          "sv": "Enheten är inom [[radius]] meter av latitud [[latitude]] och longitud [[longitude]]",
+          "no": "Enheten er innenfor [[radius]] meter av breddegrad [[latitude]] og lengdegrad [[longitude]]",
+          "es": "El dispositivo está en [[radius]] metros de latitud [[latitude]] y longitud [[longitude]]",
+          "da": "Enheden er inden for [[radius]] meter af breddegrad [[latitude]] og længdegrad [[longitude]]",
+          "ru": "Устройство находится в [[radius]] метрах от широты [[latitude]] и долготы [[longitude]]",
+          "pl": "Urządzenie znajduje się w [[radius]] metrów od szerokości [[latitude]] i długości geograficznej [[longitude]]",
+          "ko": "장치가 위도 [[latitude]] 및 경도 [[longitude]]의 [[radius]] 미터 범위 내에 있습니다"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=apple-device&capabilities=alarm_is_home"
+          },
+          {
+            "type": "text",
+            "name": "latitude",
+            "required": true,
+            "title": {
+              "en": "Latitude",
+              "nl": "Breedtegraad",
+              "de": "Breitengrad",
+              "fr": "Latitude",
+              "it": "Latitudine",
+              "sv": "Latitud",
+              "no": "Breddegrad",
+              "es": "Latitud",
+              "da": "Breddegrad",
+              "ru": "Широта",
+              "pl": "Szerokość geograficzna",
+              "ko": "위도"
+            }
+          },
+          {
+            "type": "text",
+            "name": "longitude",
+            "required": true,
+            "title": {
+              "en": "Longitude",
+              "nl": "Lengtegraad",
+              "de": "Längengrad",
+              "fr": "Longitude",
+              "it": "Longitudine",
+              "sv": "Longitud",
+              "no": "Lengdegrad",
+              "es": "Longitud",
+              "da": "Længdegrad",
+              "ru": "Долгота",
+              "pl": "Długość geograficzna",
+              "ko": "경도"
+            }
+          },
+          {
+            "type": "number",
+            "name": "radius",
+            "required": true,
+            "title": {
+              "en": "Radius (meters)",
+              "nl": "Straal (meters)",
+              "de": "Radius (Meter)",
+              "fr": "Rayon (mètres)",
+              "it": "Raggio (metri)",
+              "sv": "Radie (meter)",
+              "no": "Radius (meter)",
+              "es": "Radio (metros)",
+              "da": "Radius (meter)",
+              "ru": "Радиус (метры)",
+              "pl": "Promień (metry)",
+              "ko": "반경 (미터)"
+            }
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "title": {
+          "en": "Send message",
+          "nl": "Bericht versturen",
+          "de": "Nachricht senden",
+          "fr": "Envoyer un message",
+          "it": "Invia messaggio",
+          "sv": "Skicka meddelande",
+          "no": "Send melding",
+          "es": "Enviar mensaje",
+          "da": "Send besked",
+          "ru": "Отправить сообщение",
+          "pl": "Wyślij wiadomość",
+          "ko": "메시지 보내기"
+        },
+        "titleFormatted": {
+          "en": "Send message: [[text]] with subject: [[subject]]",
+          "nl": "Verstuur bericht: [[text]] met onderwerp: [[subject]]",
+          "de": "Nachricht senden: [[text]] mit Betreff: [[subject]]",
+          "fr": "Envoyer un message : [[text]] avec l'objet : [[subject]]",
+          "it": "Invia messaggio: [[text]] con oggetto: [[subject]]",
+          "sv": "Skicka meddelande: [[text]] med ämne: [[subject]]",
+          "no": "Send melding: [[text]] med emne: [[subject]]",
+          "es": "Enviar mensaje: [[text]] con asunto: [[subject]]",
+          "da": "Send besked: [[text]] med emne: [[subject]]",
+          "ru": "Отправить сообщение: [[text]] с темой: [[subject]]",
+          "pl": "Wyślij wiadomość: [[text]] z tematem: [[subject]]",
+          "ko": "메시지 보내기: [[text]]과 주제: [[subject]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "placeholder": {
+              "en": "Select device",
+              "nl": "Selecteer apparaat"
+            },
+            "filter": "driver_id=apple-device|Whatsapp_cloud&capabilities=send_message"
+          },
+          {
+            "type": "text",
+            "name": "subject",
+            "required": false,
+            "title": {
+              "en": "Subject",
+              "nl": "Onderwerp",
+              "de": "Betreff",
+              "fr": "Sujet",
+              "it": "Oggetto",
+              "sv": "Ämne",
+              "no": "Emne",
+              "es": "Asunto",
+              "da": "Emne",
+              "ru": "Тема",
+              "pl": "Temat",
+              "ko": "제목"
+            }
+          },
+          {
+            "type": "text",
+            "name": "text",
+            "required": true,
+            "title": {
+              "en": "Message",
+              "nl": "Bericht",
+              "de": "Nachricht",
+              "fr": "Message",
+              "it": "Messaggio",
+              "sv": "Meddelande",
+              "no": "Melding",
+              "es": "Mensaje",
+              "da": "Besked",
+              "ru": "Сообщение",
+              "pl": "Wiadomość",
+              "ko": "메시지"
+            }
+          }
+        ],
+        "platforms": [
+          "local"
+        ],
+        "id": "send_message"
+      },
+      {
+        "title": {
+          "en": "Play sound on device",
+          "nl": "Geluid afspelen op apparaat",
+          "de": "Ton auf Gerät abspielen",
+          "fr": "Jouer un son sur l'appareil",
+          "it": "Riproduci suono sul dispositivo",
+          "sv": "Spela ljud på enheten",
+          "no": "Spill lyd på enheten",
+          "es": "Reproducir sonido en el dispositivo",
+          "da": "Afspil lyd på enheden",
+          "ru": "Воспроизвести звук на устройстве",
+          "pl": "Odtwórz dźwięk na urządzeniu",
+          "ko": "장치에서 소리 재생"
+        },
+        "titleFormatted": {
+          "en": "Play sound on device",
+          "nl": "Geluid afspelen op apparaat",
+          "de": "Ton auf Gerät abspielen",
+          "fr": "Jouer un son sur l'appareil",
+          "it": "Riproduci suono sul dispositivo",
+          "sv": "Spela ljud på enheten",
+          "no": "Spill lyd på enheten",
+          "es": "Reproducir sonido en el dispositivo",
+          "da": "Afspil lyd på enheden",
+          "ru": "Воспроизвести звук на устройстве",
+          "pl": "Odtwórz dźwięk na urządzeniu",
+          "ko": "장치에서 소리 재생"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "placeholder": {
+              "en": "Select device",
+              "nl": "Selecteer apparaat"
+            },
+            "filter": "driver_id=apple-device|Whatsapp_cloud&capabilities=send_message"
+          }
+        ],
+        "platforms": [
+          "local"
+        ],
+        "id": "send_sound"
+      },
+      {
+        "title": {
+          "en": "Set server request interval",
+          "nl": "Stel serververzoekinterval in",
+          "de": "Serveranforderungsintervall festlegen",
+          "fr": "Définir l'intervalle de demande de serveur",
+          "it": "Imposta l'intervallo di richiesta del server",
+          "sv": "Ställ in serverförfrågningsintervall",
+          "no": "Angi serverforespørselsintervall",
+          "es": "Establecer intervalo de solicitud de servidor",
+          "da": "Indstil serverforespørgselsinterval",
+          "ru": "Установить интервал запроса сервера",
+          "pl": "Ustaw interwał żądania serwera",
+          "ko": "서버 요청 간격 설정"
+        },
+        "titleFormatted": {
+          "en": "Set server request interval to [[interval]]",
+          "nl": "Stel serververzoekinterval in op [[interval]]",
+          "de": "Serveranforderungsintervall auf [[interval]] festlegen",
+          "fr": "Définir l'intervalle de demande de serveur à [[interval]]",
+          "it": "Imposta l'intervallo di richiesta del server su [[interval]]",
+          "sv": "Ställ in serverförfrågningsintervall till [[interval]]",
+          "no": "Angi serverforespørselsintervall til [[interval]]",
+          "es": "Establecer intervalo de solicitud de servidor en [[interval]]",
+          "da": "Indstil serverforespørgselsinterval til [[interval]]",
+          "ru": "Установить интервал запроса сервера на [[interval]]",
+          "pl": "Ustaw interwał żądania serwera na [[interval]]",
+          "ko": "서버 요청 간격을 [[interval]]로 설정"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "placeholder": {
+              "en": "Select device"
+            },
+            "filter": "driver_id=apple-device"
+          },
+          {
+            "name": "interval",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "Off",
+                  "nl": "Uit",
+                  "de": "Aus",
+                  "fr": "Éteint",
+                  "it": "Spento",
+                  "sv": "Av",
+                  "no": "Av",
+                  "es": "Apagado",
+                  "da": "Fra",
+                  "ru": "Отключено",
+                  "pl": "Wyłączone",
+                  "ko": "끄기"
+                }
+              },
+              {
+                "id": "5000",
+                "label": {
+                  "en": "Default (5 seconds)",
+                  "nl": "Standaard (5 seconden)",
+                  "de": "Standard (5 Sekunden)",
+                  "fr": "Par défaut (5 secondes)",
+                  "it": "Predefinito (5 secondi)",
+                  "sv": "Standard (5 sekunder)",
+                  "no": "Standard (5 sekunder)",
+                  "es": "Predeterminado (5 segundos)",
+                  "da": "Standard (5 sekunder)",
+                  "ru": "По умолчанию (5 секунд)",
+                  "pl": "Domyślnie (5 sekund)",
+                  "ko": "기본값 (5 초)"
+                }
+              },
+              {
+                "id": "500",
+                "label": {
+                  "en": "0.5 second",
+                  "nl": "0,5 seconde",
+                  "de": "0,5 Sekunden",
+                  "fr": "0,5 seconde",
+                  "it": "0,5 secondo",
+                  "sv": "0,5 sekund",
+                  "no": "0,5 sekund",
+                  "es": "0,5 segundo",
+                  "da": "0,5 sekund",
+                  "ru": "0,5 секунды",
+                  "pl": "0,5 sekundy",
+                  "ko": "0.5 초"
+                }
+              },
+              {
+                "id": "1000",
+                "label": {
+                  "en": "1 second",
+                  "nl": "1 seconde",
+                  "de": "1 Sekunde",
+                  "fr": "1 seconde",
+                  "it": "1 secondo",
+                  "sv": "1 sekund",
+                  "no": "1 sekund",
+                  "es": "1 segundo",
+                  "da": "1 sekund",
+                  "ru": "1 секунда",
+                  "pl": "1 sekunda",
+                  "ko": "1 초"
+                }
+              },
+              {
+                "id": "2000",
+                "label": {
+                  "en": "2 seconds",
+                  "nl": "2 seconden",
+                  "de": "2 Sekunden",
+                  "fr": "2 secondes",
+                  "it": "2 secondi",
+                  "sv": "2 sekunder",
+                  "no": "2 sekunder",
+                  "es": "2 segundos",
+                  "da": "2 sekunder",
+                  "ru": "2 секунды",
+                  "pl": "2 sekundy",
+                  "ko": "2 초"
+                }
+              },
+              {
+                "id": "3000",
+                "label": {
+                  "en": "3 seconds",
+                  "nl": "3 seconden",
+                  "de": "3 Sekunden",
+                  "fr": "3 secondes",
+                  "it": "3 secondi",
+                  "sv": "3 sekunder",
+                  "no": "3 sekunder",
+                  "es": "3 segundos",
+                  "da": "3 sekunder",
+                  "ru": "3 секунды",
+                  "pl": "3 sekundy",
+                  "ko": "3 초"
+                }
+              },
+              {
+                "id": "4000",
+                "label": {
+                  "en": "4 seconds",
+                  "nl": "4 seconden",
+                  "de": "4 Sekunden",
+                  "fr": "4 secondes",
+                  "it": "4 secondi",
+                  "sv": "4 sekunder",
+                  "no": "4 sekunder",
+                  "es": "4 segundos",
+                  "da": "4 sekunder",
+                  "ru": "4 секунды",
+                  "pl": "4 sekundy",
+                  "ko": "4 초"
+                }
+              },
+              {
+                "id": "5000",
+                "label": {
+                  "en": "5 seconds",
+                  "nl": "5 seconden",
+                  "de": "5 Sekunden",
+                  "fr": "5 secondes",
+                  "it": "5 secondi",
+                  "sv": "5 sekunder",
+                  "no": "5 sekunder",
+                  "es": "5 segundos",
+                  "da": "5 sekunder",
+                  "ru": "5 секунды",
+                  "pl": "5 sekundy",
+                  "ko": "5 초"
+                }
+              },
+              {
+                "id": "6000",
+                "label": {
+                  "en": "6 seconds",
+                  "nl": "6 seconden",
+                  "de": "6 Sekunden",
+                  "fr": "6 secondes",
+                  "it": "6 secondi",
+                  "sv": "6 sekunder",
+                  "no": "6 sekunder",
+                  "es": "6 segundos",
+                  "da": "6 sekunder",
+                  "ru": "6 секунды",
+                  "pl": "6 sekundy",
+                  "ko": "6 초"
+                }
+              },
+              {
+                "id": "7000",
+                "label": {
+                  "en": "7 seconds",
+                  "nl": "7 seconden",
+                  "de": "7 Sekunden",
+                  "fr": "7 secondes",
+                  "it": "7 secondi",
+                  "sv": "7 sekunder",
+                  "no": "7 sekunder",
+                  "es": "7 segundos",
+                  "da": "7 sekunder",
+                  "ru": "7 секунды",
+                  "pl": "7 sekundy",
+                  "ko": "7 초"
+                }
+              },
+              {
+                "id": "8000",
+                "label": {
+                  "en": "8 seconds",
+                  "nl": "8 seconden",
+                  "de": "8 Sekunden",
+                  "fr": "8 secondes",
+                  "it": "8 secondi",
+                  "sv": "8 sekunder",
+                  "no": "8 sekunder",
+                  "es": "8 segundos",
+                  "da": "8 sekunder",
+                  "ru": "8 секунды",
+                  "pl": "8 sekundy",
+                  "ko": "8 초"
+                }
+              },
+              {
+                "id": "9000",
+                "label": {
+                  "en": "9 seconds",
+                  "nl": "9 seconden",
+                  "de": "9 Sekunden",
+                  "fr": "9 secondes",
+                  "it": "9 secondi",
+                  "sv": "9 sekunder",
+                  "no": "9 sekunder",
+                  "es": "9 segundos",
+                  "da": "9 sekunder",
+                  "ru": "9 секунды",
+                  "pl": "9 sekundy",
+                  "ko": "9 초"
+                }
+              },
+              {
+                "id": "10000",
+                "label": {
+                  "en": "10 seconds",
+                  "nl": "10 seconden",
+                  "de": "10 Sekunden",
+                  "fr": "10 secondes",
+                  "it": "10 secondi",
+                  "sv": "10 sekunder",
+                  "no": "10 sekunder",
+                  "es": "10 segundos",
+                  "da": "10 sekunder",
+                  "ru": "10 секунд",
+                  "pl": "10 sekund",
+                  "ko": "10 초"
+                }
+              },
+              {
+                "id": "15000",
+                "label": {
+                  "en": "15 seconds",
+                  "nl": "15 seconden",
+                  "de": "15 Sekunden",
+                  "fr": "15 secondes",
+                  "it": "15 secondi",
+                  "sv": "15 sekunder",
+                  "no": "15 sekunder",
+                  "es": "15 segundos",
+                  "da": "15 sekunder",
+                  "ru": "15 секунд",
+                  "pl": "15 sekund",
+                  "ko": "15 초"
+                }
+              },
+              {
+                "id": "20000",
+                "label": {
+                  "en": "20 seconds",
+                  "nl": "20 seconden",
+                  "de": "20 Sekunden",
+                  "fr": "20 secondes",
+                  "it": "20 secondi",
+                  "sv": "20 sekunder",
+                  "no": "20 sekunder",
+                  "es": "20 segundos",
+                  "da": "20 sekunder",
+                  "ru": "20 секунд",
+                  "pl": "20 sekund",
+                  "ko": "20 초"
+                }
+              },
+              {
+                "id": "30000",
+                "label": {
+                  "en": "30 seconds",
+                  "nl": "30 seconden",
+                  "de": "30 Sekunden",
+                  "fr": "30 secondes",
+                  "it": "30 secondi",
+                  "sv": "30 sekunder",
+                  "no": "30 sekunder",
+                  "es": "30 segundos",
+                  "da": "30 sekunder",
+                  "ru": "30 секунд",
+                  "pl": "30 sekund",
+                  "ko": "30 초"
+                }
+              },
+              {
+                "id": "60000",
+                "label": {
+                  "en": "1 minute",
+                  "nl": "1 minuut",
+                  "de": "1 Minute",
+                  "fr": "1 minute",
+                  "it": "1 minuto",
+                  "sv": "1 minut",
+                  "no": "1 minutt",
+                  "es": "1 minuto",
+                  "da": "1 minut",
+                  "ru": "1 минута",
+                  "pl": "1 minuta",
+                  "ko": "1 분"
+                }
+              },
+              {
+                "id": "120000",
+                "label": {
+                  "en": "2 minutes",
+                  "nl": "2 minuten",
+                  "de": "2 Minuten",
+                  "fr": "2 minutes",
+                  "it": "2 minuti",
+                  "sv": "2 minuter",
+                  "no": "2 minutter",
+                  "es": "2 minutos",
+                  "da": "2 minutter",
+                  "ru": "2 минуты",
+                  "pl": "2 minuty",
+                  "ko": "2 분"
+                }
+              },
+              {
+                "id": "300000",
+                "label": {
+                  "en": "5 minutes",
+                  "nl": "5 minuten",
+                  "de": "5 Minuten",
+                  "fr": "5 minutes",
+                  "it": "5 minuti",
+                  "sv": "5 minuter",
+                  "no": "5 minutter",
+                  "es": "5 minutos",
+                  "da": "5 minutter",
+                  "ru": "5 минут",
+                  "pl": "5 minut",
+                  "ko": "5 분"
+                }
+              },
+              {
+                "id": "600000",
+                "label": {
+                  "en": "10 minutes",
+                  "nl": "10 minuten",
+                  "de": "10 Minuten",
+                  "fr": "10 minutes",
+                  "it": "10 minuti",
+                  "sv": "10 minuter",
+                  "no": "10 minutter",
+                  "es": "10 minutos",
+                  "da": "10 minutter",
+                  "ru": "10 минут",
+                  "pl": "10 minut",
+                  "ko": "10 분"
+                }
+              },
+              {
+                "id": "900000",
+                "label": {
+                  "en": "15 minutes",
+                  "nl": "15 minuten",
+                  "de": "15 Minuten",
+                  "fr": "15 minutes",
+                  "it": "15 minuti",
+                  "sv": "15 minuter",
+                  "no": "15 minutter",
+                  "es": "15 minutos",
+                  "da": "15 minutter",
+                  "ru": "15 минут",
+                  "pl": "15 minut",
+                  "ko": "15 분"
+                }
+              },
+              {
+                "id": "1800000",
+                "label": {
+                  "en": "30 minutes",
+                  "nl": "30 minuten",
+                  "de": "30 Minuten",
+                  "fr": "30 minutes",
+                  "it": "30 minuti",
+                  "sv": "30 minuter",
+                  "no": "30 minutter",
+                  "es": "30 minutos",
+                  "da": "30 minutter",
+                  "ru": "30 минут",
+                  "pl": "30 minut",
+                  "ko": "30 분"
+                }
+              },
+              {
+                "id": "3600000",
+                "label": {
+                  "en": "1 hour",
+                  "nl": "1 uur",
+                  "de": "1 Stunde",
+                  "fr": "1 heure",
+                  "it": "1 ora",
+                  "sv": "1 timme",
+                  "no": "1 time",
+                  "es": "1 hora",
+                  "da": "1 time",
+                  "ru": "1 час",
+                  "pl": "1 godzina",
+                  "ko": "1 시간"
+                }
+              }
+            ]
+          }
+        ],
+        "platforms": [
+          "local"
+        ],
+        "id": "set_interval"
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "icon": "/drivers/apple-device/assets/icon.svg",
+      "images": {
+        "large": "/drivers/apple-device/assets/images/large.png",
+        "small": "/drivers/apple-device/assets/images/small.png"
+      },
+      "class": "other",
+      "connectivity": [
+        "cloud"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Username",
+              "nl": "Gebruikersnaam",
+              "de": "Benutzername",
+              "fr": "Nom d'utilisateur",
+              "it": "Nome utente",
+              "sv": "Användarnamn",
+              "no": "Brukernavn",
+              "es": "Nombre de usuario",
+              "da": "Brugernavn",
+              "ru": "Имя пользователя",
+              "pl": "Nazwa użytkownika",
+              "ko": "사용자 이름"
+            },
+            "usernamePlaceholder": {
+              "en": "john@doe.com"
+            },
+            "usernameValue": {
+              "en": ""
+            },
+            "passwordLabel": {
+              "en": "Password",
+              "nl": "Wachtwoord",
+              "de": "Passwort",
+              "fr": "Mot de passe",
+              "it": "Password",
+              "sv": "Lösenord",
+              "no": "Passord",
+              "es": "Contraseña",
+              "da": "Adgangskode",
+              "ru": "Пароль",
+              "pl": "Hasło",
+              "ko": "비밀번호"
+            },
+            "passwordPlaceholder": {
+              "en": "Password",
+              "nl": "Wachtwoord",
+              "de": "Passwort",
+              "fr": "Mot de passe",
+              "it": "Password",
+              "sv": "Lösenord",
+              "no": "Passord",
+              "es": "Contraseña",
+              "da": "Adgangskode",
+              "ru": "Пароль",
+              "pl": "Hasło",
+              "ko": "비밀번호"
+            },
+            "logo": "../../../assets/icon.svg"
+          }
+        },
+        {
+          "id": "loading",
+          "template": "loading"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Username",
+              "nl": "Gebruikersnaam",
+              "de": "Benutzername",
+              "fr": "Nom d'utilisateur",
+              "it": "Nome utente",
+              "sv": "Användarnamn",
+              "no": "Brukernavn",
+              "es": "Nombre de usuario",
+              "da": "Brugernavn",
+              "ru": "Имя пользователя",
+              "pl": "Nazwa użytkownika",
+              "ko": "사용자 이름"
+            },
+            "usernamePlaceholder": {
+              "en": "john@doe.com"
+            },
+            "usernameValue": {
+              "en": ""
+            },
+            "passwordLabel": {
+              "en": "Password",
+              "nl": "Wachtwoord",
+              "de": "Passwort",
+              "fr": "Mot de passe",
+              "it": "Password",
+              "sv": "Lösenord",
+              "no": "Passord",
+              "es": "Contraseña",
+              "da": "Adgangskode",
+              "ru": "Пароль",
+              "pl": "Hasło",
+              "ko": "비밀번호"
+            },
+            "passwordPlaceholder": {
+              "en": "Password",
+              "nl": "Wachtwoord",
+              "de": "Passwort",
+              "fr": "Mot de passe",
+              "it": "Password",
+              "sv": "Lösenord",
+              "no": "Passord",
+              "es": "Contraseña",
+              "da": "Adgangskode",
+              "ru": "Пароль",
+              "pl": "Hasło",
+              "ko": "비밀번호"
+            },
+            "logo": "../../../assets/icon.svg"
+          }
+        },
+        {
+          "id": "loading",
+          "template": "loading"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "settings": [
+        {
+          "id": "is_home_radius",
+          "type": "number",
+          "label": {
+            "en": "Radius for Is Home check",
+            "nl": "Straal voor Is Thuis controle",
+            "de": "Radius für Is Home-Überprüfung",
+            "fr": "Rayon pour la vérification de la maison",
+            "it": "Raggio per il controllo di Is Home",
+            "sv": "Radie för Is Home-kontroll",
+            "no": "Radius for Is Home-sjekk",
+            "es": "Radio para la verificación de Is Home",
+            "da": "Radius for Is Home check",
+            "ru": "Радиус для проверки дома",
+            "pl": "Promień dla sprawdzenia Is Home",
+            "ko": "홈 확인을위한 반경"
+          },
+          "min": 1,
+          "max": 9999999,
+          "steps": 0.01,
+          "units": {
+            "en": "Meters",
+            "nl": "Meters",
+            "it": "Meters"
+          },
+          "value": 300
+        }
+      ],
+      "name": {
+        "en": "Apple Find My"
+      },
+      "capabilities": [
+        "alarm_battery",
+        "alarm_is_home",
+        "alarm_is_moving",
+        "alarm_is_charging",
+        "measure_battery",
+        "measure_distance",
+        "measure_distance_meters",
+        "measure_distance_miles",
+        "measure_interval",
+        "measure_latitude",
+        "measure_longitude",
+        "send_message",
+        "send_sound"
+      ],
+      "energy": {
+        "batteries": [
+          "INTERNAL"
+        ]
+      },
+      "id": "apple-device"
+    }
+  ],
+  "capabilities": {
+    "alarm_is_charging": {
+      "type": "boolean",
+      "title": {
+        "en": "Device is charging",
+        "nl": "Apparaat wordt opgeladen",
+        "de": "Gerät wird geladen",
+        "fr": "L'appareil se charge",
+        "it": "Il dispositivo è in carica",
+        "sv": "Enhet laddas",
+        "no": "Enheten lades",
+        "es": "El dispositivo se está cargando",
+        "da": "Enhed oplades",
+        "ru": "Устройство заряжается",
+        "pl": "Urządzenie ładuje się",
+        "ko": "장치가 충전 중입니다"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/battery-charging.svg"
+    },
+    "alarm_is_home": {
+      "type": "boolean",
+      "title": {
+        "en": "Is device at home",
+        "nl": "Is apparaat thuis",
+        "de": "Ist das Gerät zu Hause",
+        "fr": "L'appareil est-il à la maison",
+        "it": "Il dispositivo è a casa",
+        "sv": "Är enheten hemma",
+        "no": "Er enheten hjemme",
+        "es": "¿Está el dispositivo en casa",
+        "da": "Er enheden hjemme",
+        "ru": "Находится ли устройство дома",
+        "pl": "Czy urządzenie jest w domu",
+        "ko": "장치가 집에 있습니까"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/house-door.svg"
+    },
+    "alarm_is_moving": {
+      "type": "boolean",
+      "title": {
+        "en": "Is moving",
+        "nl": "Is aan het bewegen",
+        "de": "Bewegt sich",
+        "fr": "Est en mouvement",
+        "it": "Si sta muovendo",
+        "sv": "Rör sig",
+        "no": "Beveger seg",
+        "es": "Está en movimiento",
+        "da": "Bevæger sig",
+        "ru": "Движется",
+        "pl": "Porusza się",
+        "ko": "움직이고 있습니다"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/motion.svg"
+    },
+    "measure_distance": {
+      "platforms": [
+        "local"
+      ],
+      "type": "number",
+      "title": {
+        "en": "Distance from Home(y) in km",
+        "nl": "Afstand van Home(y) in km",
+        "de": "Entfernung von Home(y) in km",
+        "fr": "Distance de Home(y) en km",
+        "it": "Distanza da Home(y) in km",
+        "sv": "Avstånd från Home(y) i km",
+        "no": "Avstand fra Home(y) i km",
+        "es": "Distancia desde Home(y) en km",
+        "da": "Afstand fra Home(y) i km",
+        "ru": "Расстояние от Home(y) в км",
+        "pl": "Odległość od Home(y) w km",
+        "ko": "홈(y)로부터의 거리(km)"
+      },
+      "units": {
+        "en": "km"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Distance from Home(y) in km",
+        "nl": "Afstand van Home(y) in km",
+        "de": "Entfernung von Home(y) in km",
+        "fr": "Distance de Home(y) en km",
+        "it": "Distanza da Home(y) in km",
+        "sv": "Avstånd från Home(y) i km",
+        "no": "Avstand fra Home(y) i km",
+        "es": "Distancia desde Home(y) en km",
+        "da": "Afstand fra Home(y) i km",
+        "ru": "Расстояние от Home(y) в км",
+        "pl": "Odległość od Home(y) w km",
+        "ko": "홈(y)로부터의 거리(km)"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/mileage.svg"
+    },
+    "measure_distance_meters": {
+      "platforms": [
+        "local"
+      ],
+      "type": "number",
+      "title": {
+        "en": "Distance from Home(y) in m",
+        "nl": "Afstand van Home(y) in m",
+        "de": "Entfernung von Home(y) in m",
+        "fr": "Distance de Home(y) en m",
+        "it": "Distanza da Home(y) in m",
+        "sv": "Avstånd från Home(y) i m",
+        "no": "Avstand fra Home(y) i m",
+        "es": "Distancia desde Home(y) en m",
+        "da": "Afstand fra Home(y) i m",
+        "ru": "Расстояние от Home(y) в m",
+        "pl": "Odległość od Home(y) w m",
+        "ko": "홈(y)로부터의 거리(m)"
+      },
+      "units": {
+        "en": "meter"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Distance from Home(y) in m",
+        "nl": "Afstand van Home(y) in m",
+        "de": "Entfernung von Home(y) in m",
+        "fr": "Distance de Home(y) en m",
+        "it": "Distanza da Home(y) in m",
+        "sv": "Avstånd från Home(y) i m",
+        "no": "Avstand fra Home(y) i m",
+        "es": "Distancia desde Home(y) en m",
+        "da": "Afstand fra Home(y) i m",
+        "ru": "Расстояние от Home(y) в m",
+        "pl": "Odległość od Home(y) w m",
+        "ko": "홈(y)로부터의 거리(m)"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/mileage.svg"
+    },
+    "measure_distance_miles": {
+      "platforms": [
+        "local"
+      ],
+      "type": "number",
+      "title": {
+        "en": "Distance from Home(y) in mi",
+        "nl": "Afstand van Home(y) in mi",
+        "de": "Entfernung von Home(y) in mi",
+        "fr": "Distance de Home(y) en mi",
+        "it": "Distanza da Home(y) in mi",
+        "sv": "Avstånd från Home(y) i mi",
+        "no": "Avstand fra Home(y) i mi",
+        "es": "Distancia desde Home(y) en mi",
+        "da": "Afstand fra Home(y) i mi",
+        "ru": "Расстояние от Home(y) в mi",
+        "pl": "Odległość od Home(y) w mi",
+        "ko": "홈(y)로부터의 거리(mi)"
+      },
+      "units": {
+        "en": "mi"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Distance from Home(y) in mi",
+        "nl": "Afstand van Home(y) in mi",
+        "de": "Entfernung von Home(y) in mi",
+        "fr": "Distance de Home(y) en mi",
+        "it": "Distanza da Home(y) in mi",
+        "sv": "Avstånd från Home(y) i mi",
+        "no": "Avstand fra Home(y) i mi",
+        "es": "Distancia desde Home(y) en mi",
+        "da": "Afstand fra Home(y) i mi",
+        "ru": "Расстояние от Home(y) в mi",
+        "pl": "Odległość od Home(y) w mi",
+        "ko": "홈(y)로부터의 거리(mi)"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/mileage.svg"
+    },
+    "measure_interval": {
+      "platforms": [
+        "local"
+      ],
+      "type": "number",
+      "title": {
+        "en": "Server request interval",
+        "nl": "Serververzoekinterval",
+        "de": "Serveranforderungsintervall",
+        "fr": "Intervalle de demande de serveur",
+        "it": "Intervallo di richiesta del server",
+        "sv": "Serverförfrågningsintervall",
+        "no": "Serverforespørselsintervall",
+        "es": "Intervalo de solicitud del servidor",
+        "da": "Serverforespørgselsinterval",
+        "ru": "Интервал запроса сервера",
+        "pl": "Interwał żądania serwera",
+        "ko": "서버 요청 간격"
+      },
+      "units": {
+        "en": "seconds"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Server request interval",
+        "nl": "Serververzoekinterval",
+        "de": "Serveranforderungsintervall",
+        "fr": "Intervalle de demande de serveur",
+        "it": "Intervallo di richiesta del server",
+        "sv": "Serverförfrågningsintervall",
+        "no": "Serverforespørselsintervall",
+        "es": "Intervalo de solicitud del servidor",
+        "da": "Serverforespørgselsinterval",
+        "ru": "Интервал запроса сервера",
+        "pl": "Interwał żądania serwera",
+        "ko": "서버 요청 간격"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/speedometer.svg"
+    },
+    "measure_latitude": {
+      "platforms": [
+        "local"
+      ],
+      "type": "number",
+      "title": {
+        "en": "Latitude",
+        "nl": "Breedtegraad",
+        "de": "Breitengrad",
+        "fr": "Latitude",
+        "it": "Latitudine",
+        "sv": "Latitud",
+        "no": "Breddegrad",
+        "es": "Latitud",
+        "da": "Breddegrad",
+        "ru": "Широта",
+        "pl": "Szerokość geograficzna",
+        "ko": "위도"
+      },
+      "insights": false,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/geo-alt-fill.svg"
+    },
+    "measure_longitude": {
+      "platforms": [
+        "local"
+      ],
+      "type": "number",
+      "title": {
+        "en": "Longitude",
+        "nl": "Lengtegraad",
+        "de": "Längengrad",
+        "fr": "Longitude",
+        "it": "Longitudine",
+        "sv": "Longitud",
+        "no": "Lengdegrad",
+        "es": "Longitud",
+        "da": "Længdegrad",
+        "ru": "Долгота",
+        "pl": "Długość geograficzna",
+        "ko": "경도"
+      },
+      "insights": false,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/geo-alt.svg"
+    },
+    "send_message": {
+      "platforms": [
+        "local"
+      ],
+      "type": "boolean",
+      "title": {
+        "en": "Send Message"
+      },
+      "getable": false,
+      "setable": false,
+      "uiComponent": null
+    },
+    "send_sound": {
+      "platforms": [
+        "local"
+      ],
+      "type": "boolean",
+      "title": {
+        "en": "Send Sound"
+      },
+      "getable": false,
+      "setable": false,
+      "uiComponent": null
+    }
+  }
+}

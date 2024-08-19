@@ -1,0 +1,439 @@
+{
+  "title": {
+    "en": "Set server request interval",
+    "nl": "Stel serververzoekinterval in",
+    "de": "Serveranforderungsintervall festlegen",
+    "fr": "Définir l'intervalle de demande de serveur",
+    "it": "Imposta l'intervallo di richiesta del server",
+    "sv": "Ställ in serverförfrågningsintervall",
+    "no": "Angi serverforespørselsintervall",
+    "es": "Establecer intervalo de solicitud de servidor",
+    "da": "Indstil serverforespørgselsinterval",
+    "ru": "Установить интервал запроса сервера",
+    "pl": "Ustaw interwał żądania serwera",
+    "ko": "서버 요청 간격 설정"
+  },
+  "titleFormatted": {
+    "en": "Set server request interval to [[interval]]",
+    "nl": "Stel serververzoekinterval in op [[interval]]",
+    "de": "Serveranforderungsintervall auf [[interval]] festlegen",
+    "fr": "Définir l'intervalle de demande de serveur à [[interval]]",
+    "it": "Imposta l'intervallo di richiesta del server su [[interval]]",
+    "sv": "Ställ in serverförfrågningsintervall till [[interval]]",
+    "no": "Angi serverforespørselsintervall til [[interval]]",
+    "es": "Establecer intervalo de solicitud de servidor en [[interval]]",
+    "da": "Indstil serverforespørgselsinterval til [[interval]]",
+    "ru": "Установить интервал запроса сервера на [[interval]]",
+    "pl": "Ustaw interwał żądania serwera na [[interval]]",
+    "ko": "서버 요청 간격을 [[interval]]로 설정"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "placeholder": {
+        "en": "Select device"
+      },
+      "filter": "driver_id=apple-device"
+    },
+    {
+      "name": "interval",
+      "type": "dropdown",
+      "values": [
+        {
+            "id": "0",
+            "label": {
+              "en": "Off",
+              "nl": "Uit",
+                "de": "Aus",
+                "fr": "Éteint",
+                "it": "Spento",
+                "sv": "Av",
+                "no": "Av",
+                "es": "Apagado",
+                "da": "Fra",
+                "ru": "Отключено",
+                "pl": "Wyłączone",
+                "ko": "끄기"
+            }
+        },
+        {
+          "id": "5000",
+          "label": {
+            "en": "Default (5 seconds)",
+            "nl": "Standaard (5 seconden)",
+            "de": "Standard (5 Sekunden)",
+            "fr": "Par défaut (5 secondes)",
+            "it": "Predefinito (5 secondi)",
+            "sv": "Standard (5 sekunder)",
+            "no": "Standard (5 sekunder)",
+            "es": "Predeterminado (5 segundos)",
+            "da": "Standard (5 sekunder)",
+            "ru": "По умолчанию (5 секунд)",
+            "pl": "Domyślnie (5 sekund)",
+            "ko": "기본값 (5 초)"
+          }
+        },
+        {
+            "id": "500",
+            "label": {
+              "en": "0.5 second",
+              "nl": "0,5 seconde",
+                "de": "0,5 Sekunden",
+                "fr": "0,5 seconde",
+                "it": "0,5 secondo",
+                "sv": "0,5 sekund",
+                "no": "0,5 sekund",
+                "es": "0,5 segundo",
+                "da": "0,5 sekund",
+                "ru": "0,5 секунды",
+                "pl": "0,5 sekundy",
+                "ko": "0.5 초"
+            }
+        },
+        {
+            "id": "1000",
+            "label": {
+              "en": "1 second",
+              "nl": "1 seconde",
+                "de": "1 Sekunde",
+                "fr": "1 seconde",
+                "it": "1 secondo",
+                "sv": "1 sekund",
+                "no": "1 sekund",
+                "es": "1 segundo",
+                "da": "1 sekund",
+                "ru": "1 секунда",
+                "pl": "1 sekunda",
+                "ko": "1 초"
+            }
+        },
+        {
+            "id": "2000",
+            "label": {
+              "en": "2 seconds",
+              "nl": "2 seconden",
+                "de": "2 Sekunden",
+                "fr": "2 secondes",
+                "it": "2 secondi",
+                "sv": "2 sekunder",
+                "no": "2 sekunder",
+                "es": "2 segundos",
+                "da": "2 sekunder",
+                "ru": "2 секунды",
+                "pl": "2 sekundy",
+                "ko": "2 초"
+            }
+        },
+        {
+            "id": "3000",
+            "label": {
+              "en": "3 seconds",
+              "nl": "3 seconden",
+                "de": "3 Sekunden",
+                "fr": "3 secondes",
+                "it": "3 secondi",
+                "sv": "3 sekunder",
+                "no": "3 sekunder",
+                "es": "3 segundos",
+                "da": "3 sekunder",
+                "ru": "3 секунды",
+                "pl": "3 sekundy",
+                "ko": "3 초"
+            }
+        },
+        {
+            "id": "4000",
+            "label": {
+              "en": "4 seconds",
+              "nl": "4 seconden",
+                "de": "4 Sekunden",
+                "fr": "4 secondes",
+                "it": "4 secondi",
+                "sv": "4 sekunder",
+                "no": "4 sekunder",
+                "es": "4 segundos",
+                "da": "4 sekunder",
+                "ru": "4 секунды",
+                "pl": "4 sekundy",
+                "ko": "4 초"
+            }
+        },
+        {
+            "id": "5000",
+            "label": {
+              "en": "5 seconds",
+              "nl": "5 seconden",
+                "de": "5 Sekunden",
+                "fr": "5 secondes",
+                "it": "5 secondi",
+                "sv": "5 sekunder",
+                "no": "5 sekunder",
+                "es": "5 segundos",
+                "da": "5 sekunder",
+                "ru": "5 секунды",
+                "pl": "5 sekundy",
+                "ko": "5 초"
+            }
+        },
+        {
+            "id": "6000",
+            "label": {
+              "en": "6 seconds",
+              "nl": "6 seconden",
+                "de": "6 Sekunden",
+                "fr": "6 secondes",
+                "it": "6 secondi",
+                "sv": "6 sekunder",
+                "no": "6 sekunder",
+                "es": "6 segundos",
+                "da": "6 sekunder",
+                "ru": "6 секунды",
+                "pl": "6 sekundy",
+                "ko": "6 초"
+            }
+        },
+        {
+            "id": "7000",
+            "label": {
+              "en": "7 seconds",
+              "nl": "7 seconden",
+                "de": "7 Sekunden",
+                "fr": "7 secondes",
+                "it": "7 secondi",
+                "sv": "7 sekunder",
+                "no": "7 sekunder",
+                "es": "7 segundos",
+                "da": "7 sekunder",
+                "ru": "7 секунды",
+                "pl": "7 sekundy",
+                "ko": "7 초"
+            }
+        },
+        {
+            "id": "8000",
+            "label": {
+              "en": "8 seconds",
+              "nl": "8 seconden",
+                "de": "8 Sekunden",
+                "fr": "8 secondes",
+                "it": "8 secondi",
+                "sv": "8 sekunder",
+                "no": "8 sekunder",
+                "es": "8 segundos",
+                "da": "8 sekunder",
+                "ru": "8 секунды",
+                "pl": "8 sekundy",
+                "ko": "8 초"
+            }
+        },
+        {
+            "id": "9000",
+            "label": {
+              "en": "9 seconds",
+              "nl": "9 seconden",
+                "de": "9 Sekunden",
+                "fr": "9 secondes",
+                "it": "9 secondi",
+                "sv": "9 sekunder",
+                "no": "9 sekunder",
+                "es": "9 segundos",
+                "da": "9 sekunder",
+                "ru": "9 секунды",
+                "pl": "9 sekundy",
+                "ko": "9 초"
+            }
+        },
+        {
+            "id": "10000",
+            "label": {
+              "en": "10 seconds",
+              "nl": "10 seconden",
+                "de": "10 Sekunden",
+                "fr": "10 secondes",
+                "it": "10 secondi",
+                "sv": "10 sekunder",
+                "no": "10 sekunder",
+                "es": "10 segundos",
+                "da": "10 sekunder",
+                "ru": "10 секунд",
+                "pl": "10 sekund",
+                "ko": "10 초"
+            }
+        },
+        {
+            "id": "15000",
+            "label": {
+              "en": "15 seconds",
+              "nl": "15 seconden",
+                "de": "15 Sekunden",
+                "fr": "15 secondes",
+                "it": "15 secondi",
+                "sv": "15 sekunder",
+                "no": "15 sekunder",
+                "es": "15 segundos",
+                "da": "15 sekunder",
+                "ru": "15 секунд",
+                "pl": "15 sekund",
+                "ko": "15 초"
+            }
+        },
+        {
+            "id": "20000", 
+            "label": {
+              "en": "20 seconds",
+              "nl": "20 seconden",
+                "de": "20 Sekunden",
+                "fr": "20 secondes",
+                "it": "20 secondi",
+                "sv": "20 sekunder",
+                "no": "20 sekunder",
+                "es": "20 segundos",
+                "da": "20 sekunder",
+                "ru": "20 секунд",
+                "pl": "20 sekund",
+                "ko": "20 초"
+            }
+
+        },
+        {
+            "id": "30000",
+            "label": {
+              "en": "30 seconds",
+              "nl": "30 seconden",
+                "de": "30 Sekunden",
+                "fr": "30 secondes",
+                "it": "30 secondi",
+                "sv": "30 sekunder",
+                "no": "30 sekunder",
+                "es": "30 segundos",
+                "da": "30 sekunder",
+                "ru": "30 секунд",
+                "pl": "30 sekund",
+                "ko": "30 초"
+            }
+        },
+        {
+            "id": "60000",
+            "label": {
+              "en": "1 minute",
+              "nl": "1 minuut",
+                "de": "1 Minute",
+                "fr": "1 minute",
+                "it": "1 minuto",
+                "sv": "1 minut",
+                "no": "1 minutt",
+                "es": "1 minuto",
+                "da": "1 minut",
+                "ru": "1 минута",
+                "pl": "1 minuta",
+                "ko": "1 분"
+            }
+        },
+        {
+            "id": "120000",
+            "label": {
+              "en": "2 minutes",
+              "nl": "2 minuten",
+                "de": "2 Minuten",
+                "fr": "2 minutes",
+                "it": "2 minuti",
+                "sv": "2 minuter",
+                "no": "2 minutter",
+                "es": "2 minutos",
+                "da": "2 minutter",
+                "ru": "2 минуты",
+                "pl": "2 minuty",
+                "ko": "2 분"
+            }
+        },
+        {
+            "id": "300000",
+            "label": {
+              "en": "5 minutes",
+              "nl": "5 minuten",
+                "de": "5 Minuten",
+                "fr": "5 minutes",
+                "it": "5 minuti",
+                "sv": "5 minuter",
+                "no": "5 minutter",
+                "es": "5 minutos",
+                "da": "5 minutter",
+                "ru": "5 минут",
+                "pl": "5 minut",
+                "ko": "5 분"
+            }
+        },
+        {
+            "id": "600000",
+            "label": {
+              "en": "10 minutes",
+              "nl": "10 minuten",
+                "de": "10 Minuten",
+                "fr": "10 minutes",
+                "it": "10 minuti",
+                "sv": "10 minuter",
+                "no": "10 minutter",
+                "es": "10 minutos",
+                "da": "10 minutter",
+                "ru": "10 минут",
+                "pl": "10 minut",
+                "ko": "10 분"
+            }
+        },
+        {
+            "id": "900000",
+            "label": {
+              "en": "15 minutes",
+              "nl": "15 minuten",
+                "de": "15 Minuten",
+                "fr": "15 minutes",
+                "it": "15 minuti",
+                "sv": "15 minuter",
+                "no": "15 minutter",
+                "es": "15 minutos",
+                "da": "15 minutter",
+                "ru": "15 минут",
+                "pl": "15 minut",
+                "ko": "15 분"
+            }
+        },
+        {
+            "id": "1800000",
+            "label": {
+              "en": "30 minutes",
+              "nl": "30 minuten",
+                "de": "30 Minuten",
+                "fr": "30 minutes",
+                "it": "30 minuti",
+                "sv": "30 minuter",
+                "no": "30 minutter",
+                "es": "30 minutos",
+                "da": "30 minutter",
+                "ru": "30 минут",
+                "pl": "30 minut",
+                "ko": "30 분"
+            }
+        },
+        {
+            "id": "3600000",
+            "label": {
+              "en": "1 hour",
+              "nl": "1 uur",
+                "de": "1 Stunde",
+                "fr": "1 heure",
+                "it": "1 ora",
+                "sv": "1 timme",
+                "no": "1 time",
+                "es": "1 hora",
+                "da": "1 time",
+                "ru": "1 час",
+                "pl": "1 godzina",
+                "ko": "1 시간"
+            }
+        }
+      ]
+    }
+  ],
+  "platforms": ["local"]
+}

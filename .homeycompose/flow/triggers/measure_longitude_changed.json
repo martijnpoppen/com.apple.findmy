@@ -1,0 +1,17 @@
+{
+  "id": "measure_longitude_changed",
+  "title": {
+    "en": "Longitude has changed",
+    "nl": "Lengtegraad is veranderd",
+    "de": "Längengrad hat sich geändert",
+    "fr": "La longitude a changé",
+    "it": "La longitudine è cambiata",
+    "sv": "Longituden har ändrats",
+    "no": "Lengdegraden har endret seg",
+    "es": "La longitud ha cambiado",
+    "da": "Længdegraden er ændret",
+    "ru": "Долгота изменилась",
+    "pl": "Długość geograficzna została zmieniona",
+    "ko": "경도가 변경되었습니다"
+  }
+}

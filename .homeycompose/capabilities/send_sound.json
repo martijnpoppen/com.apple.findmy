@@ -1,0 +1,11 @@
+{
+    "platforms": ["local"],
+    "type": "boolean",
+    "title": {
+      "en": "Send Sound"
+    },
+    "getable": false,
+    "setable": false,
+    "uiComponent": null
+  }
+  

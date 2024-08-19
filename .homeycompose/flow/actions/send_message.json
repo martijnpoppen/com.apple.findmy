@@ -1,0 +1,80 @@
+{
+  "title": {
+    "en": "Send message",
+    "nl": "Bericht versturen",
+    "de": "Nachricht senden",
+    "fr": "Envoyer un message",
+    "it": "Invia messaggio",
+    "sv": "Skicka meddelande",
+    "no": "Send melding",
+    "es": "Enviar mensaje",
+    "da": "Send besked",
+    "ru": "Отправить сообщение",
+    "pl": "Wyślij wiadomość",
+    "ko": "메시지 보내기"
+  },
+  "titleFormatted": {
+    "en": "Send message: [[text]] with subject: [[subject]]",
+    "nl": "Verstuur bericht: [[text]] met onderwerp: [[subject]]",
+    "de": "Nachricht senden: [[text]] mit Betreff: [[subject]]",
+    "fr": "Envoyer un message : [[text]] avec l'objet : [[subject]]",
+    "it": "Invia messaggio: [[text]] con oggetto: [[subject]]",
+    "sv": "Skicka meddelande: [[text]] med ämne: [[subject]]",
+    "no": "Send melding: [[text]] med emne: [[subject]]",
+    "es": "Enviar mensaje: [[text]] con asunto: [[subject]]",
+    "da": "Send besked: [[text]] med emne: [[subject]]",
+    "ru": "Отправить сообщение: [[text]] с темой: [[subject]]",
+    "pl": "Wyślij wiadomość: [[text]] z tematem: [[subject]]",
+    "ko": "메시지 보내기: [[text]]과 주제: [[subject]]"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "placeholder": {
+        "en": "Select device",
+        "nl": "Selecteer apparaat"
+      },
+      "filter": "driver_id=apple-device|Whatsapp_cloud&capabilities=send_message"
+    },
+    {
+      "type": "text",
+      "name": "subject",
+      "required": false,
+      "title": {
+        "en": "Subject",
+        "nl": "Onderwerp",
+        "de": "Betreff",
+        "fr": "Sujet",
+        "it": "Oggetto",
+        "sv": "Ämne",
+        "no": "Emne",
+        "es": "Asunto",
+        "da": "Emne",
+        "ru": "Тема",
+        "pl": "Temat",
+        "ko": "제목"
+      }
+    },
+    {
+      "type": "text",
+      "name": "text",
+      "required": true,
+      "title": {
+        "en": "Message",
+        "nl": "Bericht",
+        "de": "Nachricht",
+        "fr": "Message",
+        "it": "Messaggio",
+        "sv": "Meddelande",
+        "no": "Melding",
+        "es": "Mensaje",
+        "da": "Besked",
+        "ru": "Сообщение",
+        "pl": "Wiadomość",
+        "ko": "메시지"
+      }
+    }
+  ],
+  "platforms": ["local"]
+}
