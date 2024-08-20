@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.apple.findmy",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -803,6 +803,54 @@
     "actions": [
       {
         "title": {
+          "en": "Update device data",
+          "nl": "Apparaatgegevens bijwerken",
+          "de": "Gerätedaten aktualisieren",
+          "fr": "Mettre à jour les données de l'appareil",
+          "it": "Aggiorna dati dispositivo",
+          "sv": "Uppdatera enhetsdata",
+          "no": "Oppdater enhetsdata",
+          "es": "Actualizar datos del dispositivo",
+          "da": "Opdater enhedsdata",
+          "ru": "Обновить данные устройства",
+          "pl": "Zaktualizuj dane urządzenia",
+          "ko": "장치 데이터 업데이트"
+        },
+        "titleFormatted": {
+          "en": "Update device data",
+          "nl": "Apparaatgegevens bijwerken",
+          "de": "Gerätedaten aktualisieren",
+          "fr": "Mettre à jour les données de l'appareil",
+          "it": "Aggiorna dati dispositivo",
+          "sv": "Uppdatera enhetsdata",
+          "no": "Oppdater enhetsdata",
+          "es": "Actualizar datos del dispositivo",
+          "da": "Opdater enhedsdata",
+          "ru": "Обновить данные устройства",
+          "pl": "Zaktualizuj dane urządzenia",
+          "ko": "장치 데이터 업데이트"
+        },
+        "hint": {
+          "en": "You can use this card when you set the interval to off or to a high value. With this card you can update the data of the device manually without changing the interval.",
+          "nl": "U kunt deze kaart gebruiken wanneer u het interval op uit of op een hoge waarde instelt. Met deze kaart kunt u de gegevens van het apparaat handmatig bijwerken zonder het interval te wijzigen.",
+          "de": "Sie können diese Karte verwenden, wenn Sie das Intervall auf aus oder auf einen hohen Wert einstellen. Mit dieser Karte können Sie die Daten des Geräts manuell aktualisieren, ohne das Intervall zu ändern.",
+          "fr": "Vous pouvez utiliser cette carte lorsque vous définissez l'intervalle sur désactivé ou sur une valeur élevée. Avec cette carte, vous pouvez mettre à jour les données de l'appareil manuellement sans changer l'intervalle.",
+          "it": "Puoi utilizzare questa scheda quando imposti l'intervallo su off o su un valore elevato. Con questa scheda puoi aggiornare manualmente i dati del dispositivo senza modificare l'intervallo.",
+          "sv": "Du kan använda det här kortet när du ställer intervallet till av eller till ett högt värde. Med det här kortet kan du uppdatera enhetsdata manuellt utan att ändra intervallet.",
+          "no": "Du kan bruke dette kortet når du setter intervallet til av eller til en høy verdi. Med dette kortet kan du oppdatere enhetsdata manuelt uten å endre intervallet.",
+          "es": "Puede usar esta tarjeta cuando establezca el intervalo en desactivado o en un valor alto. Con esta tarjeta puede actualizar los datos del dispositivo manualmente sin cambiar el intervalo.",
+          "da": "Du kan bruge dette kort, når du indstiller intervallet til fra eller til en høj værdi. Med dette kort kan du manuelt opdatere enhedsdata uden at ændre intervallet.",
+          "ru": "Вы можете использовать эту карту, когда устанавливаете интервал на отключение или на высокое значение. С помощью этой карты вы можете вручную обновить данные устройства, не изменяя интервал.",
+          "pl": "Możesz użyć tej karty, gdy ustawisz interwał na wyłączony lub na wysoką wartość. Dzięki tej karcie możesz ręcznie zaktualizować dane urządzenia, nie zmieniając interwału.",
+          "ko": "이 카드를 사용하면 간격을 끄거나 높은 값으로 설정할 때 사용할 수 있습니다. 이 카드를 사용하면 간격을 변경하지 않고 장치 데이터를 수동으로 업데이트할 수 있습니다."
+        },
+        "platforms": [
+          "local"
+        ],
+        "id": "manual_update"
+      },
+      {
+        "title": {
           "en": "Send message",
           "nl": "Bericht versturen",
           "de": "Nachricht senden",
@@ -959,14 +1007,6 @@
           "ko": "서버 요청 간격을 [[interval]]로 설정"
         },
         "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "placeholder": {
-              "en": "Select device"
-            },
-            "filter": "driver_id=apple-device"
-          },
           {
             "name": "interval",
             "type": "dropdown",
@@ -1360,6 +1400,40 @@
                   "ru": "1 час",
                   "pl": "1 godzina",
                   "ko": "1 시간"
+                }
+              },
+              {
+                "id": "7200000",
+                "label": {
+                  "en": "2 hours",
+                  "nl": "2 uur",
+                  "de": "2 Stunden",
+                  "fr": "2 heures",
+                  "it": "2 ore",
+                  "sv": "2 timmar",
+                  "no": "2 timer",
+                  "es": "2 horas",
+                  "da": "2 timer",
+                  "ru": "2 часа",
+                  "pl": "2 godziny",
+                  "ko": "2 시간"
+                }
+              },
+              {
+                "id": "10800000",
+                "label": {
+                  "en": "3 hours",
+                  "nl": "3 uur",
+                  "de": "3 Stunden",
+                  "fr": "3 heures",
+                  "it": "3 ore",
+                  "sv": "3 timmar",
+                  "no": "3 timer",
+                  "es": "3 horas",
+                  "da": "3 timer",
+                  "ru": "3 часа",
+                  "pl": "3 godziny",
+                  "ko": "3 시간"
                 }
               }
             ]
