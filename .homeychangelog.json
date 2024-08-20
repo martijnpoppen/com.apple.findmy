@@ -31,5 +31,8 @@
   },
   "1.0.7": {
     "en": "NEW: disable location tracking FlowCard (save battery)"
+  },
+  "1.0.8": {
+    "en": "FIX: issue for non battery devices"
   }
 }
