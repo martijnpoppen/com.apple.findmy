@@ -28,5 +28,8 @@
   },
   "1.0.6": {
     "en": "NEW: flowcard and changed a flowcard from device to app"
+  },
+  "1.0.7": {
+    "en": "NEW: disable location tracking FlowCard (save battery)"
   }
 }
