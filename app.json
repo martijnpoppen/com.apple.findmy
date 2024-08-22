@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.apple.findmy",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -365,7 +365,7 @@
   "flow": {
     "triggers": [
       {
-        "id": "is_charging_false",
+        "id": "alarm_is_charging_false",
         "title": {
           "en": "Device stopped charging",
           "nl": "Apparaat is gestopt met opladen",
@@ -403,7 +403,7 @@
         ]
       },
       {
-        "id": "is_charging_true",
+        "id": "alarm_is_charging_true",
         "title": {
           "en": "Device started charging",
           "nl": "Apparaat is aan het opladen",
@@ -441,7 +441,7 @@
         ]
       },
       {
-        "id": "is_home_false",
+        "id": "alarm_is_home_false",
         "title": {
           "en": "Device left home",
           "nl": "Apparaat heeft thuis verlaten",
@@ -479,7 +479,7 @@
         ]
       },
       {
-        "id": "is_home_true",
+        "id": "alarm_is_home_true",
         "title": {
           "en": "Device came home",
           "nl": "Apparaat is thuis gekomen",
@@ -517,7 +517,7 @@
         ]
       },
       {
-        "id": "is_moving_false",
+        "id": "alarm_is_moving_false",
         "title": {
           "en": "Device stopped moving",
           "nl": "Apparaat is gestopt met bewegen",
@@ -555,7 +555,7 @@
         ]
       },
       {
-        "id": "is_moving_true",
+        "id": "alarm_is_moving_true",
         "title": {
           "en": "Device started moving",
           "nl": "Apparaat is aan het bewegen",
@@ -607,7 +607,14 @@
           "ru": "Процент заряда батареи изменился",
           "pl": "Procent naładowania baterii został zmieniony",
           "ko": "배터리 백분율이 변경되었습니다"
-        }
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=apple-device&capabilities=measure_battery"
+          }
+        ]
       },
       {
         "id": "measure_distance_meters_changed",
@@ -624,7 +631,14 @@
           "ru": "Расстояние от Home(y) изменилось",
           "pl": "Odległość od Home(y) zmieniona",
           "ko": "홈(y)로부터의 거리가 변경됨"
-        }
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=apple-device&capabilities=measure_distance"
+          }
+        ]
       },
       {
         "id": "measure_latitude_changed",
@@ -641,7 +655,14 @@
           "ru": "Широта изменилась",
           "pl": "Szerokość geograficzna została zmieniona",
           "ko": "위도가 변경되었습니다"
-        }
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=apple-device&capabilities=measure_distance"
+          }
+        ]
       },
       {
         "id": "measure_longitude_changed",
@@ -658,7 +679,14 @@
           "ru": "Долгота изменилась",
           "pl": "Długość geograficzna została zmieniona",
           "ko": "경도가 변경되었습니다"
-        }
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=apple-device&capabilities=measure_distance"
+          }
+        ]
       }
     ],
     "conditions": [

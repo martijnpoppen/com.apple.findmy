@@ -13,5 +13,12 @@
     "ru": "Долгота изменилась",
     "pl": "Długość geograficzna została zmieniona",
     "ko": "경도가 변경되었습니다"
-  }
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=apple-device&capabilities=measure_distance"
+    }
+  ]
 }

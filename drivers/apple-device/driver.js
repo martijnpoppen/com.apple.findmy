@@ -34,9 +34,14 @@ module.exports = class FindMyDeviceDriver extends Homey.Driver {
                 try {
                     this.devices = await this.FindMy.getDevices();
 
+                    if(!this.devices) {
+                        throw new Error("Something went wrong, please try login on https://icloud.com/find and try again. Logging in on the website makes sure you're eligbe to use the Find My API");
+                    }
+
                     return session.showView('list_devices');
                 } catch (error) {
                     console.error(error);
+                    throw new Error(error);
                 }
             }
         });
@@ -49,6 +54,11 @@ module.exports = class FindMyDeviceDriver extends Homey.Driver {
                 };
 
                 this.FindMy = await this.homey.app.setupFindMyInstance(this.loginData.username, this.loginData.password);
+
+
+                if(!this.FindMy) {
+                    throw new Error("Something went wrong, please try login on https://icloud.com/find and try again. Logging in on the website makes sure you're eligbe to use the Find My API");
+                }
 
                 this.homey.app.setDeviceStore(this.loginData.username, this.loginData.password);
 

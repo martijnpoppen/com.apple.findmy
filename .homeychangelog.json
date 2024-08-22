@@ -40,5 +40,8 @@
   },
   "1.0.10": {
     "en": "FIX: add more logs to debug API issues"
+  },
+  "1.1.0": {
+    "en": "FIX: battery status on startup | FIX: remove battery if device is accessory | FIX: throw error on login when user has to login first on icloud.com/find | FIX: autehntication after 15 minutes session invalidation"
   }
 }

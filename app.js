@@ -190,13 +190,15 @@ class FindMy extends Homey.App {
             try {
                 this.findMyDeviceList = await FindMy.getDevices(this.shouldLocate);
 
-                const devices = this.getDevicesByStoreKeyValue('username', uniqueDevices[index].username);
+                    const devices = this.getDevicesByStoreKeyValue('username', uniqueDevices[index].username);
 
-                devices.forEach((device) => {
-                    if (device) device.setCapabilityValues();
-                });
+                    devices.forEach((device) => {
+                        if (device) device.setCapabilityValues();
+                    });
+                
             } catch (error) {
                 this.error(error);
+                await this.setupFindMyInstance(uniqueDevices[index].username, uniqueDevices[index].password, true);
             }
         }
     }

@@ -13,5 +13,12 @@
     "ru": "Процент заряда батареи изменился",
     "pl": "Procent naładowania baterii został zmieniony",
     "ko": "배터리 백분율이 변경되었습니다"
-  }
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=apple-device&capabilities=measure_battery"
+    }
+  ]
 }

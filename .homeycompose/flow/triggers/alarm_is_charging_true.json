@@ -1,5 +1,5 @@
 {
-  "id": "is_charging_true",
+  "id": "alarm_is_charging_true",
   "title": {
     "en": "Device started charging",
     "nl": "Apparaat is aan het opladen",

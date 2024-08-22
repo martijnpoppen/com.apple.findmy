@@ -13,5 +13,12 @@
     "ru": "Расстояние от Home(y) изменилось",
     "pl": "Odległość od Home(y) zmieniona",
     "ko": "홈(y)로부터의 거리가 변경됨"
-  }
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=apple-device&capabilities=measure_distance"
+    }
+  ]
 }
