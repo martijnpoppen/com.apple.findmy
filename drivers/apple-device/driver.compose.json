@@ -8,6 +8,7 @@
     "alarm_is_moving",
     "alarm_is_charging",
     "measure_battery",
+    "measure_percent_battery",
     "measure_distance",
     "measure_distance_meters",
     "measure_distance_miles",

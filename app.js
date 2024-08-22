@@ -48,7 +48,8 @@ class FindMy extends Homey.App {
         this.driversInitialized = false;
         this.findMyInstances = {};
 
-        this.intervalTime = await this.getIntervalTime()
+        this.intervalTime = await this.getIntervalTime();
+        this.shouldLocate = await this.getShouldLocate();
 
         this.FindMyLib = await import('./lib/findmy.js/dist/index.js');
     }
@@ -170,23 +171,7 @@ class FindMy extends Homey.App {
 
             await sleep(DEFAULT_INTERVAL);
         } else {
-            const uniqueDevices = await this.getDevicesByStore();
-
-            for (let index = 0; index < uniqueDevices.length; index++) {
-                const FindMy = await this.setupFindMyInstance(uniqueDevices[index].username, uniqueDevices[index].password);
-
-                try {
-                    this.findMyDeviceList = await FindMy.getDevices();
-
-                    const devices = this.getDevicesByStoreKeyValue('username', uniqueDevices[index].username);
-
-                    devices.forEach((device) => {
-                        if(device) device.setCapabilityValues();
-                    });
-                } catch (error) {
-                    this.error(error);
-                }
-            }
+            await this.updateData();
 
             this.log('runApiInterval = waiting for:', this.intervalTime);
 
@@ -194,6 +179,26 @@ class FindMy extends Homey.App {
         }
 
         return this.runApiInterval();
+    }
+
+    async updateData() {
+        const uniqueDevices = await this.getDevicesByStore();
+
+        for (let index = 0; index < uniqueDevices.length; index++) {
+            const FindMy = await this.setupFindMyInstance(uniqueDevices[index].username, uniqueDevices[index].password);
+
+            try {
+                this.findMyDeviceList = await FindMy.getDevices(this.shouldLocate);
+
+                const devices = this.getDevicesByStoreKeyValue('username', uniqueDevices[index].username);
+
+                devices.forEach((device) => {
+                    if (device) device.setCapabilityValues();
+                });
+            } catch (error) {
+                this.error(error);
+            }
+        }
     }
 
     // ---------------- LOCATION ----------------
@@ -231,9 +236,42 @@ class FindMy extends Homey.App {
             return 'intervalTime' in timeEntry ? parseInt(timeEntry.intervalTime) : DEFAULT_INTERVAL;
         } catch (error) {
             this.error(error);
+            
+            this.setIntervalTime(DEFAULT_INTERVAL);
+
             return false;
         }
     }
+
+    setShouldLocate(shouldLocate) {
+        this.shouldLocate = shouldLocate;
+
+        const persistentDir = path.resolve(__dirname, '/userdata/');
+        const shouldLocateFile = { shouldLocate };
+
+        this.log('setShouldLocate', shouldLocate);
+
+        return writeFileSync(`${persistentDir}/shouldLocate.json`, JSON.stringify(shouldLocateFile));
+    }
+
+    getShouldLocate() {
+        try {
+            const persistentDir = path.resolve(__dirname, '/userdata/');
+            const shouldLocateFile = readFileSync(`${persistentDir}/shouldLocate.json`, 'utf8');
+            const shouldLocateEntry = JSON.parse(shouldLocateFile);
+
+            this.log('getShouldLocate', shouldLocateEntry, shouldLocateEntry.shouldLocate);
+
+            return 'shouldLocate' in shouldLocateEntry ? shouldLocateEntry.shouldLocate : false;
+        } catch (error) {
+            this.error(error);
+            
+            this.setShouldLocate(true);
+            
+            return false;
+        }
+    }
+
 }
 
 module.exports = FindMy;

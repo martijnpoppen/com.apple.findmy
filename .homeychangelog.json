@@ -34,5 +34,11 @@
   },
   "1.0.8": {
     "en": "FIX: issue for non battery devices"
+  },
+  "1.0.9": {
+    "en": "NEW: add battery status to sensor tab | FIX: add extra logging to debug errors"
+  },
+  "1.0.10": {
+    "en": "FIX: add more logs to debug API issues"
   }
 }

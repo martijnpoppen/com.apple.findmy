@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.apple.findmy",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -1726,6 +1726,7 @@
         "alarm_is_moving",
         "alarm_is_charging",
         "measure_battery",
+        "measure_percent_battery",
         "measure_distance",
         "measure_distance_meters",
         "measure_distance_miles",
@@ -2032,6 +2033,52 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "assets/icons/geo-alt.svg"
+    },
+    "measure_percent_battery": {
+      "platforms": [
+        "local"
+      ],
+      "type": "number",
+      "title": {
+        "en": "Battery level",
+        "nl": "Batterij niveau",
+        "de": "Batterieprozentsatz",
+        "fr": "Niveau de batterie",
+        "it": "Livello batteria",
+        "sv": "Batterinivå",
+        "no": "Batterinivå",
+        "es": "Nivel de batería",
+        "da": "Batteriniveau",
+        "ru": "Уровень заряда батареи",
+        "pl": "Poziom naładowania baterii",
+        "ko": "배터리 레벨"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%",
+        "it": "%"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Battery level",
+        "nl": "Batterij niveau",
+        "de": "Batterieprozentsatz",
+        "fr": "Niveau de batterie",
+        "it": "Livello batteria",
+        "sv": "Batterinivå",
+        "no": "Batterinivå",
+        "es": "Nivel de batería",
+        "da": "Batteriniveau",
+        "ru": "Уровень заряда батареи",
+        "pl": "Poziom naładowania baterii",
+        "ko": "배터리 레벨"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/battery-half.svg"
     },
     "send_message": {
       "platforms": [

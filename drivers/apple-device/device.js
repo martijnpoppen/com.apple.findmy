@@ -60,12 +60,6 @@ class FindMyDevice extends Device {
                 }
             }
 
-            if ('set_interval' in value) {
-                const val = value.set_interval;
-
-                await this.homey.app.setIntervalTime(val.interval);
-            }
-
             return Promise.resolve(true);
         } catch (e) {
             this.error(e);
@@ -114,7 +108,7 @@ class FindMyDevice extends Device {
         if (data) {
             const settings = this.getSettings();
             const getLocation = data.getLocation();
-            const location = getLocation.lat ? getLocation : { lat: 0, lon: 0 };
+            const location = getLocation && getLocation.lat ? getLocation : { lat: 0, lon: 0 };
             const batteryStatus = data.getBattery();
 
             console.log(`[Device] ${this.getName()} - [setCapabilityValues] batteryStatus`, batteryStatus);
@@ -126,7 +120,8 @@ class FindMyDevice extends Device {
 
             const isMoving = this.getCapabilityValue('measure_distance') - distanceKM > 1 || this.getCapabilityValue('measure_distance') - distanceKM < -1;
             const isHome = distance < settings.is_home_radius;
-            const isCharging = batteryStatus.status === 'Charging';
+            const isCharging = batteryStatus && batteryStatus.status === 'Charging';
+            const batteryPercentage = batteryStatus && batteryStatus.percentage ? Math.round(parseFloat(batteryStatus.percentage)) : 100;
             
             this.setCapabilityValue('alarm_is_moving', isMoving);
             this.setCapabilityValue('measure_distance', distanceKM);
@@ -134,8 +129,9 @@ class FindMyDevice extends Device {
             this.setCapabilityValue('measure_distance_meters', Math.round(parseFloat(distance)));
             this.setCapabilityValue('measure_latitude', parseFloat(location.lat.toFixed(4)));
             this.setCapabilityValue('measure_longitude', parseFloat(location.lon.toFixed(4)));
-            this.setCapabilityValue('measure_battery', Math.round(parseFloat(batteryStatus.percentage)));
-            this.setCapabilityValue('alarm_battery', Math.round(parseFloat(batteryStatus.percentage)) < 15);
+            this.setCapabilityValue('measure_battery', batteryPercentage);
+            this.setCapabilityValue('measure_percent_battery', batteryPercentage);
+            this.setCapabilityValue('alarm_battery', batteryPercentage < 15);
             this.setCapabilityValue('alarm_is_home', isHome);
             this.setCapabilityValue('alarm_is_charging', isCharging);
         } else {

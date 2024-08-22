@@ -1,0 +1,44 @@
+{
+  "platforms": ["local"],
+  "type": "number",
+  "title": {
+    "en": "Battery level",
+    "nl": "Batterij niveau",
+    "de": "Batterieprozentsatz",
+    "fr": "Niveau de batterie",
+    "it": "Livello batteria",
+    "sv": "Batterinivå",
+    "no": "Batterinivå",
+    "es": "Nivel de batería",
+    "da": "Batteriniveau",
+    "ru": "Уровень заряда батареи",
+    "pl": "Poziom naładowania baterii",
+    "ko": "배터리 레벨"
+  },
+  "units": {
+    "en": "%",
+    "nl": "%",
+    "it": "%"
+  },
+  "insights": true,
+  "desc": {
+    "en": "Battery level",
+    "nl": "Batterij niveau",
+    "de": "Batterieprozentsatz",
+    "fr": "Niveau de batterie",
+    "it": "Livello batteria",
+    "sv": "Batterinivå",
+    "no": "Batterinivå",
+    "es": "Nivel de batería",
+    "da": "Batteriniveau",
+    "ru": "Уровень заряда батареи",
+    "pl": "Poziom naładowania baterii",
+    "ko": "배터리 레벨"
+  },
+  "chartType": "spline",
+  "decimals": 2,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/battery-half.svg"
+}

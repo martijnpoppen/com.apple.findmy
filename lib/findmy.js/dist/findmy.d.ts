@@ -23,7 +23,7 @@ export declare class FindMy {
             last: string;
         };
     };
-    getDevices(): Promise<Array<FindMyDevice>>;
+    getDevices(shouldLocate?: boolean): Promise<Array<FindMyDevice>>;
     sendICloudRequest(service: keyof iCloudAccountInfo['webservices'], endpoint: string, request: Record<string, unknown>): Promise<any>;
     private getHeaders;
     private get authOrThrow();

@@ -1,0 +1,73 @@
+{
+  "title": {
+    "en": "Enable/disable location tracking",
+    "nl": "Locatietracking in-/uitschakelen",
+    "de": "Standortverfolgung aktivieren/deaktivieren",
+    "fr": "Activer/désactiver le suivi de l'emplacement",
+    "it": "Abilita/disabilita il tracciamento della posizione",
+    "sv": "Aktivera/inaktivera platspårning",
+    "no": "Aktiver/deaktiver stedsregistrering",
+    "es": "Activar/desactivar seguimiento de ubicación",
+    "da": "Aktivér/deaktivér placeringssporing",
+    "ru": "Включить/отключить отслеживание местоположения",
+    "pl": "Włącz/wyłącz śledzenie lokalizacji",
+    "ko": "위치 추적 활성화/비활성화"
+  },
+  "titleFormatted": {
+    "en": "[[shouldlocate]] location tracking",
+    "nl": "[[shouldlocate]] locatietracking",
+    "de": "[[shouldlocate]] Standortverfolgung",
+    "fr": "[[shouldlocate]] suivi de l'emplacement",
+    "it": "[[shouldlocate]] tracciamento della posizione",
+    "sv": "[[shouldlocate]] platspårning",
+    "no": "[[shouldlocate]] stedsregistrering",
+    "es": "[[shouldlocate]] seguimiento de ubicación",
+    "da": "[[shouldlocate]] placeringssporing",
+    "ru": "[[shouldlocate]] отслеживание местоположения",
+    "pl": "[[shouldlocate]] śledzenie lokalizacji",
+    "ko": "[[shouldlocate]] 위치 추적"
+  },
+  "args": [
+    {
+      "name": "shouldlocate",
+      "type": "dropdown",
+      "values": [
+        {
+          "id": "0",
+          "label": {
+            "en": "Disable",
+            "nl": "Uitschakelen",
+            "de": "Deaktivieren",
+            "fr": "Désactiver",
+            "it": "Disabilitare",
+            "sv": "Inaktivera",
+            "no": "Deaktiver",
+            "es": "Desactivar",
+            "da": "Deaktivér",
+            "ru": "Отключить",
+            "pl": "Wyłącz",
+            "ko": "비활성화"
+          }
+        },
+        {
+          "id": "1",
+          "label": {
+            "en": "Enable (default)",
+            "nl": "Inschakelen (standaard)",
+            "de": "Aktivieren (Standard)",
+            "fr": "Activer (par défaut)",
+            "it": "Abilita (predefinito)",
+            "sv": "Aktivera (standard)",
+            "no": "Aktiver (standard)",
+            "es": "Activar (predeterminado)",
+            "da": "Aktivér (standard)",
+            "ru": "Включить (по умолчанию)",
+            "pl": "Włącz (domyślnie)",
+            "ko": "활성화 (기본값)"
+          }
+        }
+      ]
+    }
+  ],
+  "platforms": ["local"]
+}

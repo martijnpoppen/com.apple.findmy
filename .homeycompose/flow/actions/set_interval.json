@@ -29,14 +29,6 @@
   },
   "args": [
     {
-      "type": "device",
-      "name": "device",
-      "placeholder": {
-        "en": "Select device"
-      },
-      "filter": "driver_id=apple-device"
-    },
-    {
       "name": "interval",
       "type": "dropdown",
       "values": [
@@ -430,6 +422,40 @@
                 "ru": "1 час",
                 "pl": "1 godzina",
                 "ko": "1 시간"
+            }
+        },
+        {
+            "id": "7200000",
+            "label": {
+              "en": "2 hours",
+              "nl": "2 uur",
+                "de": "2 Stunden",
+                "fr": "2 heures",
+                "it": "2 ore",
+                "sv": "2 timmar",
+                "no": "2 timer",
+                "es": "2 horas",
+                "da": "2 timer",
+                "ru": "2 часа",
+                "pl": "2 godziny",
+                "ko": "2 시간"
+            }
+        },
+        {
+            "id": "10800000",
+            "label": {
+              "en": "3 hours",
+              "nl": "3 uur",
+                "de": "3 Stunden",
+                "fr": "3 heures",
+                "it": "3 ore",
+                "sv": "3 timmar",
+                "no": "3 timer",
+                "es": "3 horas",
+                "da": "3 timer",
+                "ru": "3 часа",
+                "pl": "3 godziny",
+                "ko": "3 시간"
             }
         }
       ]
