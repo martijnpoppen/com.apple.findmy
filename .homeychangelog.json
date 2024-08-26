@@ -46,5 +46,8 @@
   },
   "1.2.0": {
     "en": "FIX: flowcards not tirggering"
+  },
+  "1.2.1": {
+    "en": "FIX: accessory battery (airpods)"
   }
 }
