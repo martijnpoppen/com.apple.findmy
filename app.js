@@ -6,7 +6,7 @@ const flowConditions = require('./lib/flows/conditions');
 const { sleep, decrypt } = require('./lib/helpers');
 const { readFileSync, writeFileSync } = require('fs');
 const path = require('path');
-const DEFAULT_INTERVAL = 5000;
+const DEFAULT_INTERVAL = 60000;
 
 class FindMy extends Homey.App {
     trace() {
@@ -48,8 +48,8 @@ class FindMy extends Homey.App {
         this.driversInitialized = false;
         this.findMyInstances = {};
 
-        this.intervalTime = await this.getIntervalTime();
-        this.shouldLocate = await this.getShouldLocate();
+        await this.getIntervalTime();
+        await this.getShouldLocate();
 
         this.FindMyLib = await import('./lib/findmy.js/dist/index.js');
     }
@@ -181,25 +181,45 @@ class FindMy extends Homey.App {
         return this.runApiInterval();
     }
 
-    async updateData() {
-        const uniqueDevices = await this.getDevicesByStore();
 
+    async updateData(uniqueDevice = null) {
+        this.findMyDeviceList = [];
+
+        if (uniqueDevice !== null) {
+            const FindMy = await this.setupFindMyInstance(uniqueDevice.username, uniqueDevice.password, true);
+            return this.updateDateMethod(FindMy, uniqueDevice);
+        } else {
+            const uniqueDevices = await this.getDevicesByStore();
+            return this.updateDataMultiple(uniqueDevices);
+        }
+    }
+
+    async updateDataMultiple(uniqueDevices) {
         for (let index = 0; index < uniqueDevices.length; index++) {
             const FindMy = await this.setupFindMyInstance(uniqueDevices[index].username, uniqueDevices[index].password);
 
-            try {
-                this.findMyDeviceList = await FindMy.getDevices(this.shouldLocate);
+            this.updateDateMethod(FindMy, uniqueDevices[index], true);
+        }
+    }
 
-                    const devices = this.getDevicesByStoreKeyValue('username', uniqueDevices[index].username);
-
-                    devices.forEach((device) => {
-                        if (device) device.setCapabilityValues();
-                    });
+    async updateDateMethod(FindMy, uniqueDevice, retryOnFail = null) {
+        try {
+            console.log('retryOnFail', retryOnFail);
+            const findMyDeviceList = await FindMy.getDevices(this.shouldLocate);
                 
-            } catch (error) {
-                this.error(error);
-                await this.setupFindMyInstance(uniqueDevices[index].username, uniqueDevices[index].password, true);
-            }
+            this.findMyDeviceList = [...this.findMyDeviceList, ...findMyDeviceList];
+
+            const devices = this.getDevicesByStoreKeyValue('username', uniqueDevice.username);
+
+            devices.forEach((device) => {
+                if (device) device.setCapabilityValues();
+            });
+        } catch (error) {
+            this.error(error);
+
+            if(retryOnFail) {
+                await this.updateData(uniqueDevice)
+            }       
         }
     }
 
@@ -232,16 +252,15 @@ class FindMy extends Homey.App {
             const persistentDir = path.resolve(__dirname, '/userdata/');
             const timeFile = readFileSync(`${persistentDir}/intervalTime.json`, 'utf8');
             const timeEntry = JSON.parse(timeFile);
+            const time = 'intervalTime' in timeEntry ? timeEntry.intervalTime : DEFAULT_INTERVAL;
 
             this.log('getIntervalTime', timeEntry, timeEntry.intervalTime);
 
-            return 'intervalTime' in timeEntry ? parseInt(timeEntry.intervalTime) : DEFAULT_INTERVAL;
+            this.setIntervalTime(time);
         } catch (error) {
             this.error(error);
-            
-            this.setIntervalTime(DEFAULT_INTERVAL);
 
-            return false;
+            this.setIntervalTime(DEFAULT_INTERVAL);
         }
     }
 
@@ -267,13 +286,10 @@ class FindMy extends Homey.App {
             return 'shouldLocate' in shouldLocateEntry ? shouldLocateEntry.shouldLocate : false;
         } catch (error) {
             this.error(error);
-            
+
             this.setShouldLocate(true);
-            
-            return false;
         }
     }
-
 }
 
 module.exports = FindMy;

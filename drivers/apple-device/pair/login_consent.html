@@ -1,0 +1,25 @@
+<style>
+    p > strong {
+        font-weight: bold;
+    }
+</style>
+<div class="hy-tmpl-login_credentials" id="instructions">
+    <div class="text"></div>
+</div>
+<script>
+    (function () {
+        var $text = document.querySelector('#instructions .text');
+        var $next = document.querySelector('#hy-nav-next');
+
+        Homey.getOptions(function (err, options) {
+            if (err) return Homey.error(err);
+
+            setTimeout(function () {
+                if (options.title) Homey.setTitle(Homey.__(options.title));
+                if (options.text) $text.innerHTML = Homey.__(options.text);
+
+                $next.classList += ' hy-button-primary hy-button-fill button';
+            }, 0);
+        });
+    })();
+</script>

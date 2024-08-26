@@ -49,5 +49,11 @@
   },
   "1.2.1": {
     "en": "FIX: accessory battery (airpods)"
+  },
+  "1.2.2": {
+    "en": "FIX: change default interval to 30 minutes (prevent battery leak)"
+  },
+  "1.2.3": {
+    "en": "NEW: add disclaimer to pairing screen. NEW: change default interval time to 1 minute"
   }
 }

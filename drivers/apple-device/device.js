@@ -18,6 +18,7 @@ class FindMyDevice extends Device {
     onAdded() {
         this.homey.app.log(`[Device] ${this.getName()} - onAdded`);
         this.homey.app.setDevice(this);
+        this.homey.app.updateData();
     }
 
     onDeleted() {
@@ -121,7 +122,7 @@ class FindMyDevice extends Device {
 
             console.log(`[Device] ${this.getName()} - [setCapabilityValues] batteryStatus`, batteryStatus);
             console.log(`[Device] ${this.getName()} - [setCapabilityValues] Location`, this.homey.app.homeyLocation, { lat: location.lat, lon: location.lon });
-            console.log(`[Device] ${this.getName()} - [setCapabilityValues] deviceInfo.isConsideredAccessory`, deviceInfo.isConsideredAccessory);
+            console.log(`[Device] ${this.getName()} - [setCapabilityValues] deviceInfo`, deviceInfo);
 
             const distance = this.checkLocation(this.homey.app.homeyLocation, { lat: location.lat, lon: location.lon });
             const distanceKM = distance / 1000;
@@ -132,7 +133,7 @@ class FindMyDevice extends Device {
             const isCharging = batteryStatus && batteryStatus.status === 'Charging';
             const batteryPercentage = batteryStatus && batteryStatus.percentage ? Math.round(parseFloat(batteryStatus.percentage)) : null;
 
-            const hasNoBattery = deviceInfo.isConsideredAccessory;
+            const hasNoBattery = deviceInfo.deviceClass === 'Accessory' || deviceInfo.deviceClass === 'AirPods' || deviceInfo.deviceClass === 'AirTag';
 
             this.setValue('alarm_is_moving', isMoving);
             this.setValue('measure_distance', distanceKM);

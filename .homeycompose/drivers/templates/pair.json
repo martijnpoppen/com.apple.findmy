@@ -1,22 +1,47 @@
 {
   "pair": [
     {
+      "id": "login_consent",
+      "options": {
+        "title": {
+          "en": "🚨Disclaimer🚨"
+        },
+        "text": {
+          "en": "<ol><li>This app utilizes the FindMy server to locate your Apple devices, which may result in increased battery consumption. Please be aware that frequent use of this feature can impact your device's battery life. We recommend using it judiciously to balance convenience with battery performance.</li></ol>",
+          "nl": "<ol><li>Deze app maakt gebruik van de FindMy-server om uw Apple-apparaten te lokaliseren, wat kan leiden tot een verhoogd batterijverbruik. Houd er rekening mee dat frequent gebruik van deze functie van invloed kan zijn op de batterijduur van uw apparaat. We raden aan om het verstandig te gebruiken om gemak en batterijprestaties in evenwicht te brengen.</li></ol>",
+          "de": "<ol><li>Diese App nutzt den FindMy-Server, um Ihre Apple-Geräte zu lokalisieren, was zu einem erhöhten Batterieverbrauch führen kann. Bitte beachten Sie, dass die häufige Nutzung dieser Funktion die Akkulaufzeit Ihres Geräts beeinträchtigen kann. Wir empfehlen, sie sorgfältig zu verwenden, um Bequemlichkeit und Batterieleistung in Einklang zu bringen.</li></ol>",
+          "fr": "<ol><li>Cette application utilise le serveur FindMy pour localiser vos appareils Apple, ce qui peut entraîner une consommation accrue de la batterie. Veuillez noter que l'utilisation fréquente de cette fonctionnalité peut affecter la durée de vie de la batterie de votre appareil. Nous vous recommandons de l'utiliser avec discernement pour équilibrer la commodité et les performances de la batterie.</li></ol>",
+          "it": "<ol><li>Questa app utilizza il server FindMy per localizzare i tuoi dispositivi Apple, il che può comportare un aumento del consumo della batteria. Si prega di notare che un uso frequente di questa funzione può influire sulla durata della batteria del dispositivo. Ti consigliamo di utilizzarla con giudizio per bilanciare la comodità con le prestazioni della batteria.</li></ol>",
+          "sv": "<ol><li>Denna app använder FindMy-servern för att lokalisera dina Apple-enheter, vilket kan resultera i ökad batteriförbrukning. Observera att frekvent användning av denna funktion kan påverka enhetens batteritid. Vi rekommenderar att du använder den med omdöme för att balansera bekvämlighet med batteriprestanda.</li></ol>",
+          "no": "<ol><li>Denne appen bruker FindMy-serveren til å lokalisere Apple-enhetene dine, noe som kan føre til økt batteriforbruk. Vær oppmerksom på at hyppig bruk av denne funksjonen kan påvirke enhetens batterilevetid. Vi anbefaler å bruke den med omhu for å balansere bekvemmelighet med batteriytelse.</li></ol>",
+          "es": "<ol><li>Esta aplicación utiliza el servidor FindMy para localizar sus dispositivos Apple, lo que puede resultar en un mayor consumo de batería. Tenga en cuenta que el uso frecuente de esta función puede afectar la duración de la batería de su dispositivo. Recomendamos utilizarla con prudencia para equilibrar la comodidad con el rendimiento de la batería.</li></ol>",
+          "da": "<ol><li>Denne app bruger FindMy-serveren til at lokalisere dine Apple-enheder, hvilket kan resultere i øget batteriforbrug. Vær opmærksom på, at hyppig brug af denne funktion kan påvirke enhedens batterilevetid. Vi anbefaler at bruge den med omtanke for at afbalancere bekvemmelighed med batteriydelse.</li></ol>",
+          "ru": "<ol><li>Это приложение использует сервер FindMy для определения местоположения ваших устройств Apple, что может привести к увеличению расхода заряда батареи. Обратите внимание, что частое использование этой функции может повлиять на время работы батареи устройства. Мы рекомендуем использовать ее осторожно, чтобы сбалансировать удобство и производительность батареи.</li></ol>",
+          "pl": "<ol><li>Ta aplikacja wykorzystuje serwer FindMy do lokalizacji urządzeń Apple, co może skutkować zwiększonym zużyciem baterii. Prosimy pamiętać, że częste korzystanie z tej funkcji może wpłynąć na żywotność baterii urządzenia. Zalecamy korzystanie z niej z rozwagą, aby zachować równowagę między wygodą a wydajnością baterii.</li></ol>",
+          "ko": "<ol><li>이 앱은 Apple 기기를 찾기 위해 FindMy 서버를 사용하며, 이로 인해 배터리 소모가 증가할 수 있습니다. 이 기능을 자주 사용하면 기기의 배터리 수명에 영향을 줄 수 있습니다. 편의성과 배터리 성능을 균형있게 유지하기 위해 신중하게 사용하는 것이 좋습니다.</li></ol>"
+        }
+      },
+      "navigation": {
+        "next": "login_credentials"
+      }
+    },
+    {
       "id": "login_credentials",
       "template": "login_credentials",
       "options": {
         "usernameLabel": {
           "en": "Username",
           "nl": "Gebruikersnaam",
-            "de": "Benutzername",
-            "fr": "Nom d'utilisateur",
-            "it": "Nome utente",
-            "sv": "Användarnamn",
-            "no": "Brukernavn",
-            "es": "Nombre de usuario",
-            "da": "Brugernavn",
-            "ru": "Имя пользователя",
-            "pl": "Nazwa użytkownika",
-            "ko": "사용자 이름"
+          "de": "Benutzername",
+          "fr": "Nom d'utilisateur",
+          "it": "Nome utente",
+          "sv": "Användarnamn",
+          "no": "Brukernavn",
+          "es": "Nombre de usuario",
+          "da": "Brugernavn",
+          "ru": "Имя пользователя",
+          "pl": "Nazwa użytkownika",
+          "ko": "사용자 이름"
         },
         "usernamePlaceholder": {
           "en": "john@doe.com"
@@ -27,30 +52,30 @@
         "passwordLabel": {
           "en": "Password",
           "nl": "Wachtwoord",
-            "de": "Passwort",
-            "fr": "Mot de passe",
-            "it": "Password",
-            "sv": "Lösenord",
-            "no": "Passord",
-            "es": "Contraseña",
-            "da": "Adgangskode",
-            "ru": "Пароль",
-            "pl": "Hasło",
-            "ko": "비밀번호"
+          "de": "Passwort",
+          "fr": "Mot de passe",
+          "it": "Password",
+          "sv": "Lösenord",
+          "no": "Passord",
+          "es": "Contraseña",
+          "da": "Adgangskode",
+          "ru": "Пароль",
+          "pl": "Hasło",
+          "ko": "비밀번호"
         },
         "passwordPlaceholder": {
           "en": "Password",
           "nl": "Wachtwoord",
-            "de": "Passwort",
-            "fr": "Mot de passe",
-            "it": "Password",
-            "sv": "Lösenord",
-            "no": "Passord",
-            "es": "Contraseña",
-            "da": "Adgangskode",
-            "ru": "Пароль",
-            "pl": "Hasło",
-            "ko": "비밀번호"
+          "de": "Passwort",
+          "fr": "Mot de passe",
+          "it": "Password",
+          "sv": "Lösenord",
+          "no": "Passord",
+          "es": "Contraseña",
+          "da": "Adgangskode",
+          "ru": "Пароль",
+          "pl": "Hasło",
+          "ko": "비밀번호"
         },
         "logo": "../../../assets/icon.svg"
       }
