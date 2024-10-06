@@ -53,7 +53,7 @@ module.exports = class FindMyDeviceDriver extends Homey.Driver {
                     password: encrypt(data.password)
                 };
 
-                this.FindMy = await this.homey.app.setupFindMyInstance(this.loginData.username, this.loginData.password);
+                this.FindMy = await this.homey.app.setupFindMyInstance(this.loginData.username, this.loginData.password, true);
 
 
                 if(!this.FindMy) {
