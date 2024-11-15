@@ -3,7 +3,7 @@
 import Homey from 'homey';
 import flowActions from './lib/flows/actions.mjs';
 import flowConditions from './lib/flows/conditions.mjs';
-import { sleep, decrypt } from './lib/helpers.mjs';
+import { sleep, decrypt, encrypt } from './lib/helpers.mjs';
 import { readFileSync, writeFileSync } from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -55,8 +55,6 @@ class FindMyApp extends Homey.App {
 
         await this.getIntervalTime();
         await this.getShouldLocate();
-
-        
     }
 
     async initApp() {
@@ -130,14 +128,16 @@ class FindMyApp extends Homey.App {
 
             if (store.username && store.password) {
 
-                const username = encodeURIComponent(decrypt(store.username));
+                const encodeUsername = encodeURIComponent(decrypt(store.username));
 
-                uniqueDevices[username] = {
-                    username,
+                uniqueDevices[encodeUsername] = {
+                    username: store.username,
                     password: store.password
                 };
             }
         });
+
+        console.log('getDevicesByStore', uniqueDevices);
 
         return Object.values(uniqueDevices);
     }
@@ -176,7 +176,7 @@ class FindMyApp extends Homey.App {
 
             this.findMyInstances[username] = new FindMy();
 
-            await this.findMyInstances[username].authenticate(decodeURIComponent(username), decrypt(password));
+            await this.findMyInstances[username].authenticate(decrypt(username), decrypt(password));
 
             return this.findMyInstances[username];
         } catch (error) {

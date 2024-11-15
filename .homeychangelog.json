@@ -70,5 +70,8 @@
   },
   "1.3.5": {
     "en": "ADD invert to location  condition"
+  },
+  "1.4.0": {
+    "en": "FIX: FindMy to ESM | FIX: duplicate instances | FIX: auth decyrption (possibly causing extra logins)"
   }
 }
