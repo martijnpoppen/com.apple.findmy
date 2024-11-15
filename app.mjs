@@ -1,16 +1,21 @@
 'use strict';
 
-const Homey = require('homey');
-const flowActions = require('./lib/flows/actions');
-const flowConditions = require('./lib/flows/conditions');
-const { sleep, decrypt } = require('./lib/helpers');
-const { readFileSync, writeFileSync } = require('fs');
-const path = require('path');
-const DEFAULT_INTERVAL = 60000;
+import Homey from 'homey';
+import flowActions from './lib/flows/actions.mjs';
+import flowConditions from './lib/flows/conditions.mjs';
+import { sleep, decrypt } from './lib/helpers.mjs';
+import { readFileSync, writeFileSync } from 'fs';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { FindMy } from './lib/findmy.js/dist/index.js';
 
-class FindMy extends Homey.App {
+const DEFAULT_INTERVAL = 60000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+class FindMyApp extends Homey.App {
     trace() {
-        console.trace.bind(this, '[log]').apply(this, arguments);
+        console.log.bind(this, '[trace]').apply(this, arguments);
     }
 
     debug() {
@@ -51,14 +56,14 @@ class FindMy extends Homey.App {
         await this.getIntervalTime();
         await this.getShouldLocate();
 
-        this.FindMyLib = await import('./lib/findmy.js/dist/index.js');
+        
     }
 
     async initApp() {
         this.log(`${this.homey.manifest.id} - ${this.homey.manifest.version} initalized...`);
 
-        await flowActions.init(this.homey);
-        await flowConditions.init(this.homey);
+        await flowActions(this.homey);
+        await flowConditions(this.homey);
 
         await this.sendNotifications();
         await this.setHomeyLocation();
@@ -114,13 +119,21 @@ class FindMy extends Homey.App {
     }
 
     async getDevicesByStore() {
+        // Get all unique devices
+        // Multiple devices can have the same username and password
+        // We only need to authenticate once
+        // So we only need to get the unique devices
+
         const uniqueDevices = {};
         this.homeyDeviceList.forEach((device) => {
             const store = device.getStore();
 
             if (store.username && store.password) {
-                uniqueDevices[store.username] = {
-                    username: store.username,
+
+                const username = encodeURIComponent(decrypt(store.username));
+
+                uniqueDevices[username] = {
+                    username,
                     password: store.password
                 };
             }
@@ -130,6 +143,9 @@ class FindMy extends Homey.App {
     }
 
     getDevicesByStoreKeyValue(key, value) {
+        // Get all devices by store key value
+        // This is used to get all devices with the same username
+        // So we can authenticate once and get all devices
         return [...this.homeyDeviceList].filter((device) => device.getStoreValue(key) === value);
     }
 
@@ -148,16 +164,19 @@ class FindMy extends Homey.App {
 
     async setupFindMyInstance(username, password, overwrite = false) {
         try {
+            this.trace('setupFindMyInstance', this.findMyInstances);
+
+            this.trace('setupFindMyInstance - username', username);
+
             if (!overwrite && this.findMyInstances[username]) {
                 return this.findMyInstances[username];
             }
 
-            this.homey.app.log('setupFindMyInstance - Setup new instance');
+            this.homey.app.trace('setupFindMyInstance - Setup new instance');
 
-            const { FindMy } = this.FindMyLib;
             this.findMyInstances[username] = new FindMy();
 
-            await this.findMyInstances[username].authenticate(decrypt(username), decrypt(password));
+            await this.findMyInstances[username].authenticate(decodeURIComponent(username), decrypt(password));
 
             return this.findMyInstances[username];
         } catch (error) {
@@ -186,8 +205,9 @@ class FindMy extends Homey.App {
         this.findMyDeviceList = [];
 
         if (uniqueDevice !== null) {
-            const FindMy = await this.setupFindMyInstance(uniqueDevice.username, uniqueDevice.password, true);
-            return this.updateDateMethod(FindMy, uniqueDevice);
+            console.log('uniqueDevice', uniqueDevice);
+            const FindMyInstance = await this.setupFindMyInstance(uniqueDevice.username, uniqueDevice.password, true);
+            return this.updateDateMethod(FindMyInstance, uniqueDevice);
         } else {
             const uniqueDevices = await this.getDevicesByStore();
             return this.updateDataMultiple(uniqueDevices);
@@ -195,17 +215,17 @@ class FindMy extends Homey.App {
     }
 
     async updateDataMultiple(uniqueDevices) {
+        this.trace('updateDataMultiple', uniqueDevices);
         for (let index = 0; index < uniqueDevices.length; index++) {
-            const FindMy = await this.setupFindMyInstance(uniqueDevices[index].username, uniqueDevices[index].password);
+            const FindMyInstance = await this.setupFindMyInstance(uniqueDevices[index].username, uniqueDevices[index].password);
 
-            this.updateDateMethod(FindMy, uniqueDevices[index], true);
+            this.updateDateMethod(FindMyInstance, uniqueDevices[index], true);
         }
     }
 
-    async updateDateMethod(FindMy, uniqueDevice, retryOnFail = null) {
+    async updateDateMethod(FindMyInstance, uniqueDevice, retryOnFail = null) {
         try {
-            console.log('retryOnFail', retryOnFail);
-            const findMyDeviceList = await FindMy.getDevices(this.shouldLocate);
+            const findMyDeviceList = await FindMyInstance.getDevices(this.shouldLocate);
                 
             this.findMyDeviceList = [...this.findMyDeviceList, ...findMyDeviceList];
 
@@ -215,7 +235,8 @@ class FindMy extends Homey.App {
                 if (device) device.setCapabilityValues();
             });
         } catch (error) {
-            this.error(error);
+            this.error('updateDateMethod', error);
+            this.trace('retryOnFail', retryOnFail);
 
             if(retryOnFail) {
                 await this.updateData(uniqueDevice)
@@ -292,4 +313,4 @@ class FindMy extends Homey.App {
     }
 }
 
-module.exports = FindMy;
+export default FindMyApp;

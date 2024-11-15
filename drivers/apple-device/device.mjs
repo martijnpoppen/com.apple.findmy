@@ -1,10 +1,11 @@
 'use strict';
 
-const { Device } = require('homey');
-const haversine = require('haversine-distance');
-const { sleep } = require('../../lib/helpers');
+import Homey from 'homey';
+import haversine from 'haversine-distance';
+import { sleep } from '../../lib/helpers.mjs';
 
-class FindMyDevice extends Device {
+
+class FindMyDevice extends Homey.Device {
     async onInit() {
         const settings = this.getSettings();
         const driverManifest = this.driver.manifest;
@@ -120,9 +121,9 @@ class FindMyDevice extends Device {
             const batteryStatus = data.getBattery();
             const deviceInfo = data.getRawInfo();
 
-            console.log(`[Device] ${this.getName()} - [setCapabilityValues] batteryStatus`, batteryStatus);
-            console.log(`[Device] ${this.getName()} - [setCapabilityValues] Location`, this.homey.app.homeyLocation, { lat: location.lat, lon: location.lon });
-            console.log(`[Device] ${this.getName()} - [setCapabilityValues] deviceInfo`, deviceInfo);
+            this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] batteryStatus`, batteryStatus);
+            this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] Location`, this.homey.app.homeyLocation, { lat: location.lat, lon: location.lon });
+            this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] deviceInfo`, deviceInfo);
 
             const distance = this.checkLocation(this.homey.app.homeyLocation, { lat: location.lat, lon: location.lon });
             const distanceKM = distance / 1000;
@@ -182,4 +183,4 @@ class FindMyDevice extends Device {
     }
 }
 
-module.exports = FindMyDevice;
+export default FindMyDevice;

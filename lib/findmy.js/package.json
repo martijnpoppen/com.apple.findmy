@@ -1,6 +1,6 @@
 {
   "name": "findmy.js",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A simple Typescript library for Apple's Find My network without requiring 2FA login",
   "homepage": "https://github.com/CaramelFur/findmy.js",
   "keywords": [
@@ -21,13 +21,15 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "format": "prettier --write ."
   },
   "type": "module",
   "devDependencies": {
+    "@types/node": "^22.3.0",
     "@types/tough-cookie": "^4.0.5",
-    "@types/node": "^20.14.9",
-    "typescript": "^5.5.2"
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "@foxt/js-srp": "0.0.3-patch2",

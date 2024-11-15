@@ -1,7 +1,9 @@
-const Homey = require('homey');
-const { encrypt } = require('../../lib/helpers');
+'use strict';
 
-module.exports = class FindMyDeviceDriver extends Homey.Driver {
+import Homey from 'homey';
+import { encrypt } from '../../lib/helpers.mjs';
+
+class FindMyDeviceDriver extends Homey.Driver {
     async onInit() {
         this.homey.app.log('[Driver] - init', this.id);
         this.homey.app.log(`[Driver] - version`, Homey.manifest.version);
@@ -92,3 +94,5 @@ module.exports = class FindMyDeviceDriver extends Homey.Driver {
         });
     }
 };
+
+export default FindMyDeviceDriver;
