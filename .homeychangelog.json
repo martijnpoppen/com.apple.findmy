@@ -73,5 +73,8 @@
   },
   "1.4.0": {
     "en": "FIX: FindMy to ESM | FIX: duplicate instances | FIX: auth decyrption (possibly causing extra logins)"
+  },
+  "1.4.1": {
+    "en": "FIX: data not updating"
   }
 }
