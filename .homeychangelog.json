@@ -82,5 +82,8 @@
   },
   "1.5.1": {
     "en": "FIX: reset instance when error received. Login again"
+  },
+  "1.5.2": {
+    "en": "FIX: instances and change to node-fetch"
   }
 }
