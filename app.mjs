@@ -8,9 +8,6 @@ import { readFileSync, writeFileSync } from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { FindMy } from './lib/findmy.js/dist/index.js';
-import dns from 'dns';
-
-dns.setDefaultResultOrder('ipv4first');
 
 const DEFAULT_INTERVAL = 60000;
 const __filename = fileURLToPath(import.meta.url);
