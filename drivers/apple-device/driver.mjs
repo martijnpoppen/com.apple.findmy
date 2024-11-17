@@ -34,7 +34,8 @@ class FindMyDeviceDriver extends Homey.Driver {
 
             if (view === 'loading') {
                 try {
-                    this.devices = await this.homey.app.findMyInstances[this.loginData.username].getDevices();
+                    const userShortened = this.loginData.username.slice(0,8);
+                    this.devices = await this.homey.app.findMyInstances[userShortened].getDevices();
 
                     if(!this.devices) {
                         throw new Error("Something went wrong, please try login on https://icloud.com/find and try again. Logging in on the website makes sure you're eligbe to use the Find My API");
@@ -58,7 +59,8 @@ class FindMyDeviceDriver extends Homey.Driver {
                 await this.homey.app.setupFindMyInstance(this.loginData.username, this.loginData.password);
 
 
-                if(!this.homey.app.findMyInstances[this.loginData.username]) {
+                const userShortened = this.loginData.username.slice(0,8);
+                if(!this.homey.app.findMyInstances[userShortened]) {
                     throw new Error("Something went wrong, please try login on https://icloud.com/find and try again. Logging in on the website makes sure you're eligbe to use the Find My API");
                 }
 

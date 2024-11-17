@@ -167,10 +167,11 @@ class FindMyApp extends Homey.App {
     async setupFindMyInstance(username, password) {
         try {
             this.log('setupFindMyInstance')
+            const userShortened = username.slice(0,8);
 
-            this.findMyInstances[username] = new FindMy();
+            this.findMyInstances[userShortened] = new FindMy();
 
-            await this.findMyInstances[username].authenticate(decrypt(username), decrypt(password));
+            await this.findMyInstances[userShortened].authenticate(decrypt(username), decrypt(password));
 
             return await sleep(1000);
         } catch (error) {
@@ -199,21 +200,23 @@ class FindMyApp extends Homey.App {
 
         const uniqueDevices = await this.getDevicesByStore();
         for (let index = 0; index < uniqueDevices.length; index++) {
+            const userShortened = username.slice(0,8);
             const username = uniqueDevices[index].username;
             const password = uniqueDevices[index].password;
 
-            if (Object.keys(this.findMyInstances).length === 0 || !this.findMyInstances[username]) {
+            if (Object.keys(this.findMyInstances).length === 0 || !this.findMyInstances[userShortened]) {
                 this.log('updateData - setup instance', username);
                 await this.setupFindMyInstance(username, password);
             }
 
-            await this.updateDateMethod(this.findMyInstances[username], uniqueDevices[index], { username, password });
+            await this.updateDateMethod(uniqueDevices[index], { username, password });
         }
     }
 
-    async updateDateMethod(FindMyInstance, uniqueDevice, loginData, tryCount = 0) {
+    async updateDateMethod(uniqueDevice, loginData, tryCount = 0) {
         try {
-            const findMyDeviceList = await FindMyInstance.getDevices(this.shouldLocate);
+            const userShortened = loginData.username.slice(0,8);
+            const findMyDeviceList = await this.findMyInstances[userShortened].getDevices(this.shouldLocate);
 
             this.findMyDeviceList = [...this.findMyDeviceList, ...findMyDeviceList];
 
@@ -226,10 +229,17 @@ class FindMyApp extends Homey.App {
             this.error('updateDateMethod', error);
 
             if (tryCount === 0) {
+                this.error('updateDateMethod - retry');
+
                 await this.updateDateMethod(FindMyInstance, uniqueDevice, loginData, tryCount + 1);
+
             } else if (Object.keys(this.findMyInstances).length) {
-                this.error('updateDateMethod - remove instance', loginData.username);
-                delete this.findMyInstances[loginData.username];
+                
+                const userShortened = loginData.username.slice(0,8);
+
+                this.error('updateDateMethod - remove instance', userShortened);
+                
+                delete this.findMyInstances[userShortened];
             }
         }
     }
