@@ -197,9 +197,9 @@ class FindMyApp extends Homey.App {
 
         const uniqueDevices = await this.getDevicesByStore();
         for (let index = 0; index < uniqueDevices.length; index++) {
-            const userShortened = username.slice(0,8);
             const username = uniqueDevices[index].username;
             const password = uniqueDevices[index].password;
+            const userShortened = username.slice(0,8);
 
             if (Object.keys(this.findMyInstances).length === 0 || !this.findMyInstances[userShortened]) {
                 this.log('updateData - setup instance', username);
