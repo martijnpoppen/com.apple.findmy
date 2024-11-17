@@ -85,5 +85,8 @@
   },
   "1.5.2": {
     "en": "FIX: instances and change to node-fetch"
+  },
+  "1.5.3": {
+    "en": "FIX: small issue"
   }
 }
