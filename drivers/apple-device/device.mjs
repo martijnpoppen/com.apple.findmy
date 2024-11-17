@@ -123,7 +123,7 @@ class FindMyDevice extends Homey.Device {
 
             this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] batteryStatus`, batteryStatus);
             this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] Location`, this.homey.app.homeyLocation, { lat: location.lat, lon: location.lon });
-            this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] deviceInfo`, deviceInfo);
+            // this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] deviceInfo`, deviceInfo);
 
             const distance = this.checkLocation(this.homey.app.homeyLocation, { lat: location.lat, lon: location.lon });
             const distanceKM = distance / 1000;

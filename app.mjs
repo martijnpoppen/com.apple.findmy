@@ -8,6 +8,9 @@ import { readFileSync, writeFileSync } from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { FindMy } from './lib/findmy.js/dist/index.js';
+import dns from 'dns';
+
+dns.setDefaultResultOrder('ipv4first');
 
 const DEFAULT_INTERVAL = 60000;
 const __filename = fileURLToPath(import.meta.url);
@@ -127,7 +130,6 @@ class FindMyApp extends Homey.App {
             const store = device.getStore();
 
             if (store.username && store.password) {
-
                 const encodeUsername = encodeURIComponent(decrypt(store.username));
 
                 uniqueDevices[encodeUsername] = {
@@ -162,23 +164,17 @@ class FindMyApp extends Homey.App {
 
     // ---------------- API ----------------
 
-    async setupFindMyInstance(username, password, overwrite = false) {
+    async setupFindMyInstance(username, password) {
         try {
+
             this.trace('setupFindMyInstance', this.findMyInstances);
-
             this.trace('setupFindMyInstance - username', username);
-
-            if (!overwrite && this.findMyInstances[username]) {
-                return this.findMyInstances[username];
-            }
-
-            this.homey.app.trace('setupFindMyInstance - Setup new instance');
 
             this.findMyInstances[username] = new FindMy();
 
             await this.findMyInstances[username].authenticate(decrypt(username), decrypt(password));
 
-            return this.findMyInstances[username];
+            return await sleep(1000);
         } catch (error) {
             this.error(error);
         }
@@ -200,33 +196,29 @@ class FindMyApp extends Homey.App {
         return this.runApiInterval();
     }
 
+    async updateData() {
+        this.homey.app.log('updateData');
 
-    async updateData(uniqueDevice = null) {
-        this.findMyDeviceList = [];
 
-        if (uniqueDevice !== null) {
-            console.log('uniqueDevice', uniqueDevice);
-            const FindMyInstance = await this.setupFindMyInstance(uniqueDevice.username, uniqueDevice.password, true);
-            return this.updateDateMethod(FindMyInstance, uniqueDevice);
-        } else {
-            const uniqueDevices = await this.getDevicesByStore();
-            return this.updateDataMultiple(uniqueDevices);
-        }
-    }
-
-    async updateDataMultiple(uniqueDevices) {
-        this.trace('updateDataMultiple', uniqueDevices);
+        const uniqueDevices = await this.getDevicesByStore();
         for (let index = 0; index < uniqueDevices.length; index++) {
-            const FindMyInstance = await this.setupFindMyInstance(uniqueDevices[index].username, uniqueDevices[index].password);
+            const username = uniqueDevices[index].username;
+            const password = uniqueDevices[index].password;
 
-            this.updateDateMethod(FindMyInstance, uniqueDevices[index], true);
+            if(Object.keys(this.findMyInstances).length === 0) {
+                this.homey.app.log('updateData - initial', username);
+                await this.setupFindMyInstance(username, password);
+            }
+
+            
+            await this.updateDateMethod(this.findMyInstances[username], uniqueDevices[index], true);
         }
     }
 
-    async updateDateMethod(FindMyInstance, uniqueDevice, retryOnFail = null) {
+    async updateDateMethod(FindMyInstance, uniqueDevice) {
         try {
             const findMyDeviceList = await FindMyInstance.getDevices(this.shouldLocate);
-                
+
             this.findMyDeviceList = [...this.findMyDeviceList, ...findMyDeviceList];
 
             const devices = this.getDevicesByStoreKeyValue('username', uniqueDevice.username);
@@ -236,11 +228,6 @@ class FindMyApp extends Homey.App {
             });
         } catch (error) {
             this.error('updateDateMethod', error);
-            this.trace('retryOnFail', retryOnFail);
-
-            if(retryOnFail) {
-                await this.updateData(uniqueDevice)
-            }       
         }
     }
 
