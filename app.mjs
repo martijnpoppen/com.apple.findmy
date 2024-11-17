@@ -163,8 +163,8 @@ class FindMyApp extends Homey.App {
 
     async setupFindMyInstance(username, password) {
         try {
-            this.log('setupFindMyInstance')
             const userShortened = username.slice(0,8);
+            this.log('setupFindMyInstance', userShortened);
 
             this.findMyInstances[userShortened] = new FindMy();
 
@@ -202,7 +202,7 @@ class FindMyApp extends Homey.App {
             const userShortened = username.slice(0,8);
 
             if (Object.keys(this.findMyInstances).length === 0 || !this.findMyInstances[userShortened]) {
-                this.log('updateData - setup instance', username);
+                this.log('updateData - setup new instance');
                 await this.setupFindMyInstance(username, password);
             }
 
@@ -225,15 +225,14 @@ class FindMyApp extends Homey.App {
         } catch (error) {
             this.error('updateDateMethod', error);
 
+            const userShortened = loginData.username.slice(0,8);
+
             if (tryCount === 0) {
                 this.error('updateDateMethod - retry');
 
-                await this.updateDateMethod(FindMyInstance, uniqueDevice, loginData, tryCount + 1);
+                await this.updateDateMethod(this.findMyInstances[userShortened], uniqueDevice, loginData, tryCount + 1);
 
             } else if (Object.keys(this.findMyInstances).length) {
-                
-                const userShortened = loginData.username.slice(0,8);
-
                 this.error('updateDateMethod - remove instance', userShortened);
                 
                 delete this.findMyInstances[userShortened];
