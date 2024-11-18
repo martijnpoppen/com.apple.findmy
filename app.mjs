@@ -3,7 +3,7 @@
 import Homey from 'homey';
 import flowActions from './lib/flows/actions.mjs';
 import flowConditions from './lib/flows/conditions.mjs';
-import { sleep, decrypt, encrypt } from './lib/helpers.mjs';
+import { sleep, decrypt, shortenString } from './lib/helpers.mjs';
 import { readFileSync, writeFileSync } from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -49,6 +49,7 @@ class FindMyApp extends Homey.App {
 
         this.homeyDeviceList = [];
         this.findMyDeviceList = [];
+        this.errorCount = 0;
 
         this.driversInitialized = false;
         this.findMyInstances = {};
@@ -127,16 +128,16 @@ class FindMyApp extends Homey.App {
             const store = device.getStore();
 
             if (store.username && store.password) {
-                const encodeUsername = encodeURIComponent(decrypt(store.username));
+                const userShortened = shortenString(store.username);
 
-                uniqueDevices[encodeUsername] = {
+                uniqueDevices[userShortened] = {
                     username: store.username,
                     password: store.password
                 };
             }
         });
 
-        console.log('getDevicesByStore', uniqueDevices);
+        this.log('getDevicesByStore', uniqueDevices);
 
         return Object.values(uniqueDevices);
     }
@@ -163,8 +164,10 @@ class FindMyApp extends Homey.App {
 
     async setupFindMyInstance(username, password) {
         try {
-            const userShortened = username.slice(0,8);
+            const userShortened = shortenString(username);
             this.log('setupFindMyInstance', userShortened);
+
+            this.errorCount = 0;
 
             this.findMyInstances[userShortened] = new FindMy();
 
@@ -182,6 +185,8 @@ class FindMyApp extends Homey.App {
 
             await sleep(DEFAULT_INTERVAL);
         } else {
+            // Clear the device list to prevent duplicates on each interval
+            this.findMyDeviceList = [];
             await this.updateData();
 
             this.log('runApiInterval = waiting for:', this.intervalTime);
@@ -199,7 +204,7 @@ class FindMyApp extends Homey.App {
         for (let index = 0; index < uniqueDevices.length; index++) {
             const username = uniqueDevices[index].username;
             const password = uniqueDevices[index].password;
-            const userShortened = username.slice(0,8);
+            const userShortened = shortenString(username);
 
             if (Object.keys(this.findMyInstances).length === 0 || !this.findMyInstances[userShortened]) {
                 this.log('updateData - setup new instance');
@@ -210,12 +215,14 @@ class FindMyApp extends Homey.App {
         }
     }
 
-    async updateDateMethod(uniqueDevice, loginData, tryCount = 0) {
+    async updateDateMethod(uniqueDevice, loginData) {
         try {
-            const userShortened = loginData.username.slice(0,8);
+            const userShortened = shortenString(loginData.username);
             const findMyDeviceList = await this.findMyInstances[userShortened].getDevices(this.shouldLocate);
 
             this.findMyDeviceList = [...this.findMyDeviceList, ...findMyDeviceList];
+
+            this.debug(this.findMyDeviceList)
 
             const devices = this.getDevicesByStoreKeyValue('username', uniqueDevice.username);
 
@@ -225,14 +232,12 @@ class FindMyApp extends Homey.App {
         } catch (error) {
             this.error('updateDateMethod', error);
 
-            const userShortened = loginData.username.slice(0,8);
+            const userShortened = shortenString(loginData.username);
 
-            if (tryCount === 0) {
-                this.error('updateDateMethod - retry');
+            this.errorCount = this.errorCount + 1;
+            this.error('updateDateMethod - errorCount:', this.errorCount);
 
-                await this.updateDateMethod(this.findMyInstances[userShortened], uniqueDevice, loginData, tryCount + 1);
-
-            } else if (Object.keys(this.findMyInstances).length) {
+            if (Object.keys(this.findMyInstances).length && this.errorCount > 3) {
                 this.error('updateDateMethod - remove instance', userShortened);
                 
                 delete this.findMyInstances[userShortened];

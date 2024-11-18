@@ -1,7 +1,7 @@
 'use strict';
 
 import Homey from 'homey';
-import { encrypt } from '../../lib/helpers.mjs';
+import { encrypt, shortenString } from '../../lib/helpers.mjs';
 
 class FindMyDeviceDriver extends Homey.Driver {
     async onInit() {
@@ -34,7 +34,7 @@ class FindMyDeviceDriver extends Homey.Driver {
 
             if (view === 'loading') {
                 try {
-                    const userShortened = this.loginData.username.slice(0,8);
+                    const userShortened = shortenString(this.loginData.username);
                     this.devices = await this.homey.app.findMyInstances[userShortened].getDevices();
 
                     if(!this.devices) {
@@ -56,11 +56,15 @@ class FindMyDeviceDriver extends Homey.Driver {
                     password: encrypt(data.password)
                 };
 
-                await this.homey.app.setupFindMyInstance(this.loginData.username, this.loginData.password);
+                const userShortened = shortenString(this.loginData.username);
 
-
-                const userShortened = this.loginData.username.slice(0,8);
                 if(!this.homey.app.findMyInstances[userShortened]) {
+                    // Setup the Find My instance if it doesn't exist
+                    await this.homey.app.setupFindMyInstance(this.loginData.username, this.loginData.password);
+                }
+               
+                if(!this.homey.app.findMyInstances[userShortened]) {
+                    // If the instance still doesn't exist, throw an error
                     throw new Error("Something went wrong, please try login on https://icloud.com/find and try again. Logging in on the website makes sure you're eligbe to use the Find My API");
                 }
 
