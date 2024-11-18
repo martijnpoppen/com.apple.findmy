@@ -1,38 +1,40 @@
 {
-  "name": "findmy.js",
-  "version": "2.0.0",
-  "description": "A simple Typescript library for Apple's Find My network without requiring 2FA login",
-  "homepage": "https://github.com/CaramelFur/findmy.js",
-  "keywords": [
-    "Apple",
-    "Find My",
-    "Tracking",
-    "iCloud"
-  ],
-  "author": "Caramel <findmy@caramelfur.dev>",
-  "license": "GPL-3.0-only",
-  "bugs": {
-    "url": "https://github.com/CaramelFur/findmy.js/issues",
-    "email": "findmy@caramelfur.dev"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/CaramelFur/findmy.js.git"
-  },
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "tsc",
-    "format": "prettier --write ."
-  },
-  "type": "module",
-  "devDependencies": {
-    "@types/node": "^22.3.0",
-    "@types/tough-cookie": "^4.0.5",
-    "prettier": "^3.3.3",
-    "typescript": "^5.5.4"
-  },
-  "dependencies": {
-    "@foxt/js-srp": "0.0.3-patch2",
-    "tough-cookie": "^4.1.4"
+    "name": "findmy.js",
+    "version": "2.0.0",
+    "description": "A simple Typescript library for Apple's Find My network without requiring 2FA login",
+    "homepage": "https://github.com/CaramelFur/findmy.js",
+    "keywords": [
+      "Apple",
+      "Find My",
+      "Tracking",
+      "iCloud"
+    ],
+    "author": "Caramel <findmy@caramelfur.dev>",
+    "license": "GPL-3.0-only",
+    "bugs": {
+      "url": "https://github.com/CaramelFur/findmy.js/issues",
+      "email": "findmy@caramelfur.dev"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/CaramelFur/findmy.js.git"
+    },
+    "main": "dist/index.js",
+    "scripts": {
+      "build": "tsc",
+      "format": "prettier --write ."
+    },
+    "type": "module",
+    "devDependencies": {
+      "@types/node": "^22.3.0",
+      "@types/tough-cookie": "^4.0.5",
+      "prettier": "^3.3.3",
+      "typescript": "^5.5.4"
+    },
+    "dependencies": {
+      "@foxt/js-srp": "0.0.3-patch2",
+      "tough-cookie": "^4.1.4",
+      "undici": "^6.21.0"
+    }
   }
-}
+  
