@@ -33,8 +33,9 @@
     },
     "dependencies": {
       "@foxt/js-srp": "0.0.3-patch2",
+      "node-fetch": "^3.3.2",
       "tough-cookie": "^4.1.4",
-      "undici": "^6.21.0"
+      "uncrypto": "^0.1.3"
     }
   }
   
