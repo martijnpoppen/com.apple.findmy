@@ -97,5 +97,17 @@
   },
   "1.5.6": {
     "en": "FIX: authentication issues"
+  },
+  "1.5.7": {
+    "en": "FIX: small update error"
+  },
+  "1.5.9": {
+    "en": "FIX: manual update | FIX: remove intervals lower than 10s"
+  },
+  "1.5.10": {
+    "en": "FIX: Repairing"
+  },
+  "1.5.11": {
+    "en": "FIX: repairing"
   }
 }

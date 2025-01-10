@@ -185,8 +185,6 @@ class FindMyApp extends Homey.App {
 
             await sleep(DEFAULT_INTERVAL);
         } else {
-            // Clear the device list to prevent duplicates on each interval
-            this.findMyDeviceList = [];
             await this.updateData();
 
             this.log('runApiInterval = waiting for:', this.intervalTime);
@@ -198,6 +196,9 @@ class FindMyApp extends Homey.App {
     }
 
     async updateData() {
+        // Clear the device list to prevent duplicates on each interval
+        this.findMyDeviceList = [];
+
         this.log('updateData, instances: ', this.findMyInstances);
 
         const uniqueDevices = await this.getDevicesByStore();
