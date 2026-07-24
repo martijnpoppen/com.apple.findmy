@@ -121,5 +121,8 @@
   },
   "1.6.0": {
     "en": "NEW: show warning when new T&C are needed"
+  },
+  "1.7.0": {
+    "en": "FIX: authentication"
   }
 }
