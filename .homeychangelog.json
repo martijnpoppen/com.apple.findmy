@@ -109,5 +109,17 @@
   },
   "1.5.11": {
     "en": "FIX: repairing"
+  },
+  "1.5.12": {
+    "en": "FIX: fix authentication in some scenarios"
+  },
+  "1.5.13": {
+    "en": "FIX: sanitize login to prevent uppercase and spaces"
+  },
+  "1.5.14": {
+    "en": "FIX: error handling in login"
+  },
+  "1.6.0": {
+    "en": "NEW: show warning when new T&C are needed"
   }
 }

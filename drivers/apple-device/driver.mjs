@@ -80,6 +80,10 @@ class FindMyDeviceDriver extends Homey.Driver {
                     throw new Error("Something went wrong, please try login on https://icloud.com/find and try again. Logging in on the website makes sure you're eligbe to use the Find My API");
                 }
 
+                if(this.homey.app.findMyInstances[userShortened].termsUpdateNeeded()) {
+                    throw new Error("Your Apple ID requires a terms and conditions update. Please login on https://icloud.com/find and accept the updated terms and conditions.");
+                }
+
                 this.homey.app.setDeviceStore(this.loginData.username, this.loginData.password);
 
                 return true;

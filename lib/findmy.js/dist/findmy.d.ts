@@ -4,6 +4,7 @@ export declare class FindMy {
     private authenticatedData;
     authenticate(username: string, password: string): Promise<void>;
     deauthenticate(): void;
+    termsUpdateNeeded(): boolean;
     isAuthenticated(): boolean;
     getRawAccountInfo(): iCloudAccountInfo;
     getUserInfo(): {

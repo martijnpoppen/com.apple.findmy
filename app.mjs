@@ -171,28 +171,37 @@ class FindMyApp extends Homey.App {
 
             this.findMyInstances[userShortened] = new FindMy();
 
-            await this.findMyInstances[userShortened].authenticate(decrypt(username), decrypt(password));
+            const decryptedUsername = decrypt(username);
+            const sanitizedUsername = decryptedUsername.replace(/\s/g, '').toLowerCase();
+            const decryptedPassword = decrypt(password);
+            const sanitizedPassword = decryptedPassword.replace(/\s/g, '');
+
+            this.log('setupFindMyInstance - authenticate - decryptedUsername', decryptedUsername);
+            this.log('setupFindMyInstance - authenticate - sanitizedUsername', sanitizedUsername);
+
+            await this.findMyInstances[userShortened].authenticate(sanitizedUsername, sanitizedPassword);
 
             return await sleep(1000);
         } catch (error) {
             this.error(error);
+            throw new Error(error);
         }
     }
 
     async runApiInterval() {
-        if (parseInt(this.intervalTime) === 0) {
-            this.log('runApiInterval - Interval is OFF. Wait 5 seconds and check again', this.intervalTime, DEFAULT_INTERVAL);
+        while (true) {
+            if (parseInt(this.intervalTime) === 0) {
+                this.log('runApiInterval - Interval is OFF. Wait 5 seconds and check again', this.intervalTime, DEFAULT_INTERVAL);
 
-            await sleep(DEFAULT_INTERVAL);
-        } else {
-            await this.updateData();
+                await sleep(DEFAULT_INTERVAL);
+            } else {
+                await this.updateData();
 
-            this.log('runApiInterval = waiting for:', this.intervalTime);
+                this.log('runApiInterval = waiting for:', this.intervalTime);
 
-            await sleep(this.intervalTime);
+                await sleep(this.intervalTime);
+            }
         }
-
-        return this.runApiInterval();
     }
 
     async updateData() {
@@ -209,7 +218,11 @@ class FindMyApp extends Homey.App {
 
             if (Object.keys(this.findMyInstances).length === 0 || !this.findMyInstances[userShortened]) {
                 this.log('updateData - setup new instance');
-                await this.setupFindMyInstance(username, password);
+                try {
+                    await this.setupFindMyInstance(username, password);
+                } catch (error) {
+                    this.error('updateData - setup new instance', error);
+                }
             }
 
             await this.updateDateMethod(uniqueDevices[index], { username, password });
@@ -218,16 +231,26 @@ class FindMyApp extends Homey.App {
 
     async updateDateMethod(uniqueDevice, loginData) {
         try {
+            const homeyDevices = this.getDevicesByStoreKeyValue('username', uniqueDevice.username);
             const userShortened = shortenString(loginData.username);
+
+            if (!this.findMyInstances[userShortened]) {
+                throw new Error('updateDateMethod - No Find My instance found for ' + userShortened);
+            }
+
+            if (this.findMyInstances[userShortened].termsUpdateNeeded()) {
+                homeyDevices.forEach((device) => {
+                    if (device) device.setUnavailable('Your Apple ID requires a terms and conditions update. Please login on https://icloud.com/find and accept the updated terms and conditions.');
+                });
+            }
+
             const findMyDeviceList = await this.findMyInstances[userShortened].getDevices(this.shouldLocate);
 
             this.findMyDeviceList = [...this.findMyDeviceList, ...findMyDeviceList];
 
-            this.debug(this.findMyDeviceList)
+            this.debug(this.findMyDeviceList);
 
-            const devices = this.getDevicesByStoreKeyValue('username', uniqueDevice.username);
-
-            devices.forEach((device) => {
+            homeyDevices.forEach((device) => {
                 if (device) device.setCapabilityValues();
             });
         } catch (error) {
@@ -240,7 +263,7 @@ class FindMyApp extends Homey.App {
 
             if (Object.keys(this.findMyInstances).length && this.errorCount > 3) {
                 this.error('updateDateMethod - remove instance', userShortened);
-                
+
                 delete this.findMyInstances[userShortened];
             }
         }
@@ -281,7 +304,7 @@ class FindMyApp extends Homey.App {
 
             this.setIntervalTime(time);
         } catch (error) {
-            this.error(error);
+            // this.error(error);
 
             this.setIntervalTime(DEFAULT_INTERVAL);
         }
@@ -308,7 +331,7 @@ class FindMyApp extends Homey.App {
 
             return 'shouldLocate' in shouldLocateEntry ? shouldLocateEntry.shouldLocate : false;
         } catch (error) {
-            this.error(error);
+            // this.error(error);
 
             this.setShouldLocate(true);
         }

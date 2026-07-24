@@ -208,8 +208,13 @@ export interface iCloudAccountInfo {
     appsOrder: Array<string>;
     version: number;
     isExtendedLogin: boolean;
+    isRepairNeeded: boolean;
+    isUnderMaintenance: boolean;
     pcsServiceIdentitiesIncluded: boolean;
     hsaChallengeRequired: boolean;
+    showApplePrivacyNotice: boolean;
+    showGcbdPrivacyNotice: boolean;
+    termsUpdateNeeded: boolean;
     requestInfo: {
         country: string;
         timeZone: string;
