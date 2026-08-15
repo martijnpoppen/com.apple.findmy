@@ -124,5 +124,8 @@
   },
   "1.7.0": {
     "en": "FIX: authentication"
+  },
+  "1.7.1": {
+    "en": "OPT: fix session disconnects"
   }
 }
