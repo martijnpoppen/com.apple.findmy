@@ -127,5 +127,8 @@
   },
   "1.7.1": {
     "en": "OPT: fix session disconnects"
+  },
+  "1.8.0": {
+    "en": "FIX: repeated Apple login alerts | OPT: keep the session across restarts and network drops"
   }
 }
