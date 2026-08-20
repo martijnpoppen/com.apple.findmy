@@ -3,13 +3,15 @@
 import Homey from 'homey';
 import flowActions from './lib/flows/actions.mjs';
 import flowConditions from './lib/flows/conditions.mjs';
-import { sleep, decrypt, shortenString } from './lib/helpers.mjs';
-import { readFileSync, writeFileSync } from 'fs';
+import { sleep, decrypt, encrypt, shortenString } from './lib/helpers.mjs';
+import { readFileSync, writeFileSync, unlinkSync } from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { FindMy } from './lib/findmy.js/dist/index.js';
+import { FindMySession, RetryLaterError } from './lib/findmy.js/dist/index.js';
 
 const DEFAULT_INTERVAL = 60000;
+const PERSISTENT_DIR = '/userdata/';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -49,9 +51,10 @@ class FindMyApp extends Homey.App {
 
         this.homeyDeviceList = [];
         this.findMyDeviceList = [];
-        this.errorCount = 0;
 
         this.driversInitialized = false;
+        // Keyed by account. Each value is a FindMySession, which looks after
+        // its own reconnects, backoff and stored session.
         this.findMyInstances = {};
 
         await this.getIntervalTime();
@@ -160,32 +163,71 @@ class FindMyApp extends Homey.App {
         }
     }
 
+    // ---------------- SESSION STORAGE ----------------
+    // findmy.js decides when it is safe to sign in; this only says where the
+    // session lives. The cookies in it are as good as a password, so they are
+    // encrypted with the same key as the stored credentials.
+
+    sessionFilePath(key) {
+        return path.resolve(PERSISTENT_DIR, `session-${key}.json`);
+    }
+
+    get sessionStore() {
+        return {
+            load: (key) => JSON.parse(decrypt(readFileSync(this.sessionFilePath(key), 'utf8'))),
+            save: (key, session) => writeFileSync(this.sessionFilePath(key), encrypt(JSON.stringify(session)), 'utf8'),
+            // Already gone is already clear; the library would log a
+            // failure here on a perfectly normal path.
+            clear: (key) => {
+                try {
+                    unlinkSync(this.sessionFilePath(key));
+                } catch (error) {
+                    if (error.code !== 'ENOENT') throw error;
+                }
+            }
+        };
+    }
+
     // ---------------- API ----------------
 
     async setupFindMyInstance(username, password) {
-        try {
-            const userShortened = shortenString(username);
-            this.log('setupFindMyInstance', userShortened);
+        const userShortened = shortenString(username);
+        this.log('setupFindMyInstance', userShortened);
 
-            this.errorCount = 0;
+        const decryptedUsername = decrypt(username);
+        const sanitizedUsername = decryptedUsername.replace(/\s/g, '').toLowerCase();
+        const decryptedPassword = decrypt(password);
+        const sanitizedPassword = decryptedPassword.replace(/\s/g, '');
 
-            this.findMyInstances[userShortened] = new FindMy();
+        this.log('setupFindMyInstance - authenticate - decryptedUsername', decryptedUsername);
+        this.log('setupFindMyInstance - authenticate - sanitizedUsername', sanitizedUsername);
 
-            const decryptedUsername = decrypt(username);
-            const sanitizedUsername = decryptedUsername.replace(/\s/g, '').toLowerCase();
-            const decryptedPassword = decrypt(password);
-            const sanitizedPassword = decryptedPassword.replace(/\s/g, '');
+        let session = this.findMyInstances[userShortened];
 
-            this.log('setupFindMyInstance - authenticate - decryptedUsername', decryptedUsername);
-            this.log('setupFindMyInstance - authenticate - sanitizedUsername', sanitizedUsername);
+        if (session) {
+            // Pairing or repair with fresh credentials. Handing them over
+            // clears any backoff, so a corrected password is tried at once.
+            session.setCredentials(sanitizedUsername, sanitizedPassword);
+        } else {
+            session = new FindMySession({
+                key: userShortened,
+                username: sanitizedUsername,
+                password: sanitizedPassword,
+                store: this.sessionStore,
+                logger: (...args) => this.log(...args)
+            });
 
-            await this.findMyInstances[userShortened].authenticate(sanitizedUsername, sanitizedPassword);
-
-            return await sleep(1000);
-        } catch (error) {
-            this.error(error);
-            throw new Error(error);
+            // Registered before connecting on purpose. The session carries the
+            // backoff, so throwing it away on a failed connect would hand the
+            // next interval a fresh one that signs in immediately.
+            this.findMyInstances[userShortened] = session;
         }
+
+        await session.connect();
+
+        await sleep(1000);
+
+        return session;
     }
 
     async runApiInterval() {
@@ -208,7 +250,7 @@ class FindMyApp extends Homey.App {
         // Clear the device list to prevent duplicates on each interval
         this.findMyDeviceList = [];
 
-        this.log('updateData, instances: ', this.findMyInstances);
+        this.log('updateData, instances: ', Object.keys(this.findMyInstances));
 
         const uniqueDevices = await this.getDevicesByStore();
         for (let index = 0; index < uniqueDevices.length; index++) {
@@ -216,12 +258,14 @@ class FindMyApp extends Homey.App {
             const password = uniqueDevices[index].password;
             const userShortened = shortenString(username);
 
-            if (Object.keys(this.findMyInstances).length === 0 || !this.findMyInstances[userShortened]) {
+            if (!this.findMyInstances[userShortened]) {
                 this.log('updateData - setup new instance');
                 try {
                     await this.setupFindMyInstance(username, password);
                 } catch (error) {
-                    this.error('updateData - setup new instance', error);
+                    this.logAccountError(userShortened, error, 'setup');
+
+                    continue;
                 }
             }
 
@@ -230,21 +274,23 @@ class FindMyApp extends Homey.App {
     }
 
     async updateDateMethod(uniqueDevice, loginData) {
+        const userShortened = shortenString(loginData.username);
+
         try {
             const homeyDevices = this.getDevicesByStoreKeyValue('username', uniqueDevice.username);
-            const userShortened = shortenString(loginData.username);
+            const session = this.findMyInstances[userShortened];
 
-            if (!this.findMyInstances[userShortened]) {
+            if (!session) {
                 throw new Error('updateDateMethod - No Find My instance found for ' + userShortened);
             }
 
-            if (this.findMyInstances[userShortened].termsUpdateNeeded()) {
+            if (session.termsUpdateNeeded()) {
                 homeyDevices.forEach((device) => {
                     if (device) device.setUnavailable('Your Apple ID requires a terms and conditions update. Please login on https://icloud.com/find and accept the updated terms and conditions.');
                 });
             }
 
-            const findMyDeviceList = await this.findMyInstances[userShortened].getDevices(this.shouldLocate);
+            const findMyDeviceList = await session.getDevices(this.shouldLocate);
 
             this.findMyDeviceList = [...this.findMyDeviceList, ...findMyDeviceList];
 
@@ -254,19 +300,26 @@ class FindMyApp extends Homey.App {
                 if (device) device.setCapabilityValues();
             });
         } catch (error) {
-            this.error('updateDateMethod', error);
-
-            const userShortened = shortenString(loginData.username);
-
-            this.errorCount = this.errorCount + 1;
-            this.error('updateDateMethod - errorCount:', this.errorCount);
-
-            if (Object.keys(this.findMyInstances).length && this.errorCount > 3) {
-                this.error('updateDateMethod - remove instance', userShortened);
-
-                delete this.findMyInstances[userShortened];
-            }
+            this.logAccountError(userShortened, error, 'refresh');
         }
+    }
+
+    /**
+     * The session decides what a failure means and when to try again; the app
+     * only reports it. A RetryLaterError is expected - it means the session is
+     * still good and this round should simply be skipped.
+     */
+    logAccountError(userShortened, error, phase) {
+        if (error instanceof RetryLaterError) {
+            const waitSeconds = Math.round((error.nextAttemptAt - Date.now()) / 1000);
+
+            this.log('updateDateMethod - skipping', userShortened, `retrying in ${waitSeconds}s`, error.message);
+
+            return;
+        }
+
+        this.error('updateDateMethod', error);
+        this.error('updateDateMethod - failure', userShortened, { phase, status: error && error.status });
     }
 
     // ---------------- LOCATION ----------------

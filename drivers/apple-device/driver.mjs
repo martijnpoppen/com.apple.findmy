@@ -70,10 +70,11 @@ class FindMyDeviceDriver extends Homey.Driver {
 
                 const userShortened = shortenString(this.loginData.username);
 
-                if(!this.homey.app.findMyInstances[userShortened]) {
-                    // Setup the Find My instance if it doesn't exist
-                    await this.homey.app.setupFindMyInstance(this.loginData.username, this.loginData.password);
-                }
+                // Always hand over what was typed in the form. setupFindMyInstance
+                // creates the session, or updates an existing one with the new
+                // credentials - which matters when this is a second attempt
+                // after a wrong password.
+                await this.homey.app.setupFindMyInstance(this.loginData.username, this.loginData.password);
                
                 if(!this.homey.app.findMyInstances[userShortened]) {
                     // If the instance still doesn't exist, throw an error
