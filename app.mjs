@@ -7,7 +7,7 @@ import { sleep, decrypt, encrypt, shortenString } from './lib/helpers.mjs';
 import { readFileSync, writeFileSync, unlinkSync } from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { FindMySession, RetryLaterError } from './lib/findmy.js/dist/index.js';
+import { AccountLockedError, FindMySession, RetryLaterError } from './lib/findmy.js/dist/index.js';
 
 const DEFAULT_INTERVAL = 60000;
 const PERSISTENT_DIR = '/userdata/';
@@ -263,7 +263,7 @@ class FindMyApp extends Homey.App {
                 try {
                     await this.setupFindMyInstance(username, password);
                 } catch (error) {
-                    this.logAccountError(userShortened, error, 'setup');
+                    this.logAccountError(username, error, 'setup');
 
                     continue;
                 }
@@ -284,7 +284,9 @@ class FindMyApp extends Homey.App {
                 throw new Error('updateDateMethod - No Find My instance found for ' + userShortened);
             }
 
-            if (session.termsUpdateNeeded()) {
+            const termsNeeded = session.termsUpdateNeeded();
+
+            if (termsNeeded) {
                 homeyDevices.forEach((device) => {
                     if (device) device.setUnavailable('Your Apple ID requires a terms and conditions update. Please login on https://icloud.com/find and accept the updated terms and conditions.');
                 });
@@ -299,8 +301,15 @@ class FindMyApp extends Homey.App {
             homeyDevices.forEach((device) => {
                 if (device) device.setCapabilityValues();
             });
+
+            // Whatever had this account marked unavailable is over.
+            if (!termsNeeded) {
+                homeyDevices.forEach((device) => {
+                    if (device) device.setAvailable();
+                });
+            }
         } catch (error) {
-            this.logAccountError(userShortened, error, 'refresh');
+            this.logAccountError(uniqueDevice.username, error, 'refresh');
         }
     }
 
@@ -309,7 +318,24 @@ class FindMyApp extends Homey.App {
      * only reports it. A RetryLaterError is expected - it means the session is
      * still good and this round should simply be skipped.
      */
-    logAccountError(userShortened, error, phase) {
+    logAccountError(username, error, phase) {
+        const userShortened = shortenString(username);
+
+        if (error instanceof AccountLockedError) {
+            // Apple is refusing new sessions for this account. Nothing the app
+            // can do will help, and every further attempt prolongs it, so say
+            // so on the devices rather than retrying quietly forever.
+            const until = new Date(error.until).toISOString();
+
+            this.error('updateDateMethod - account locked', userShortened, 'until', until);
+
+            this.getDevicesByStoreKeyValue('username', username).forEach((device) => {
+                if (device) device.setUnavailable(error.message);
+            });
+
+            return;
+        }
+
         if (error instanceof RetryLaterError) {
             const waitSeconds = Math.round((error.nextAttemptAt - Date.now()) / 1000);
 
