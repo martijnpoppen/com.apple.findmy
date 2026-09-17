@@ -133,5 +133,8 @@
   },
   "1.8.1": {
     "en": "FIX: no longer re-authenticates after a restart | NEW: reports when Apple has locked the account"
+  },
+  "1.9.0": {
+    "en": "FIX: persist backoff and trust tokens across restarts, stop futile sign-ins"
   }
 }
