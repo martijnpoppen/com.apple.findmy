@@ -126,8 +126,16 @@ class FindMyDevice extends Homey.Device {
             // this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] deviceInfo`, deviceInfo);
 
             const distance = this.checkLocation(this.homey.app.homeyLocation, { lat: location.lat, lon: location.lon });
-            const distanceKM = distance / 1000;
-            const distanceMI = distance * 0.000621371192;
+            // GPS jitter moves this by centimetres on every poll even for a
+            // device lying still. Storing the full precision made Homey see a
+            // change every time, so "last updated" ticked on km and miles
+            // while the rounded meters value sat unchanged - the same distance
+            // looking fresh in one unit and stale in another. Round each unit
+            // to the precision its capability shows, so an update means the
+            // number on screen actually moved.
+            const distanceM = Math.round(distance);
+            const distanceKM = parseFloat((distance / 1000).toFixed(2));
+            const distanceMI = parseFloat((distance * 0.000621371192).toFixed(2));
 
             const isMoving = this.getCapabilityValue('measure_distance') - distanceKM > 1 || this.getCapabilityValue('measure_distance') - distanceKM < -1;
             const isHome = distance < settings.is_home_radius;
@@ -139,7 +147,7 @@ class FindMyDevice extends Homey.Device {
             this.setValue('alarm_is_moving', isMoving);
             this.setValue('measure_distance', distanceKM);
             this.setValue('measure_distance_miles', distanceMI);
-            this.setValue('measure_distance_meters', Math.round(parseFloat(distance)));
+            this.setValue('measure_distance_meters', distanceM);
             this.setValue('measure_latitude', parseFloat(location.lat.toFixed(4)));
             this.setValue('measure_longitude', parseFloat(location.lon.toFixed(4)));
 
