@@ -138,6 +138,6 @@
     "en": "FIX: persist backoff and trust tokens across restarts, stop futile sign-ins"
   },
   "1.9.1": {
-    "en": "FIX: fewer retries when Apple has blocked an account | OPT: explain how to unblock it"
+    "en": "FIX: fewer retries when Apple has blocked an account | FIX: distance in km and miles no longer refreshes while the device sits still | OPT: explain how to unblock a blocked account"
   }
 }
