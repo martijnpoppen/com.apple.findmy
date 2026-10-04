@@ -139,5 +139,8 @@
   },
   "1.9.1": {
     "en": "FIX: fewer retries when Apple has blocked an account | FIX: distance in km and miles no longer refreshes while the device sits still | OPT: explain how to unblock a blocked account"
+  },
+  "1.9.2": {
+    "en": "FIX: distance in km and miles no longer refreshes while the device sits still"
   }
 }
