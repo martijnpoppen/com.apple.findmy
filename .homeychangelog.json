@@ -142,5 +142,8 @@
   },
   "1.9.2": {
     "en": "FIX: distance in km and miles no longer refreshes while the device sits still"
+  },
+  "1.9.3": {
+    "en": "FIX: repeated Apple login emails - a rejected session no longer earns a new sign-in every refresh"
   }
 }
