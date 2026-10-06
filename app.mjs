@@ -284,30 +284,26 @@ class FindMyApp extends Homey.App {
                 throw new Error('updateDateMethod - No Find My instance found for ' + userShortened);
             }
 
-            const termsNeeded = session.termsUpdateNeeded();
-
-            if (termsNeeded) {
-                homeyDevices.forEach((device) => {
-                    if (device) device.setUnavailable('Your Apple ID requires a terms and conditions update. Please login on https://icloud.com/find and accept the updated terms and conditions.');
-                });
-            }
-
             const findMyDeviceList = await session.getDevices(this.shouldLocate);
 
             this.findMyDeviceList = [...this.findMyDeviceList, ...findMyDeviceList];
 
             this.debug(this.findMyDeviceList);
 
+            // iCloud served the data, so nothing is blocking this account -
+            // including the terms flag, which many working accounts carry.
             homeyDevices.forEach((device) => {
-                if (device) device.setCapabilityValues();
-            });
+                if (!device) return;
 
-            // Whatever had this account marked unavailable is over.
-            if (!termsNeeded) {
-                homeyDevices.forEach((device) => {
-                    if (device) device.setAvailable();
-                });
-            }
+                if (device.setCapabilityValues()) {
+                    device.setAvailable();
+                } else {
+                    device.setUnavailable(
+                        'This device is no longer listed in your Find My account. ' +
+                        'Check https://icloud.com/find, and remove it here if it is gone for good.'
+                    );
+                }
+            });
         } catch (error) {
             this.logAccountError(uniqueDevice.username, error, 'refresh');
         }
@@ -340,6 +336,18 @@ class FindMyApp extends Homey.App {
             const waitSeconds = Math.round((error.nextAttemptAt - Date.now()) / 1000);
 
             this.log('updateDateMethod - skipping', userShortened, `retrying in ${waitSeconds}s`, error.message);
+
+            return;
+        }
+
+        if (this.findMyInstances[userShortened]?.termsUpdateNeeded()) {
+            // The flag alone proves nothing, but a failure alongside it is
+            // usually Apple waiting for the terms to be accepted.
+            this.error('updateDateMethod - terms update needed', userShortened, { phase });
+
+            this.getDevicesByStoreKeyValue('username', username).forEach((device) => {
+                if (device) device.setUnavailable('Your Apple ID requires a terms and conditions update. Please login on https://icloud.com/find and accept the updated terms and conditions.');
+            });
 
             return;
         }

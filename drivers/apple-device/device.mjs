@@ -66,6 +66,20 @@ class FindMyDevice extends Homey.Device {
             return Promise.resolve(true);
         } catch (e) {
             this.error(e);
+
+            // Apple answers 500 when it cannot deliver the command to the
+            // device - asleep, offline, or reachable only over the Find My
+            // network. Nothing is wrong with the account, and a raw iCloud
+            // status in a Flow error tells the user none of that.
+            if (e && e.status === 500) {
+                return Promise.reject(
+                    new Error(
+                        `Apple could not deliver this to ${this.getName()}. ` +
+                        'The device is most likely offline or asleep - try again when it is back online.'
+                    )
+                );
+            }
+
             return Promise.reject(e);
         }
     }
@@ -111,6 +125,7 @@ class FindMyDevice extends Homey.Device {
         }
     }
 
+    /** True when iCloud listed this device; false when it is not there. */
     setCapabilityValues() {
         const data = this.homey.app.findMyDeviceList.find((d) => d.getID() === this.getData().id);
 
@@ -171,6 +186,8 @@ class FindMyDevice extends Homey.Device {
         }
 
         this.setValue('measure_interval', this.homey.app.intervalTime / 1000);
+
+        return !!data;
     }
 
     checkLocation(locationA, locationB) {

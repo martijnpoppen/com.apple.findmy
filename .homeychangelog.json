@@ -145,5 +145,8 @@
   },
   "1.9.3": {
     "en": "FIX: repeated Apple login emails - a rejected session no longer earns a new sign-in every refresh"
+  },
+  "1.9.4": {
+    "en": "FIX: no longer refuses an Apple ID over a terms notice iCloud itself ignores | FIX: a clear message when a device is offline instead of an iCloud error code"
   }
 }
