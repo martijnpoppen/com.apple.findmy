@@ -55,8 +55,9 @@ class FindMyDeviceDriver extends Homey.Driver {
 
                     return session.showView('list_devices');
                 } catch (error) {
-                    console.error(error);
-                    throw new Error(error);
+                    this.homey.app.error('[Driver] - loading failed', error);
+
+                    throw error instanceof Error ? error : new Error(String(error));
                 }
             }
         });
@@ -81,16 +82,35 @@ class FindMyDeviceDriver extends Homey.Driver {
                     throw new Error("Something went wrong, please try login on https://icloud.com/find and try again. Logging in on the website makes sure you're eligbe to use the Find My API");
                 }
 
-                if(this.homey.app.findMyInstances[userShortened].termsUpdateNeeded()) {
-                    throw new Error("Your Apple ID requires a terms and conditions update. Please login on https://icloud.com/find and accept the updated terms and conditions.");
+                // Apple sets this flag on plenty of accounts that the Find My
+                // website then lets straight in without asking anything, so on
+                // its own it is not a reason to refuse. Ask iCloud for the
+                // device list instead and let the answer decide.
+                if (this.homey.app.findMyInstances[userShortened].termsUpdateNeeded()) {
+                    try {
+                        await this.homey.app.findMyInstances[userShortened].getDevices(false);
+
+                        this.homey.app.log('[Driver] - terms flag set, but iCloud served the device list; continuing');
+                    } catch (error) {
+                        throw new Error(
+                            'Your Apple ID requires a terms and conditions update. Please login on ' +
+                            'https://icloud.com/find and accept the updated terms and conditions. ' +
+                            `(iCloud also refused the device list: ${error.message})`
+                        );
+                    }
                 }
 
                 this.homey.app.setDeviceStore(this.loginData.username, this.loginData.password);
 
                 return true;
             } catch (error) {
-                console.log(error);
-                throw new Error(error);
+                // Logged as an error so it is findable in a diagnostics
+                // report, and rethrown as itself: new Error(error) stringified
+                // the whole thing, which is why a careful sentence reached the
+                // user as "Error: Error: Your Apple ID requires...".
+                this.homey.app.error('[Driver] - login failed', error);
+
+                throw error instanceof Error ? error : new Error(String(error));
             }
         });
 

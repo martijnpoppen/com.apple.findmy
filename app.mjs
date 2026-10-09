@@ -12,6 +12,16 @@ import { AccountLockedError, FindMySession, RetryLaterError } from './lib/findmy
 const DEFAULT_INTERVAL = 60000;
 const PERSISTENT_DIR = '/userdata/';
 
+/**
+ * A diagnostics report carries a short ring buffer of the app's output. The
+ * verbose logging printed the full raw payload of every device on every
+ * refresh - hundreds of lines a minute - which flushed everything older than
+ * about a minute. Three reports were sent to show a pairing failure and none
+ * of them still contained it. So it is off unless asked for: set DEBUG=1 in
+ * env.json to get it back.
+ */
+const DEBUG_LOGGING = Homey.env && Homey.env.DEBUG === '1';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -21,6 +31,8 @@ class FindMyApp extends Homey.App {
     }
 
     debug() {
+        if (!DEBUG_LOGGING) return;
+
         console.debug.bind(this, '[debug]').apply(this, arguments);
     }
 
@@ -284,30 +296,33 @@ class FindMyApp extends Homey.App {
                 throw new Error('updateDateMethod - No Find My instance found for ' + userShortened);
             }
 
-            const termsNeeded = session.termsUpdateNeeded();
-
-            if (termsNeeded) {
-                homeyDevices.forEach((device) => {
-                    if (device) device.setUnavailable('Your Apple ID requires a terms and conditions update. Please login on https://icloud.com/find and accept the updated terms and conditions.');
-                });
-            }
-
             const findMyDeviceList = await session.getDevices(this.shouldLocate);
 
             this.findMyDeviceList = [...this.findMyDeviceList, ...findMyDeviceList];
 
+            // The names, not the payload. What iCloud returned for each
+            // device is useful when debugging and ruinous in a report.
+            this.log(
+                'updateDateMethod - served',
+                userShortened,
+                findMyDeviceList.map((device) => device.getRawInfo().name).join(', ')
+            );
             this.debug(this.findMyDeviceList);
 
+            // iCloud served the data, so nothing is blocking this account -
+            // including the terms flag, which many working accounts carry.
             homeyDevices.forEach((device) => {
-                if (device) device.setCapabilityValues();
-            });
+                if (!device) return;
 
-            // Whatever had this account marked unavailable is over.
-            if (!termsNeeded) {
-                homeyDevices.forEach((device) => {
-                    if (device) device.setAvailable();
-                });
-            }
+                if (device.setCapabilityValues()) {
+                    device.setAvailable();
+                } else {
+                    device.setUnavailable(
+                        'This device is no longer listed in your Find My account. ' +
+                        'Check https://icloud.com/find, and remove it here if it is gone for good.'
+                    );
+                }
+            });
         } catch (error) {
             this.logAccountError(uniqueDevice.username, error, 'refresh');
         }
@@ -340,6 +355,18 @@ class FindMyApp extends Homey.App {
             const waitSeconds = Math.round((error.nextAttemptAt - Date.now()) / 1000);
 
             this.log('updateDateMethod - skipping', userShortened, `retrying in ${waitSeconds}s`, error.message);
+
+            return;
+        }
+
+        if (this.findMyInstances[userShortened]?.termsUpdateNeeded()) {
+            // The flag alone proves nothing, but a failure alongside it is
+            // usually Apple waiting for the terms to be accepted.
+            this.error('updateDateMethod - terms update needed', userShortened, { phase });
+
+            this.getDevicesByStoreKeyValue('username', username).forEach((device) => {
+                if (device) device.setUnavailable('Your Apple ID requires a terms and conditions update. Please login on https://icloud.com/find and accept the updated terms and conditions.');
+            });
 
             return;
         }
