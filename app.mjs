@@ -12,6 +12,16 @@ import { AccountLockedError, FindMySession, RetryLaterError } from './lib/findmy
 const DEFAULT_INTERVAL = 60000;
 const PERSISTENT_DIR = '/userdata/';
 
+/**
+ * A diagnostics report carries a short ring buffer of the app's output. The
+ * verbose logging printed the full raw payload of every device on every
+ * refresh - hundreds of lines a minute - which flushed everything older than
+ * about a minute. Three reports were sent to show a pairing failure and none
+ * of them still contained it. So it is off unless asked for: set DEBUG=1 in
+ * env.json to get it back.
+ */
+const DEBUG_LOGGING = Homey.env && Homey.env.DEBUG === '1';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -21,6 +31,8 @@ class FindMyApp extends Homey.App {
     }
 
     debug() {
+        if (!DEBUG_LOGGING) return;
+
         console.debug.bind(this, '[debug]').apply(this, arguments);
     }
 
@@ -288,6 +300,13 @@ class FindMyApp extends Homey.App {
 
             this.findMyDeviceList = [...this.findMyDeviceList, ...findMyDeviceList];
 
+            // The names, not the payload. What iCloud returned for each
+            // device is useful when debugging and ruinous in a report.
+            this.log(
+                'updateDateMethod - served',
+                userShortened,
+                findMyDeviceList.map((device) => device.getRawInfo().name).join(', ')
+            );
             this.debug(this.findMyDeviceList);
 
             // iCloud served the data, so nothing is blocking this account -

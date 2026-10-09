@@ -55,8 +55,9 @@ class FindMyDeviceDriver extends Homey.Driver {
 
                     return session.showView('list_devices');
                 } catch (error) {
-                    console.error(error);
-                    throw new Error(error);
+                    this.homey.app.error('[Driver] - loading failed', error);
+
+                    throw error instanceof Error ? error : new Error(String(error));
                 }
             }
         });
@@ -103,8 +104,13 @@ class FindMyDeviceDriver extends Homey.Driver {
 
                 return true;
             } catch (error) {
-                console.log(error);
-                throw new Error(error);
+                // Logged as an error so it is findable in a diagnostics
+                // report, and rethrown as itself: new Error(error) stringified
+                // the whole thing, which is why a careful sentence reached the
+                // user as "Error: Error: Your Apple ID requires...".
+                this.homey.app.error('[Driver] - login failed', error);
+
+                throw error instanceof Error ? error : new Error(String(error));
             }
         });
 
