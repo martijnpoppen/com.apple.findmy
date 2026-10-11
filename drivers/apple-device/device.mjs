@@ -155,7 +155,13 @@ class FindMyDevice extends Homey.Device {
             const isMoving = this.getCapabilityValue('measure_distance') - distanceKM > 1 || this.getCapabilityValue('measure_distance') - distanceKM < -1;
             const isHome = distance < settings.is_home_radius;
             const isCharging = batteryStatus && batteryStatus.status === 'Charging';
-            const batteryPercentage = batteryStatus && batteryStatus.percentage ? Math.round(parseFloat(batteryStatus.percentage)) : null;
+            // A reported 0% is a real reading, not a missing one, so this
+            // checks for the value being there rather than being truthy.
+            const reportedPercentage =
+                batteryStatus && batteryStatus.percentage !== undefined && batteryStatus.percentage !== null
+                    ? Math.round(parseFloat(batteryStatus.percentage))
+                    : null;
+            const batteryPercentage = Number.isFinite(reportedPercentage) ? reportedPercentage : null;
 
             const hasNoBattery = deviceInfo.deviceClass === 'Accessory' || deviceInfo.deviceClass === 'AirPods' || deviceInfo.deviceClass === 'AirTag';
 
@@ -178,6 +184,16 @@ class FindMyDevice extends Homey.Device {
                 this.checkAndRemoveCapability('measure_percent_battery');
                 this.checkAndRemoveCapability('alarm_battery');
                 this.checkAndRemoveCapability('alarm_is_charging');
+            } else {
+                // A device that does have a battery, in a refresh that did not
+                // carry one. The last reading stays put - there is nothing
+                // better to show - but silently keeping it is what made this
+                // look like a frozen battery next to a location that kept
+                // moving, with nothing in the report to say why.
+                this.homey.app.log(
+                    `[Device] ${this.getName()} - [setCapabilityValues] no battery in this refresh, keeping the last reading`,
+                    batteryStatus
+                );
             }
 
             this.firstRun = false;

@@ -13,6 +13,20 @@ const DEFAULT_INTERVAL = 60000;
 const PERSISTENT_DIR = '/userdata/';
 
 /**
+ * How often to touch an idle iCloud session, independent of the polling
+ * interval the user picked.
+ *
+ * Apple drops a session that goes quiet, and re-establishing it is what sends
+ * the account holder a login alert. That made the alerts a side effect of the
+ * polling interval: accounts on two minutes never lost a session and got no
+ * mail, accounts on two hours found it dead at every poll and got mail at
+ * every poll. This keeps the session warm either way. It costs nothing on a
+ * short interval - the refresh itself counts as a touch, so the keep-alive
+ * finds nothing to do and sends no request.
+ */
+const KEEPALIVE_INTERVAL = 5 * 60 * 1000;
+
+/**
  * A diagnostics report carries a short ring buffer of the app's output. The
  * verbose logging printed the full raw payload of every device on every
  * refresh - hundreds of lines a minute - which flushed everything older than
@@ -81,6 +95,10 @@ class FindMyApp extends Homey.App {
 
         await this.sendNotifications();
         await this.setHomeyLocation();
+
+        // Deliberately not awaited: both of these run for the life of the app.
+        this.runKeepAliveInterval();
+
         await this.runApiInterval();
     }
 
@@ -261,27 +279,59 @@ class FindMyApp extends Homey.App {
     async updateData() {
         // Clear the device list to prevent duplicates on each interval
         this.findMyDeviceList = [];
+        // Held for the whole refresh so the keep-alive does not touch a
+        // session this is already using. In a finally because a flag left
+        // stuck on would silence the keep-alive for the life of the app.
+        this.isRefreshing = true;
 
         this.log('updateData, instances: ', Object.keys(this.findMyInstances));
 
-        const uniqueDevices = await this.getDevicesByStore();
-        for (let index = 0; index < uniqueDevices.length; index++) {
-            const username = uniqueDevices[index].username;
-            const password = uniqueDevices[index].password;
-            const userShortened = shortenString(username);
+        try {
+            const uniqueDevices = await this.getDevicesByStore();
+            for (let index = 0; index < uniqueDevices.length; index++) {
+                const username = uniqueDevices[index].username;
+                const password = uniqueDevices[index].password;
+                const userShortened = shortenString(username);
 
-            if (!this.findMyInstances[userShortened]) {
-                this.log('updateData - setup new instance');
+                if (!this.findMyInstances[userShortened]) {
+                    this.log('updateData - setup new instance');
+                    try {
+                        await this.setupFindMyInstance(username, password);
+                    } catch (error) {
+                        this.logAccountError(username, error, 'setup');
+
+                        continue;
+                    }
+                }
+
+                await this.updateDateMethod(uniqueDevices[index], { username, password });
+            }
+        } finally {
+            this.isRefreshing = false;
+        }
+    }
+
+    /**
+     * Keep every account's session warm. See KEEPALIVE_INTERVAL for why.
+     */
+    async runKeepAliveInterval() {
+        while (true) {
+            await sleep(KEEPALIVE_INTERVAL);
+
+            if (this.isRefreshing) continue;
+
+            for (const [key, session] of Object.entries(this.findMyInstances)) {
                 try {
-                    await this.setupFindMyInstance(username, password);
+                    await session.keepAlive();
                 } catch (error) {
-                    this.logAccountError(username, error, 'setup');
-
-                    continue;
+                    // keepAlive() is best effort by design and reports its own
+                    // outcome to the log. Anything escaping it is a bug here,
+                    // not an account problem, so it must not take the loop down
+                    // and must not be dressed up as something the user can act
+                    // on.
+                    this.error('[KeepAlive] - unexpected failure for', key, error);
                 }
             }
-
-            await this.updateDateMethod(uniqueDevices[index], { username, password });
         }
     }
 
