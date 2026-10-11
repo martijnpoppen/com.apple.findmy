@@ -218,7 +218,20 @@ class FindMyDevice extends Homey.Device {
         if (this.hasCapability(key)) {
             const currentValue = this.getCapabilityValue(key);
 
-            this.homey.app.log(`[Device] ${this.getName()} - setValue - ${key} - ${currentValue} | ${value}`);
+            // Only what moved. Every capability of every device on every
+            // refresh is thirteen lines a device a poll, nearly all of them
+            // restating a value that did not change - which is what flushes
+            // the diagnostics ring buffer. One report sent to show a problem
+            // from hours earlier covered eight minutes.
+            //
+            // The value is still written either way: a repeat write is what
+            // keeps a capability's "last updated" honest for something that
+            // genuinely has not moved, and skipping it is what made the
+            // distances disagree about when they were last seen.
+            if (currentValue !== value) {
+                this.homey.app.log(`[Device] ${this.getName()} - setValue - ${key} - ${currentValue} | ${value}`);
+            }
+
             await this.setCapabilityValue(key, value);
         }
     }
