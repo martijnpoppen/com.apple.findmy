@@ -1,0 +1,42 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate the app
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # The version lives in three files and has been bumped by hand. A
+      # mismatch between the compose source and the generated manifest is
+      # invisible until the App Store rejects it, so it is worth ten seconds
+      # here.
+      - name: Check the version is consistent and has a changelog
+        run: |
+          version="$(jq -r .version app.json)"
+          compose="$(jq -r .version .homeycompose/app.json)"
+
+          if [ "$version" != "$compose" ]; then
+            echo "::error::app.json is $version but .homeycompose/app.json is $compose"
+            exit 1
+          fi
+
+          if ! jq -e --arg v "$version" 'has($v)' .homeychangelog.json > /dev/null; then
+            echo "::error::.homeychangelog.json has no entry for $version"
+            exit 1
+          fi
+
+          echo "Version $version, changelog present." >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: athombv/github-action-homey-app-validate@master
+        with:
+          level: publish

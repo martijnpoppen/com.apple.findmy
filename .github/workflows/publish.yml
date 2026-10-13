@@ -1,0 +1,108 @@
+name: Publish
+
+on:
+  # A push to main that changes the version publishes it. Pushes that do not
+  # touch the version are ignored, so ordinary commits are free.
+  push:
+    branches:
+      - main
+  # Or publish whatever is on main right now, on request.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Two publishes of the same app at once would race in the App Store.
+concurrency:
+  group: publish-homey-app
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish to the Homey App Store
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The previous commit, to see whether the version moved.
+          fetch-depth: 2
+
+      - name: Decide whether there is anything to publish
+        id: check
+        run: |
+          version="$(jq -r .version app.json)"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Publishing $version on request." >> "$GITHUB_STEP_SUMMARY"
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          previous="$(git show HEAD~1:app.json 2>/dev/null | jq -r .version || echo none)"
+
+          if [ "$version" = "$previous" ]; then
+            echo "Version is still $version, nothing to publish." >> "$GITHUB_STEP_SUMMARY"
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Version went $previous -> $version." >> "$GITHUB_STEP_SUMMARY"
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check the version is consistent and has a changelog
+        if: steps.check.outputs.publish == 'true'
+        run: |
+          version="${{ steps.check.outputs.version }}"
+          compose="$(jq -r .version .homeycompose/app.json)"
+
+          if [ "$version" != "$compose" ]; then
+            echo "::error::app.json is $version but .homeycompose/app.json is $compose"
+            exit 1
+          fi
+
+          if ! jq -e --arg v "$version" 'has($v)' .homeychangelog.json > /dev/null; then
+            echo "::error::.homeychangelog.json has no entry for $version"
+            exit 1
+          fi
+
+      # env.json is gitignored, so a clean checkout has none - and the app
+      # encrypts every stored Apple login with Homey.env.SECRET. Publishing
+      # without it, or with a different value than previous releases used,
+      # would leave every existing user unable to decrypt their credentials.
+      # So this is fatal rather than skipped.
+      - name: Restore env.json
+        if: steps.check.outputs.publish == 'true'
+        env:
+          HOMEY_ENV_JSON: ${{ secrets.HOMEY_ENV_JSON }}
+        run: |
+          if [ -z "$HOMEY_ENV_JSON" ]; then
+            echo "::error::HOMEY_ENV_JSON is not set. It must hold the same env.json, with the same SECRET, as previous releases."
+            exit 1
+          fi
+
+          printf '%s' "$HOMEY_ENV_JSON" > env.json
+
+          if ! jq -e 'has("SECRET") and (.SECRET | length > 0)' env.json > /dev/null; then
+            echo "::error::env.json from HOMEY_ENV_JSON has no SECRET"
+            exit 1
+          fi
+
+      - name: Validate before publishing
+        if: steps.check.outputs.publish == 'true'
+        uses: athombv/github-action-homey-app-validate@master
+        with:
+          level: publish
+
+      - name: Publish
+        if: steps.check.outputs.publish == 'true'
+        id: publish
+        uses: athombv/github-action-homey-app-publish@master
+        with:
+          personal_access_token: ${{ secrets.HOMEY_PAT }}
+
+      - name: Where it went
+        if: steps.check.outputs.publish == 'true'
+        run: |
+          echo "Published ${{ steps.check.outputs.version }}." >> "$GITHUB_STEP_SUMMARY"
+          echo "Promote it to Test or Live at ${{ steps.publish.outputs.url }}" >> "$GITHUB_STEP_SUMMARY"
