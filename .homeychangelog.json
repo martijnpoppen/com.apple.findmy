@@ -154,5 +154,8 @@
   },
   "1.9.6": {
     "en": "FIX: the session keep-alive no longer renews a dropped session, which could send more Apple login emails than it saved"
+  },
+  "1.9.7": {
+    "en": "FIX: the session keep-alive no longer renews a dropped session, which could send more Apple login emails than it saved"
   }
 }
