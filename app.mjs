@@ -263,7 +263,7 @@ class FindMyApp extends Homey.App {
     async runApiInterval() {
         while (true) {
             if (parseInt(this.intervalTime) === 0) {
-                this.log('runApiInterval - Interval is OFF. Wait 5 seconds and check again', this.intervalTime, DEFAULT_INTERVAL);
+                this.log('runApiInterval - Interval is OFF. Checking again in', DEFAULT_INTERVAL, 'ms');
 
                 await sleep(DEFAULT_INTERVAL);
             } else {
