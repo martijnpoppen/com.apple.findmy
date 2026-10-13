@@ -151,5 +151,8 @@
   },
   "1.9.5": {
     "en": "FIX: Apple login emails - the iCloud session is now kept alive, so a long polling interval no longer costs a sign-in notice at every refresh | FIX: battery level no longer stays frozen when Apple leaves it out of a refresh | FIX: diagnostic reports now hold far more history, by logging only the values that actually changed"
+  },
+  "1.9.6": {
+    "en": "FIX: the session keep-alive no longer retries a session Apple keeps dropping, which could send more login emails than it saved"
   }
 }
