@@ -156,6 +156,6 @@
     "en": "FIX: the session keep-alive no longer renews a dropped session, which could send more Apple login emails than it saved"
   },
   "1.9.7": {
-    "en": "FIX: the session keep-alive no longer renews a dropped session, which could send more Apple login emails than it saved"
+    "en": "FIX: devices stopped updating after re-adding another device from the same Apple ID - every device on an account now refreshes together | FIX: the session keep-alive no longer renews a dropped session, which could send more Apple login emails than it saved"
   }
 }

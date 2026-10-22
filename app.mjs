@@ -175,15 +175,31 @@ class FindMyApp extends Homey.App {
         return Object.values(uniqueDevices);
     }
 
-    getDevicesByStoreKeyValue(key, value) {
-        // Get all devices by store key value
-        // This is used to get all devices with the same username
-        // So we can authenticate once and get all devices
-        return [...this.homeyDeviceList].filter((device) => device.getStoreValue(key) === value);
+    /**
+     * Every Homey device belonging to one Apple account.
+     *
+     * Matching on the stored username string looks equivalent and is not:
+     * encrypt() takes its IV from module scope, so it is fixed for one app
+     * run and different in the next, and the same Apple ID therefore encrypts
+     * to a different string every time the app restarts. Devices paired in
+     * different runs hold different ciphertexts for one account, an exact
+     * match finds only the ones paired in whichever run won, and the rest are
+     * never updated or made available again - they simply go quiet. Re-adding
+     * a device moves it into the winning set and pushes the others out, which
+     * is what made this look like the devices were fighting each other.
+     *
+     * So compare the account, which decrypts first and is IV-independent.
+     */
+    getDevicesByAccount(username) {
+        const account = shortenString(username);
+
+        return [...this.homeyDeviceList].filter(
+            (device) => device && shortenString(device.getStoreValue('username')) === account
+        );
     }
 
     async setDeviceStore(username, password) {
-        const devices = this.getDevicesByStoreKeyValue('username', username);
+        const devices = this.getDevicesByAccount(username);
 
         if (devices && devices.length) {
             devices.forEach((device) => {
@@ -339,7 +355,7 @@ class FindMyApp extends Homey.App {
         const userShortened = shortenString(loginData.username);
 
         try {
-            const homeyDevices = this.getDevicesByStoreKeyValue('username', uniqueDevice.username);
+            const homeyDevices = this.getDevicesByAccount(uniqueDevice.username);
             const session = this.findMyInstances[userShortened];
 
             if (!session) {
@@ -394,7 +410,7 @@ class FindMyApp extends Homey.App {
 
             this.error('updateDateMethod - account locked', userShortened, 'until', until);
 
-            this.getDevicesByStoreKeyValue('username', username).forEach((device) => {
+            this.getDevicesByAccount(username).forEach((device) => {
                 if (device) device.setUnavailable(error.message);
             });
 
@@ -414,7 +430,7 @@ class FindMyApp extends Homey.App {
             // usually Apple waiting for the terms to be accepted.
             this.error('updateDateMethod - terms update needed', userShortened, { phase });
 
-            this.getDevicesByStoreKeyValue('username', username).forEach((device) => {
+            this.getDevicesByAccount(username).forEach((device) => {
                 if (device) device.setUnavailable('Your Apple ID requires a terms and conditions update. Please login on https://icloud.com/find and accept the updated terms and conditions.');
             });
 
