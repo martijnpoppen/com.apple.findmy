@@ -155,13 +155,25 @@ class FindMyDevice extends Homey.Device {
             const isMoving = this.getCapabilityValue('measure_distance') - distanceKM > 1 || this.getCapabilityValue('measure_distance') - distanceKM < -1;
             const isHome = distance < settings.is_home_radius;
             const isCharging = batteryStatus && batteryStatus.status === 'Charging';
-            // A reported 0% is a real reading, not a missing one, so this
-            // checks for the value being there rather than being truthy.
-            const reportedPercentage =
-                batteryStatus && batteryStatus.percentage !== undefined && batteryStatus.percentage !== null
-                    ? Math.round(parseFloat(batteryStatus.percentage))
+
+            // Find My reports 0% for a device it cannot reach - a Mac that is
+            // shut down, a phone that is switched off - instead of leaving the
+            // level out. A device that is genuinely flat is also one Apple
+            // cannot reach, and for that it keeps showing the last level it
+            // saw. So a 0 here means "no reading", never "empty", and writing
+            // it is how a shut-down MacBook appeared in Homey's battery list
+            // at 0% with a low-battery alarm against it.
+            //
+            // An 'Unknown' status is Apple saying the same thing outright.
+            const reportedPercentage = batteryStatus
+                ? Math.round(parseFloat(batteryStatus.percentage))
+                : NaN;
+            const batteryPercentage =
+                Number.isFinite(reportedPercentage) &&
+                reportedPercentage > 0 &&
+                batteryStatus.status !== 'Unknown'
+                    ? reportedPercentage
                     : null;
-            const batteryPercentage = Number.isFinite(reportedPercentage) ? reportedPercentage : null;
 
             const hasNoBattery = deviceInfo.deviceClass === 'Accessory' || deviceInfo.deviceClass === 'AirPods' || deviceInfo.deviceClass === 'AirTag';
 
@@ -186,8 +198,9 @@ class FindMyDevice extends Homey.Device {
                 this.checkAndRemoveCapability('alarm_is_charging');
             } else {
                 // A device that does have a battery, in a refresh that did not
-                // carry one. The last reading stays put - there is nothing
-                // better to show - but silently keeping it is what made this
+                // carry a usable one - most often because it is off or out of
+                // reach. The last reading stays put, there being nothing
+                // better to show, but silently keeping it is what made this
                 // look like a frozen battery next to a location that kept
                 // moving, with nothing in the report to say why.
                 this.homey.app.log(

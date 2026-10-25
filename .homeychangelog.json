@@ -159,6 +159,6 @@
     "en": "FIX: devices stopped updating after re-adding another device from the same Apple ID - every device on an account now refreshes together | FIX: the session keep-alive no longer renews a dropped session, which could send more Apple login emails than it saved"
   },
   "1.9.8": {
-    "en": "FIX: devices stopped updating after re-adding another device from the same Apple ID - every device on an account now refreshes together | FIX: the session keep-alive no longer renews a dropped session, which could send more Apple login emails than it saved\""
+    "en": "FIX: a device that is switched off no longer reports 0% battery and raises a low-battery alarm | FIX: devices stopped updating after re-adding another device from the same Apple ID - every device on an account now refreshes together | FIX: the session keep-alive no longer renews a dropped session, which could send more Apple login emails than it saved"
   }
 }
