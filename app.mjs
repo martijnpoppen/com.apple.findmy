@@ -283,7 +283,14 @@ class FindMyApp extends Homey.App {
 
                 await sleep(DEFAULT_INTERVAL);
             } else {
-                await this.updateData();
+                // Account failures are handled inside updateData; anything
+                // that still escapes is a bug, and must not end polling for
+                // the rest of the app's life.
+                try {
+                    await this.updateData();
+                } catch (error) {
+                    this.error('[Polling] - unexpected refresh failure, retrying next interval', error);
+                }
 
                 this.log('runApiInterval = waiting for:', this.intervalTime);
 
