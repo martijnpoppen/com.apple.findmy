@@ -1,6 +1,6 @@
 {
   "id": "com.apple.findmy",
-  "version": "1.9.10",
+  "version": "1.9.11",
   "compatibility": ">=12.0.1",
   "sdk": 3,
   "platforms": [

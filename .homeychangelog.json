@@ -166,5 +166,8 @@
   },
   "1.9.10": {
     "en": "FIX: locations could stop updating until the app was restarted when Apple did not answer a request - requests now time out after 30 seconds and the next refresh simply tries again | FIX: an unexpected error no longer stops the periodic refresh for good"
+  },
+  "1.9.11": {
+    "en": "Keep the last known location when iCloud sends none"
   }
 }
