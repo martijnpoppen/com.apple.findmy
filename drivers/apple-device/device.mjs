@@ -131,83 +131,28 @@ class FindMyDevice extends Homey.Device {
 
         if (data) {
             const settings = this.getSettings();
-            const getLocation = data.getLocation();
-            const location = getLocation && getLocation.lat ? getLocation : { lat: 0, lon: 0 };
+            // iCloud sometimes lists a device without a location for a
+            // refresh or two - right after it wakes, or while Apple is still
+            // locating it. This used to fall back to 0,0, a point in the
+            // Atlantic off Africa, so a phone lying at home suddenly read
+            // thousands of km away and left home, setting off every Flow on
+            // distance and presence. No location means "no news": keep the
+            // last known position and distance until a real one comes in.
+            const location = data.getLocation();
             const batteryStatus = data.getBattery();
             const deviceInfo = data.getRawInfo();
 
             this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] batteryStatus`, batteryStatus);
-            this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] Location`, this.homey.app.homeyLocation, { lat: location.lat, lon: location.lon });
             // this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] deviceInfo`, deviceInfo);
 
-            const distance = this.checkLocation(this.homey.app.homeyLocation, { lat: location.lat, lon: location.lon });
-            // GPS jitter moves this by centimetres on every poll even for a
-            // device lying still. Storing the full precision made Homey see a
-            // change every time, so "last updated" ticked on km and miles
-            // while the rounded meters value sat unchanged - the same distance
-            // looking fresh in one unit and stale in another. Round each unit
-            // to the precision its capability shows, so an update means the
-            // number on screen actually moved.
-            const distanceM = Math.round(distance);
-            const distanceKM = parseFloat((distance / 1000).toFixed(2));
-            const distanceMI = parseFloat((distance * 0.000621371192).toFixed(2));
-
-            const isMoving = this.getCapabilityValue('measure_distance') - distanceKM > 1 || this.getCapabilityValue('measure_distance') - distanceKM < -1;
-            const isHome = distance < settings.is_home_radius;
-            const isCharging = batteryStatus && batteryStatus.status === 'Charging';
-
-            // Find My reports 0% for a device it cannot reach - a Mac that is
-            // shut down, a phone that is switched off - instead of leaving the
-            // level out. A device that is genuinely flat is also one Apple
-            // cannot reach, and for that it keeps showing the last level it
-            // saw. So a 0 here means "no reading", never "empty", and writing
-            // it is how a shut-down MacBook appeared in Homey's battery list
-            // at 0% with a low-battery alarm against it.
-            //
-            // An 'Unknown' status is Apple saying the same thing outright.
-            const reportedPercentage = batteryStatus
-                ? Math.round(parseFloat(batteryStatus.percentage))
-                : NaN;
-            const batteryPercentage =
-                Number.isFinite(reportedPercentage) &&
-                reportedPercentage > 0 &&
-                batteryStatus.status !== 'Unknown'
-                    ? reportedPercentage
-                    : null;
-
-            const hasNoBattery = deviceInfo.deviceClass === 'Accessory' || deviceInfo.deviceClass === 'AirPods' || deviceInfo.deviceClass === 'AirTag';
-
-            this.setValue('alarm_is_moving', isMoving);
-            this.setValue('measure_distance', distanceKM);
-            this.setValue('measure_distance_miles', distanceMI);
-            this.setValue('measure_distance_meters', distanceM);
-            this.setValue('measure_latitude', parseFloat(location.lat.toFixed(4)));
-            this.setValue('measure_longitude', parseFloat(location.lon.toFixed(4)));
-
-            this.setValue('alarm_is_home', isHome);
-
-            if (batteryPercentage !== null) {
-                this.setValue('measure_battery', batteryPercentage);
-                this.setValue('measure_percent_battery', batteryPercentage);
-                this.setValue('alarm_battery', batteryPercentage < 15);
-                this.setValue('alarm_is_charging', isCharging);
-            } else if (hasNoBattery) {
-                this.checkAndRemoveCapability('measure_battery');
-                this.checkAndRemoveCapability('measure_percent_battery');
-                this.checkAndRemoveCapability('alarm_battery');
-                this.checkAndRemoveCapability('alarm_is_charging');
+            if (location) {
+                this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] Location`, this.homey.app.homeyLocation, { lat: location.lat, lon: location.lon });
+                this.setLocationValues(location, settings);
             } else {
-                // A device that does have a battery, in a refresh that did not
-                // carry a usable one - most often because it is off or out of
-                // reach. The last reading stays put, there being nothing
-                // better to show, but silently keeping it is what made this
-                // look like a frozen battery next to a location that kept
-                // moving, with nothing in the report to say why.
-                this.homey.app.log(
-                    `[Device] ${this.getName()} - [setCapabilityValues] no battery in this refresh, keeping the last reading`,
-                    batteryStatus
-                );
+                this.homey.app.log(`[Device] ${this.getName()} - [setCapabilityValues] no location in this refresh, keeping the last known position`);
             }
+
+            this.setBatteryValues(batteryStatus, deviceInfo);
 
             this.firstRun = false;
         } else {
@@ -217,6 +162,80 @@ class FindMyDevice extends Homey.Device {
         this.setValue('measure_interval', this.homey.app.intervalTime / 1000);
 
         return !!data;
+    }
+
+    setLocationValues(location, settings) {
+        const distance = this.checkLocation(this.homey.app.homeyLocation, { lat: location.lat, lon: location.lon });
+        // GPS jitter moves this by centimetres on every poll even for a
+        // device lying still. Storing the full precision made Homey see a
+        // change every time, so "last updated" ticked on km and miles
+        // while the rounded meters value sat unchanged - the same distance
+        // looking fresh in one unit and stale in another. Round each unit
+        // to the precision its capability shows, so an update means the
+        // number on screen actually moved.
+        const distanceM = Math.round(distance);
+        const distanceKM = parseFloat((distance / 1000).toFixed(2));
+        const distanceMI = parseFloat((distance * 0.000621371192).toFixed(2));
+
+        const isMoving = this.getCapabilityValue('measure_distance') - distanceKM > 1 || this.getCapabilityValue('measure_distance') - distanceKM < -1;
+        const isHome = distance < settings.is_home_radius;
+
+        this.setValue('alarm_is_moving', isMoving);
+        this.setValue('measure_distance', distanceKM);
+        this.setValue('measure_distance_miles', distanceMI);
+        this.setValue('measure_distance_meters', distanceM);
+        this.setValue('measure_latitude', parseFloat(location.lat.toFixed(4)));
+        this.setValue('measure_longitude', parseFloat(location.lon.toFixed(4)));
+
+        this.setValue('alarm_is_home', isHome);
+    }
+
+    setBatteryValues(batteryStatus, deviceInfo) {
+        const isCharging = batteryStatus && batteryStatus.status === 'Charging';
+
+        // Find My reports 0% for a device it cannot reach - a Mac that is
+        // shut down, a phone that is switched off - instead of leaving the
+        // level out. A device that is genuinely flat is also one Apple
+        // cannot reach, and for that it keeps showing the last level it
+        // saw. So a 0 here means "no reading", never "empty", and writing
+        // it is how a shut-down MacBook appeared in Homey's battery list
+        // at 0% with a low-battery alarm against it.
+        //
+        // An 'Unknown' status is Apple saying the same thing outright.
+        const reportedPercentage = batteryStatus
+            ? Math.round(parseFloat(batteryStatus.percentage))
+            : NaN;
+        const batteryPercentage =
+            Number.isFinite(reportedPercentage) &&
+            reportedPercentage > 0 &&
+            batteryStatus.status !== 'Unknown'
+                ? reportedPercentage
+                : null;
+
+        const hasNoBattery = deviceInfo.deviceClass === 'Accessory' || deviceInfo.deviceClass === 'AirPods' || deviceInfo.deviceClass === 'AirTag';
+
+        if (batteryPercentage !== null) {
+            this.setValue('measure_battery', batteryPercentage);
+            this.setValue('measure_percent_battery', batteryPercentage);
+            this.setValue('alarm_battery', batteryPercentage < 15);
+            this.setValue('alarm_is_charging', isCharging);
+        } else if (hasNoBattery) {
+            this.checkAndRemoveCapability('measure_battery');
+            this.checkAndRemoveCapability('measure_percent_battery');
+            this.checkAndRemoveCapability('alarm_battery');
+            this.checkAndRemoveCapability('alarm_is_charging');
+        } else {
+            // A device that does have a battery, in a refresh that did not
+            // carry a usable one - most often because it is off or out of
+            // reach. The last reading stays put, there being nothing
+            // better to show, but silently keeping it is what made this
+            // look like a frozen battery next to a location that kept
+            // moving, with nothing in the report to say why.
+            this.homey.app.log(
+                `[Device] ${this.getName()} - [setCapabilityValues] no battery in this refresh, keeping the last reading`,
+                batteryStatus
+            );
+        }
     }
 
     checkLocation(locationA, locationB) {
